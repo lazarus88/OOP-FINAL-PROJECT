@@ -2,7 +2,7 @@ drop database kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
-CREATE TABLE `User` (`Id` bigInt,
+CREATE TABLE `User` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                      `FullName` varchar(100),
                      `UserName` varchar(100),
                      `HashPassword` varchar(100),
@@ -10,62 +10,69 @@ CREATE TABLE `User` (`Id` bigInt,
                      `CreatedAt` Date,
                      `UpdatedAt` Date,
                      `UpdateAdminId` bigInt,
-                     `Role` varchar(100)
+                     `Role` varchar(100),
+                     PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `UserAchivement` (
-                                  `Id` bigInt,
+                                  `Id` bigInt NOT NULL AUTO_INCREMENT,
                                   `UserId` bigInt,
                                   `AchivementId` int,
-                                  `AchivedAt` Date
+                                  `AchivedAt` Date,
+                                  PRIMARY KEY (`Id`)
 );
 
 
 CREATE TABLE `UserQuizHistory` (
-                                   `Id` bigInt,
+                                   `Id` bigInt NOT NULL AUTO_INCREMENT,
                                    `UserId` bigInt,
                                    `QuizId` int,
                                    `TookAt` Date,
                                    `Duration` bigInt,
                                    `Score` int,
                                    `Status` varchar(100),
-                                   `IsPractice` bit
+                                   `IsPractice` bit,
+                                   PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `Mail` (
-                        `Id` bigInt,
+                        `Id` bigInt NOT NULL AUTO_INCREMENT,
                         `SenderUserId` bigInt,
                         `ReciverUserId` bigInt,
                         `Message` varchar(100),
                         `MailTypeId` int,
                         `CreatedAt` Date,
-                        `Status` varchar(100)
+                        `Status` varchar(100),
+                        PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `Quiz` (
-                        `Id` bigInt,
+                        `Id` bigInt NOT NULL AUTO_INCREMENT,
                         `CreatorUserId` bigInt,
                         `IsRandom` bit,
                         `IsOneVsMultiple` bit,
                         `IsImmidiatle` bit,
                         `IsPracticeEnable` bit,
                         `QuizTypeId` int,
-                        `Status` varchar(100)
+                        `Status` varchar(100),
+                        PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `Achivement` (
-                              `Id` bigInt,
+                              `Id` bigInt NOT NULL AUTO_INCREMENT,
                               `UserId` bigInt,
                               `AchivementId` int,
-                              `AchievedAt` Date
+                              `AchievedAt` Date,
+                              PRIMARY KEY (`Id`)
 );
 
 CREATE TABLE `Friend` (
-                          `Id` bigInt,
+                          `Id` bigInt NOT NULL AUTO_INCREMENT,
                           `senderUserId` bigInt,
                           `ReciverUserId` bigInt,
                           `invitedAt` Date,
-                          `status` varchar(100)
+                          `status` varchar(100),
+                              PRIMARY KEY (`Id`)
 );
 
 
