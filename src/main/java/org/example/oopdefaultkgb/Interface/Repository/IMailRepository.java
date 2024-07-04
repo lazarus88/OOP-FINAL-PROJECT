@@ -2,10 +2,11 @@ package org.example.oopdefaultkgb.Interface.Repository;
 
 import org.example.oopdefaultkgb.EntityDTO.Mail;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IMailRepository {
-     boolean sendFriendRequest(int userIdFrom, int userIdTo);
+     boolean sendFriendRequest(int userIdFrom, int userIdTo, String userNameFrom) throws SQLException;
      boolean sendChallengeRequest(int userIdFrom, int userIdTo, int quizId);
      boolean sendNote(int userIdFrom, int userIdTo, String note);
      boolean acceptFriendRequest(int userId, int userIdFrom);
