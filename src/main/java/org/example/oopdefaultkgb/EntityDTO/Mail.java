@@ -14,4 +14,5 @@ public class Mail {
     public String message;
     public int MailTypeId;
     public Date CreatedAt;
+    public String status;
 }
