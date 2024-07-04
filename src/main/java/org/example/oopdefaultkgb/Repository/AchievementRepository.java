@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementRepository extends BaseRepository implements IAchievementRepository {
-    public AchievementRepository(Connection connectionString) throws SQLException {
-        super(connectionString);
+    public AchievementRepository() throws SQLException {
+        super();
     }
 
     @Override
