@@ -40,7 +40,7 @@ public class FriendRepository extends  BaseRepository implements IFriendReposito
     @Override
     public boolean AcceptFriends(int userId, int friendId, Date InvitedAt) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("insert into Friend(SenderUserId,ReceiverUserId,InvitedAt,Status) vales(%d,%d,%s,'ACTIVE') ", friendId, userId, InvitedAt.toString());
+        String query = String.format("insert into Friend(SenderUserId,ReceiverUserId,InvitedAt,Status) values(%d,%d,%s,'ACTIVE') ", friendId, userId, InvitedAt.toString());
         return statement.execute(query);
     }
 
