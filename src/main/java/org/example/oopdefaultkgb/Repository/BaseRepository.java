@@ -7,6 +7,6 @@ public class BaseRepository {
     Connection ConnectionString;
 
     public BaseRepository(Connection connectionString) throws SQLException {
-        ConnectionString = ConnectionString;
+        ConnectionString = connectionString;
     }
 }
