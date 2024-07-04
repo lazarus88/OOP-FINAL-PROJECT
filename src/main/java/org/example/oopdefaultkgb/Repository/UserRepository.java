@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRepository extends BaseRepository implements IUserRepository {
-    public UserRepository(Connection connectionString) throws SQLException {
-        super(connectionString);
+    public UserRepository() throws SQLException {
+        super();
     }
     @Override
     public boolean addUser(User user) throws SQLException {

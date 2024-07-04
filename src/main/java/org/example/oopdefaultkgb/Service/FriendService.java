@@ -13,7 +13,7 @@ public class FriendService implements IFriendService {
     public IFriendRepository friendRepository;
 
     public FriendService( ) throws SQLException, ClassNotFoundException {
-        friendRepository = new FriendRepository(new DatabaseConnection().getConnection());
+        friendRepository = new FriendRepository();
     }
 
     @Override

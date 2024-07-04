@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendRepository extends  BaseRepository implements IFriendRepository {
-    public FriendRepository(Connection connectionString) throws SQLException {
-        super(connectionString);
+    public FriendRepository() throws SQLException {
+        super();
     }
     @Override
     public List<Friend> getFriends(int userId) throws SQLException {

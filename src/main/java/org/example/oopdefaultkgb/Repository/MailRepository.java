@@ -17,8 +17,8 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     private final String SEND_REQUEST = "sent";
 
 
-    public MailRepository(Connection connectionString) throws SQLException {
-        super(connectionString);
+    public MailRepository() throws SQLException {
+        super();
     }
 
     @Override
