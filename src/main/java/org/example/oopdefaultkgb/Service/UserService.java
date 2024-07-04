@@ -1,7 +1,9 @@
 package org.example.oopdefaultkgb.Service;
 
+import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.Friend;
 import org.example.oopdefaultkgb.EntityDTO.User;
+import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IUserRepository;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
@@ -14,6 +16,7 @@ import java.util.List;
 public class UserService implements IUserService {
     public IUserRepository userRepository;
     public IFriendRepository friendRepository;
+    public IAchievementRepository achievementRepository;
     public UserService( ) throws SQLException, ClassNotFoundException {
         userRepository = new UserRepository(new DatabaseConnection().getConnection());
         friendRepository = new FriendRepository(new DatabaseConnection().getConnection());
@@ -27,5 +30,11 @@ public class UserService implements IUserService {
     public List<Friend> getFriends(int userId) throws SQLException {
         return friendRepository.getFriends(userId);
     }
+
+    @Override
+    public List<Achievement> getAchievements(int userId) throws SQLException {
+        return achievementRepository.getAchievements(userId);
+    }
+
 
 }
