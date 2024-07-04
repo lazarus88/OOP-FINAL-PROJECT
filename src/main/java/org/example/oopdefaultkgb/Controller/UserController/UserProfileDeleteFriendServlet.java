@@ -33,7 +33,6 @@ public class UserProfileDeleteFriendServlet extends HttpServlet {
         try {
             IFriendService friendService = new FriendService();
             friendService.deleteFriends(userId,FriendId);
-            response.se
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
