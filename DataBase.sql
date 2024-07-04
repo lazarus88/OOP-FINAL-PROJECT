@@ -14,10 +14,10 @@ CREATE TABLE `User` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                      PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `UserAchivement` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+CREATE TABLE `UserAchievement` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                                `UserId` bigInt,
-                               `AchivementId` int,
-                               `AchivedAt` Date,
+                               `AchievementId` int,
+                               `AchievedAt` Date,
                                PRIMARY KEY (`Id`)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE `UserQuizHistory` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 
 CREATE TABLE `Mail` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `SenderUserId` bigInt,
-                    `ReciverUserId` bigInt,
+                    `ReceiverUserId` bigInt,
                     `Message` varchar(100),
                     `MailTypeId` int,
                     `CreatedAt` Date,
@@ -47,25 +47,18 @@ CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `CreatorUserId` bigInt,
                     `IsRandom` bit,
                     `IsOneVsMultiple` bit,
-                    `IsImmidiatle` bit,
+                    `IsImmediate` bit,
                     `IsPracticeEnable` bit,
                     `QuizTypeId` int,
                     `Status` varchar(100),
                     PRIMARY KEY (`Id`)
 );
 
-CREATE TABLE `Achivement` (`Id` bigInt NOT NULL AUTO_INCREMENT,
-                          `UserId` bigInt,
-                          `AchivementId` int,
-                          `AchievedAt` Date,
-                          PRIMARY KEY (`Id`)
-);
-
 CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
-                      `senderUserId` bigInt,
-                      `ReciverUserId` bigInt,
-                      `invitedAt` Date,
-                      `status` varchar(100),
+                      `SenderUserId` bigInt,
+                      `ReceiverUserId` bigInt,
+                      `InvitedAt` Date,
+                      `Status` varchar(100),
                       PRIMARY KEY (`Id`)
 );
 
