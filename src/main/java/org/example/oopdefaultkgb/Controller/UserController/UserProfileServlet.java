@@ -2,6 +2,7 @@ package org.example.oopdefaultkgb.Controller.UserController;
 
 import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.Friend;
+import org.example.oopdefaultkgb.EntityDTO.HistoryQuiz;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
@@ -32,7 +33,8 @@ public class UserProfileServlet extends HttpServlet {
                 List<Achievement> achievements = userService.getAchievements(currUser.id);
                 request.setAttribute("achievementList", achievements);
 
-            // TODO: History
+            // history list
+                List<HistoryQuiz> historyQuizs = userService.getHistories(currUser.id);
             // TODO: FavouriteQuiz
             request.getRequestDispatcher("ProfileJSPs/profile.jsp").forward(request, response);
         } catch (SQLException e) {

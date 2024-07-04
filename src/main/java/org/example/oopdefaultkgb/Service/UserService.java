@@ -2,6 +2,7 @@ package org.example.oopdefaultkgb.Service;
 
 import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.Friend;
+import org.example.oopdefaultkgb.EntityDTO.HistoryQuiz;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
@@ -34,6 +35,11 @@ public class UserService implements IUserService {
     @Override
     public List<Achievement> getAchievements(int userId) throws SQLException {
         return achievementRepository.getAchievements(userId);
+    }
+
+    @Override
+    public List<HistoryQuiz> getHistories(int userId) {
+        return List.of();
     }
 
 
