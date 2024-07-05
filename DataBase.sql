@@ -44,6 +44,7 @@ CREATE TABLE `Mail` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 );
 
 CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                    `QuizName` varchar(100),
                     `CreatorUserId` bigInt,
                     `IsRandom` bit,
                     `IsOneVsMultiple` bit,
@@ -62,11 +63,29 @@ CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       PRIMARY KEY (`Id`)
 );
 
+
+
+=======
+CREATE TABLE `Question` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                        `QuizId` int,
+                        `Question` varchar(500),
+                        `QuestionTypeId` int,
+                        `Status` varchar(100),
+                        PRIMARY KEY (`Id`)
+);
+CREATE TABLE `Answer` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                      `QuestionId` int,
+                      `Answer` varchar(500),
+                      `IsCorrect` bit,
+                      `status` varchar(100),
+                      PRIMARY KEY (`Id`)
+);
+
+
 INSERT INTO User (FullName,UserName, HashPassword,
                     Status, CreatedAt, UpdatedAt,
                     UpdateAdminId, Role)
 VALUES ('Nata Tatikishvili', 'Tatika', 'luboiRagaca', 'active', '2024-07-05',  '2024-07-10', 4, 'momxmarebeli');
-
 
 INSERT INTO User (FullName,UserName, HashPassword,
                   Status, CreatedAt, UpdatedAt,
