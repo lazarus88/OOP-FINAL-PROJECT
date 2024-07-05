@@ -12,9 +12,14 @@ import java.util.List;
 
 
 public class MailRepository extends BaseRepository implements IMailRepository {
-    private  final String FriendRequest = "თქვენ გამოგიგზავნათ მეგობრობის მოთხოვნა {%s}";
+
+    private final String CHALLENGE_REQUEST_SEND = " თქვენ გაუგზავნეთ {%s} ქვიზის Challenge {%s} - ს";
+    private final String CHALLENGE_REQUEST_RECEIVE = " {%s} - მა გამომიგზავნათ {%s} ქვიზის Challenge";
     private final int FRIEND_REQUEST_ID = 1;
-    private final String SEND_REQUEST = "sent";
+    private final int CHALLENGE_REQUEST_ID = 2;
+    private final int NOTE_ID = 3;
+
+    private final String SENT = "sent";
 
 
     public MailRepository() throws SQLException {
@@ -22,28 +27,35 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     }
 
     @Override
-    public boolean sendFriendRequest(int userIdFrom, int userIdTo, String userNameFrom) throws SQLException {
+    public boolean sendFriendRequest(int userIdFrom, int userIdTo) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String message = String.format(FriendRequest, userNameFrom);
+        String query = String.format("INSERT INTO  Mail(SenderUserId, ReceiverUserId MailTypeId, CreatedAt, status" +
+                "VALUES(%d, %d, %s, %d, %s, %s", userIdFrom, userIdTo, FRIEND_REQUEST_ID, LocalDateTime.now(), SENT);
+        return statement.execute(query);
+    }
+
+    @Override
+    public boolean sendChallengeRequest(int userIdFrom, int userIdTo, String quizName) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
         String query = String.format("INSERT INTO  Mail(SenderUserId, ReceiverUserId, message, MailTypeId, CreatedAt, status" +
-                "VALUES(%d, %d, %s, %d, %s, %s", userIdFrom, userIdTo, message, FRIEND_REQUEST_ID, LocalDateTime.now(), SEND_REQUEST );
-        return  statement.execute(query);
+                "VALUES(%d, %d, %s, %d, %s, %s", userIdFrom, userIdTo, quizName, CHALLENGE_REQUEST_ID, LocalDateTime.now(), SENT);
+        return statement.execute(query);
     }
 
     @Override
-    public boolean sendChallengeRequest(int userIdFrom, int userIdTo, int quizId) {
-        return false;
+    public boolean sendNote(int userIdFrom, int userIdTo, String note) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("INSERT INTO  Mail(SenderUserId, ReceiverUserId, message, MailTypeId, CreatedAt, status" +
+                "VALUES(%d, %d, %s, %d, %s, %s", userIdFrom, userIdTo, note, NOTE_ID, LocalDateTime.now(), SENT);
+        return statement.execute(query);
     }
 
     @Override
-    public boolean sendNote(int userIdFrom, int userIdTo, String note) {
-        return false;
-    }
-
-    @Override
-    public boolean acceptFriendRequest(int userId, int userIdFrom) {
-        return false;
-    }
+    public boolean acceptFriendRequest(int userId, int userIdFrom) throws SQLException {
+        Statement statement =ConnectionString.createStatement();
+    String query = String.format("UPDATE Mail SET Status = 'ACCEPTED' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d)", userIdFrom, userId, FRIEND_REQUEST_ID);
+        return statement.execute(query);
+}
 
     @Override
     public boolean acceptChallengeRequest(int userId, int userIdFrom, int quizId) {
