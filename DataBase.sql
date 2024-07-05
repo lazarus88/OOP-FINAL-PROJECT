@@ -1,4 +1,4 @@
-drop database kgb;
+#drop database kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -63,6 +63,9 @@ CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       PRIMARY KEY (`Id`)
 );
 
+
+
+=======
 CREATE TABLE `Question` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                         `QuizId` int,
                         `Question` varchar(500),
@@ -79,6 +82,23 @@ CREATE TABLE `Answer` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 );
 
 
+INSERT INTO User (FullName,UserName, HashPassword,
+                    Status, CreatedAt, UpdatedAt,
+                    UpdateAdminId, Role)
+VALUES ('Nata Tatikishvili', 'Tatika', 'luboiRagaca', 'active', '2024-07-05',  '2024-07-10', 4, 'momxmarebeli');
 
+INSERT INTO User (FullName,UserName, HashPassword,
+                  Status, CreatedAt, UpdatedAt,
+                  UpdateAdminId, Role)
+VALUES ('lazo pachuliani', 'lestanberi', 'luboiRagaca2', 'active', '2024-07-05',  '2024-07-15', 3, 'momxmarebeli');
 
+INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
+VALUES (1, 2,'2024-07-07' , 'friends');
 
+INSERT INTO User (FullName,UserName, HashPassword,
+                  Status, CreatedAt, UpdatedAt,
+                  UpdateAdminId, Role)
+VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3', 'active', '2023-08-05',  '2023-09-15', 3, 'momxmarebeli');
+
+INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
+VALUES (3, 1,'2024-01-01' , 'no longer friends');
