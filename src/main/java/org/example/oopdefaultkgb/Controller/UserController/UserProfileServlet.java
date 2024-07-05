@@ -18,32 +18,11 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "UserProfile", value = "/user-profile")
+@WebServlet(name = "UserProfileServlet", value = "/user-profile-servlet")
 public class UserProfileServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        User currUser = (User) request.getSession().getAttribute("currentUser");
-        try {
-            IUserService userService = new UserService();
-            // friend list
-                List<Friend> friends = userService.getFriends(currUser.id);
-                request.setAttribute("friendList", friends);
-
-            // achievement list
-                List<Achievement> achievements = userService.getAchievements(currUser.id);
-                request.setAttribute("achievementList", achievements);
-
-            // history list
-                List<HistoryQuiz> historyQuizs = userService.getHistories(currUser.id);
-            // TODO: FavouriteQuiz
-            request.getRequestDispatcher("ProfileJSPs/profile.jsp").forward(request, response);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+        User currUser = new User(5,"LAZARUS", "", null,null,null,0,"ADMIN");
+        request.setAttribute("currentUser",currUser);
+        request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }
 }
