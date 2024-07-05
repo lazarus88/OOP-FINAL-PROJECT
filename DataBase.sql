@@ -44,10 +44,11 @@ CREATE TABLE `Mail` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 );
 
 CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                    `QuizName` varchar(100),
                     `CreatorUserId` bigInt,
                     `IsRandom` bit,
                     `IsOneVsMultiple` bit,
-                    `IsImmidiatle` bit,
+                    `IsImmediate` bit,
                     `IsPracticeEnable` bit,
                     `QuizTypeId` int,
                     `Status` varchar(100),
@@ -65,6 +66,21 @@ CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       `senderUserId` bigInt,
                       `ReciverUserId` bigInt,
                       `invitedAt` Date,
+                      `status` varchar(100),
+                      PRIMARY KEY (`Id`)
+);
+
+CREATE TABLE `Question` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                        `QuizId` int,
+                        `Question` varchar(500),
+                        `QuestionTypeId` int,
+                        `Status` varchar(100),
+                        PRIMARY KEY (`Id`)
+);
+CREATE TABLE `Answer` (`Id` bigInt NOT NULL AUTO_INCREMENT,
+                      `QuestionId` int,
+                      `Answer` varchar(500),
+                      `IsCorrect` bit,
                       `status` varchar(100),
                       PRIMARY KEY (`Id`)
 );
