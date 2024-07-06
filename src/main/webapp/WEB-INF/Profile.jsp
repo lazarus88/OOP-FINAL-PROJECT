@@ -14,11 +14,17 @@
     <title>Title</title>
 </head>
 <body>
-<h1>List of Friends</h1>
+<h1>შენი მეგობრები</h1>
 <ul>
     <%for(User friend : friendList){ %>
     <li><%=friend.fullName%>, user: <%=friend.userName%></li>
     <%}%>
 </ul>
+<h2>შენი მიღწევები</h2>
+<ul>
+    <li>საღოლ საღოლ</li>
+    <li>საღოლ საღოლ</li>
+</ul>
+
 </body>
 </html>
