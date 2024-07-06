@@ -13,5 +13,8 @@
 <body>
 <h1><%= ((User)request.getAttribute("currentUser")).getFullName() %>
 </h1>
+<br/>
+<a href="mail-servlet?userId=5">My Mails</a>
+</h2>
 </body>
 </html>

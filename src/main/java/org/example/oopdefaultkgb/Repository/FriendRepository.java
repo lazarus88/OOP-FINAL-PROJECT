@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendRepository extends  BaseRepository implements IFriendRepository {
-    public FriendRepository() throws SQLException {
+    public FriendRepository() throws SQLException, ClassNotFoundException {
         super();
     }
     @Override

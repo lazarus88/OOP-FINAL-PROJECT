@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QuestionRepository  extends  BaseRepository implements IQuestionRepository {
-    public QuestionRepository() throws SQLException {
+    public QuestionRepository() throws SQLException, ClassNotFoundException {
         super();
     }
     @Override

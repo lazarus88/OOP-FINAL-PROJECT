@@ -7,8 +7,9 @@ import java.sql.SQLException;
 public class BaseRepository {
     Connection ConnectionString;
 
-    public BaseRepository() throws SQLException {
-        this.ConnectionString = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "rootPassword1!");
+    public BaseRepository() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        this.ConnectionString = DriverManager.getConnection("jdbc:mysql://localhost:3306/kgb", "root", "rootPassword1!");
     }
 
     public Connection getBaseRepository(){

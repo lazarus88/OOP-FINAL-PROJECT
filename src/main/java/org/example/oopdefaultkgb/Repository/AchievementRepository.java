@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementRepository extends BaseRepository implements IAchievementRepository {
-    public AchievementRepository() throws SQLException {
+    public AchievementRepository() throws SQLException, ClassNotFoundException {
         super();
     }
 

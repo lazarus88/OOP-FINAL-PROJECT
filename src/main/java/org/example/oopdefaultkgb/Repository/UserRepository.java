@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRepository extends BaseRepository implements IUserRepository {
-    public UserRepository() throws SQLException {
+    public UserRepository() throws SQLException, ClassNotFoundException {
         super();
     }
     @Override

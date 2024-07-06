@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MailService implements IMailService {
     private IMailRepository mailRepository;
-    public MailService() throws SQLException {
+    public MailService() throws SQLException, ClassNotFoundException {
         mailRepository = new MailRepository();
     }
 
