@@ -1,38 +1,51 @@
-<%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Mail" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.oopdefaultkgb.Service.MailService" %><%--
-  Created by IntelliJ IDEA.
-  User: ntati
-  Date: 7/5/2024
-  Time: 11:14 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.io.IOException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Title</title>
+  <title>Requests</title>
 </head>
 <body>
-<%
-  // Retrieve the list from the request attribute
-  List<Mail> mails = (List<Mail>) request.getAttribute("AllMails");
 
+<%!
+  // Function to display list of Mail objects
+  void displayMailList(List<Mail> mails, JspWriter out) throws IOException {
   if (mails != null) {
-    for (Mail mail : mails) {
-%>
-<li>
-   <%= mail %>
-</li>
-<%
+  for (Mail mail : mails) {
+  out.println("<li>" + mail + "</li>");
   }
-} else {
-%>
-<li>No users available.</li>
-<%
+  } else {
+  out.println("<li>No items available.</li>");
+  }
   }
 %>
 
-<br/>
+<h1>Friend Requests</h1>
+<ul>
+  <%
+
+    List<Mail> friendRequests = (List<Mail>) request.getAttribute("friendRequests");
+    displayMailList(friendRequests, out);
+  %>
+</ul>
+
+<h1>Challenge Requests</h1>
+<ul>
+  <%
+    List<Mail> challengeRequests = (List<Mail>) request.getAttribute("challengeRequests");
+    displayMailList(challengeRequests, out);
+  %>
+</ul>
+
+<h1>Notes</h1>
+<ul>
+  <%
+    List<Mail> notes = (List<Mail>) request.getAttribute("notes");
+    displayMailList(notes, out);
+  %>
+</ul>
+
 </body>
 </html>
