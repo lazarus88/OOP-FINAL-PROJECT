@@ -1,4 +1,4 @@
-#drop database kgb;
+drop database kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -63,9 +63,6 @@ CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       PRIMARY KEY (`Id`)
 );
 
-
-
-=======
 CREATE TABLE `Question` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                         `QuizId` int,
                         `Question` varchar(500),
