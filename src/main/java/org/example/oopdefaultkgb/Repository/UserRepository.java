@@ -6,6 +6,7 @@ import org.example.oopdefaultkgb.Interface.Repository.IUserRepository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
 public class UserRepository extends BaseRepository implements IUserRepository {
     public UserRepository() throws SQLException, ClassNotFoundException {
@@ -40,7 +41,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
         ResultSet res = statement.executeQuery(query);
         if(!res.next()) return null;
         User user = new User(res.getInt(1), res.getString(2),res.getString(3), res.getString(4),
-                res.getString(5),res.getDate(6), res.getDate(7), res.getLong(8), res.getString(9));
+                res.getString(5),res.getObject(6, LocalDateTime.class), res.getObject(7, LocalDateTime.class), res.getLong(8), res.getString(9));
         return user;
     }
     @Override
@@ -50,7 +51,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
         ResultSet res = statement.executeQuery(query);
         if(!res.next()) return null;
         User user = new User(res.getInt(1), res.getString(2),res.getString(3), res.getString(4),
-                res.getString(5),res.getDate(6), res.getDate(7), res.getLong(8), res.getString(9));
+                res.getString(5),res.getObject(6, LocalDateTime.class), res.getObject(7, LocalDateTime.class), res.getLong(8), res.getString(9));
         return user;
     }
 

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserService {
+    User getProfileById(int userId) throws SQLException;
+
     User getProfile(String userName) throws SQLException;
 
     List<Friend> getFriends(int userId) throws SQLException;

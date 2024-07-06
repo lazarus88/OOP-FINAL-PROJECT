@@ -4,7 +4,7 @@ package org.example.oopdefaultkgb.EntityDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -14,8 +14,8 @@ public class User {
     public String userName;
     public String hashPassword;
     public String Status;
-    public Date createdAt;
-    public Date updatedAt;
+    public LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
     public long updateAdminId;
     public String Role;
 }

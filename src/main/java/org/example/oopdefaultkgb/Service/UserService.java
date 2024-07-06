@@ -23,7 +23,10 @@ public class UserService implements IUserService {
         userRepository = new UserRepository();
         friendRepository = new FriendRepository();
     }
-
+    @Override
+    public User getProfileById(int userId) throws SQLException {
+        return userRepository.getUser(userId);
+    }
     @Override
     public User getProfile(String userName) throws SQLException {
         return userRepository.getUser(userName);

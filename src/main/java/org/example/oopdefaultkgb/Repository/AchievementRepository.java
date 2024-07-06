@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class AchievementRepository extends BaseRepository implements IAchievemen
                     result.getInt(1),
                     result.getInt(2),
                     result.getInt(3),
-                    result.getDate(4)
+                    result.getObject(4, LocalDateTime.class)
             ));
         return resultList;
     }
