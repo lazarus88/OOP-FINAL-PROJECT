@@ -15,4 +15,6 @@ public interface IUserService {
     List<Achievement> getAchievements(int userId) throws SQLException;
 
     List<HistoryQuiz> getHistories(int userId);
+
+    boolean checkPassword(String userName, String password);
 }

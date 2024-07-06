@@ -13,6 +13,7 @@ public class User {
     public String fullName;
     public String userName;
     public String hashPassword;
+    public String Status;
     public Date createdAt;
     public Date updatedAt;
     public long updateAdminId;

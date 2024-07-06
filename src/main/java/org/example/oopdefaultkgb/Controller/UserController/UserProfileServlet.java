@@ -21,7 +21,7 @@ import java.util.List;
 @WebServlet(name = "UserProfileServlet", value = "/user-profile-servlet")
 public class UserProfileServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User currUser = new User(5,"LAZARUS", "", null,null,null,0,"ADMIN");
+        User currUser = new User(5,"LAZARUS", "", null,null,null,null,0,"ADMIN");
         request.setAttribute("currentUser",currUser);
         request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }

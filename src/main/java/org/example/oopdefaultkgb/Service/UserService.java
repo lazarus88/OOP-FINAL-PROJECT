@@ -42,5 +42,14 @@ public class UserService implements IUserService {
         return List.of();
     }
 
+    @Override
+    public boolean checkPassword(String userName, String password){
+        try {
+            User curUser = userRepository.getUser(userName);
+            return curUser.getHashPassword().equals(password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
 }

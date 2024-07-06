@@ -33,17 +33,17 @@ public class UserRepository extends BaseRepository implements IUserRepository {
         ResultSet res = statement.executeQuery(query);
         if(!res.next()) return null;
         User user = new User(res.getInt(1), res.getString(2),res.getString(3), res.getString(4),
-                res.getDate(5), res.getDate(6), res.getInt(7), res.getString(8));
+                res.getString(5),res.getDate(6), res.getDate(7), res.getLong(8), res.getString(9));
         return user;
     }
     @Override
     public User getUser(String userName) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM User WHERE UserName = %s", userName);
+        String query = String.format("SELECT * FROM User WHERE UserName = '%s'", userName);
         ResultSet res = statement.executeQuery(query);
         if(!res.next()) return null;
         User user = new User(res.getInt(1), res.getString(2),res.getString(3), res.getString(4),
-                res.getDate(5), res.getDate(6), res.getInt(7), res.getString(8));
+                res.getString(5),res.getDate(6), res.getDate(7), res.getLong(8), res.getString(9));
         return user;
     }
 

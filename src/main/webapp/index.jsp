@@ -1,13 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>JSP - Hello World</title>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <h1>Welcome to HomeWork 5</h1>
+    <p>Please log in.</p>
+    <form action="LoginServlet" method="post">
+        User Name: <input type="text" name="name"/><br>
+        Password: <input type="text" name="pass"/>
+        <input type="submit" value="Login">
+    </form>
+    <p><a href="newAccount.html">Create New Account</a></p>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="user-profile-servlet">Hello Profile</a>
+
 </body>
 </html>
