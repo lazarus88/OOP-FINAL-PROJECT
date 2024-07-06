@@ -3,7 +3,6 @@ package org.example.oopdefaultkgb.Repository;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Repository.IUserRepository;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +14,16 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     @Override
     public boolean addUser(User user) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("INSERT INTO User(FullName, UserName, hashPassword, CreatedAt, Role)" +
-                "VALUES(%s, %s, %s, %s, %s, %s)", user.fullName, user.userName, user.hashPassword, user.createdAt.toString(), user.createdAt, user.Role);
+        String query = String.format("INSERT INTO User(FullName, UserName, hashPassword,Status, CreatedAt, Role)" +
+                "VALUES(%s, %s, %s, %s,'ACTIVE', SYSDATE(), %s)", user.fullName, user.userName, user.hashPassword, user.Role);
+        return statement.execute(query);
+
+    }
+    @Override
+    public boolean addUser(String userName, String hashPassword, String role) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("INSERT INTO User(FullName, UserName, hashPassword,Status, CreatedAt, Role)" +
+                "VALUES(%s, %s, %s, %s,'ACTIVE', SYSDATE(), %s)", userName, userName, hashPassword, role);
         return statement.execute(query);
 
     }

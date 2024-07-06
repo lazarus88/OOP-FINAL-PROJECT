@@ -11,8 +11,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "LoginServlet", value = "/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "CreationServlet", value = "/CreationServlet")
+public class CreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,33 +29,32 @@ public class LoginServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //AccountManager accountManager = (AccountManager) sc.getAttribute("AMG");
         String usr = request.getParameter("name");
         String psw = request.getParameter("pass");
-        System.out.println(usr + psw);
         User curUser = null;
         try {
             curUser = sercive.getProfile(usr);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if(curUser == null){
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/illegalPassword.jsp");
+        if(curUser != null){
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/inUse.jsp");
             rd.forward(request,response);
         }
-        else if (sercive.checkPassword(usr,psw))
-        {
-            try {
-                request.setAttribute("currentUser",sercive.getProfile(usr));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try {
+            if (sercive.addUser(usr,psw,null))
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
+                rd.forward(request,response);
             }
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
-            rd.forward(request,response);
-        }
-        else
-        {
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/illegalPassword.jsp");
-            rd.forward(request,response);
+            else
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/inUse.jsp");
+                rd.forward(request,response);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

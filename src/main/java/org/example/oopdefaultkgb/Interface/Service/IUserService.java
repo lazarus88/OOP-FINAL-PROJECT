@@ -17,4 +17,8 @@ public interface IUserService {
     List<HistoryQuiz> getHistories(int userId);
 
     boolean checkPassword(String userName, String password);
+
+    boolean addUser(User user) throws SQLException;
+
+    boolean addUser(String userName, String hashPassword, String role) throws SQLException;
 }

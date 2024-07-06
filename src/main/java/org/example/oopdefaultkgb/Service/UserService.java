@@ -18,10 +18,12 @@ public class UserService implements IUserService {
     public IUserRepository userRepository;
     public IFriendRepository friendRepository;
     public IAchievementRepository achievementRepository;
-    public UserService( ) throws SQLException, ClassNotFoundException {
+
+    public UserService() throws SQLException, ClassNotFoundException {
         userRepository = new UserRepository();
         friendRepository = new FriendRepository();
     }
+
     @Override
     public User getProfile(String userName) throws SQLException {
         return userRepository.getUser(userName);
@@ -43,7 +45,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean checkPassword(String userName, String password){
+    public boolean checkPassword(String userName, String password) {
         try {
             User curUser = userRepository.getUser(userName);
             return curUser.getHashPassword().equals(password);
@@ -51,5 +53,15 @@ public class UserService implements IUserService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public boolean addUser(User user) throws SQLException {
+        return userRepository.addUser(user);
+    }
+
+    @Override
+    public boolean addUser(String userName, String hashPassword, String role) throws SQLException {
+        return userRepository.addUser(userName, hashPassword, role);
     }
 }
