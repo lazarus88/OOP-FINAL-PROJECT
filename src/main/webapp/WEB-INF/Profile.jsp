@@ -14,7 +14,7 @@
 <h1><%= ((User)request.getAttribute("currentUser")).getFullName() %>
 </h1>
 <br/>
-<a href="mail-servlet?userId=5">My Mails</a>
+<a href="mail-servlet?userId=<%=((User)request.getAttribute("currentUser")).getId() %>">Inbox</a>
 </h2>
 </body>
 </html>
