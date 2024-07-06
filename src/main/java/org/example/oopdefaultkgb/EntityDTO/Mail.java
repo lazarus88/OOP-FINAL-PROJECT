@@ -3,6 +3,7 @@ package org.example.oopdefaultkgb.EntityDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -13,6 +14,6 @@ public class Mail {
     public int ReceiverUserId;
     public String message;
     public int MailTypeId;
-    public Date CreatedAt;
+    public LocalDateTime CreatedAt;
     public String Status;
 }

@@ -7,6 +7,7 @@ import org.example.oopdefaultkgb.Repository.FriendRepository;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class FriendService implements IFriendService {
@@ -27,7 +28,7 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public boolean AcceptFriends(int userId, int friendId, Date InvitedAt) throws SQLException {
+    public boolean AcceptFriends(int userId, int friendId, LocalDateTime InvitedAt) throws SQLException {
         return friendRepository.AcceptFriends(userId,friendId,InvitedAt);
     }
 }
