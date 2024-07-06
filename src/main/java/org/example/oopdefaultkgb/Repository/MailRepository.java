@@ -24,7 +24,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     private final String REJECTED = "REJECTED";
 
 
-    public MailRepository() throws SQLException {
+    public MailRepository() throws SQLException, ClassNotFoundException {
         super();
     }
 

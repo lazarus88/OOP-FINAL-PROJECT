@@ -23,6 +23,8 @@ public class MailServlet extends HttpServlet {
             req.setAttribute("AllMails",mailService.getMails(Integer.parseInt(userId),0));
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 

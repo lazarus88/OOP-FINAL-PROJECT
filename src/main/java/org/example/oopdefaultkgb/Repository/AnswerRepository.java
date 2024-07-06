@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerRepository  extends BaseRepository implements IAnswerRepository {
-    public AnswerRepository() throws SQLException {
+    public AnswerRepository() throws SQLException, ClassNotFoundException {
         super();
     }
     @Override

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public  class QuizRepository extends  BaseRepository implements IQuizRepository {
-    public QuizRepository() throws SQLException {
+    public QuizRepository() throws SQLException, ClassNotFoundException {
         super();
     }
     @Override
