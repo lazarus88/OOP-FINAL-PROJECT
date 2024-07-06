@@ -86,11 +86,10 @@ public class MailRepository extends BaseRepository implements IMailRepository {
         Statement statement =ConnectionString.createStatement();
         String query;
         if(mailTypeId == 0)
-            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND Status = %s)", userId, SENT);
+            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND Status = '%s')", userId, SENT);
         else
-            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = %s)", userId, mailTypeId, SENT);
+            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userId, mailTypeId, SENT);
         ResultSet res = statement.executeQuery(query);
-        if(!res.next()) return null;
         while(res.next())
               MailList.add(new Mail(
                       res.getInt(1), res.getInt(2),

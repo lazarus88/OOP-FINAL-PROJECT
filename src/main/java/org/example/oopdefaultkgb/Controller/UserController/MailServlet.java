@@ -20,7 +20,7 @@ public class MailServlet extends HttpServlet {
         String userId = req.getParameter("userId");
         try {
             IMailService mailService = new MailService();
-            req.setAttribute("ALLMails",mailService.getMails(Integer.parseInt(userId),0));
+            req.setAttribute("AllMails",mailService.getMails(Integer.parseInt(userId),0));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

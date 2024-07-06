@@ -8,7 +8,7 @@ public class BaseRepository {
     Connection ConnectionString;
 
     public BaseRepository() throws SQLException {
-        this.ConnectionString = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "rootPassword1!");
+        this.ConnectionString = DriverManager.getConnection("jdbc:mysql://localhost:3306/kgb", "root", "rootPassword1!");
     }
 
     public Connection getBaseRepository(){
