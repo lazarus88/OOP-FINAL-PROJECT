@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 public interface IUserRepository {
     boolean addUser(User user) throws SQLException;
+
+    boolean addUser(String userName, String hashPassword, String role) throws SQLException;
+
     boolean updateStatus(int userId, String status);
 
     User getUser(int userId) throws SQLException;

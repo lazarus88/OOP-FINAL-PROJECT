@@ -90,7 +90,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
               MailList.add(new Mail(
                       res.getInt(1), res.getInt(2),
                       res.getInt(3), res.getString(4),
-                      res.getInt(5), res.getDate(6),
+                      res.getInt(5), res.getObject(6, LocalDateTime.class),
                       res.getString(7)));
         return MailList;
     }
