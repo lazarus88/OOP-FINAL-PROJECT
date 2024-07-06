@@ -62,10 +62,6 @@ CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       `Status` varchar(100),
                       PRIMARY KEY (`Id`)
 );
-
-
-
-=======
 CREATE TABLE `Question` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                         `QuizId` int,
                         `Question` varchar(500),
@@ -102,3 +98,7 @@ VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3', 'active', '2023-08-05', 
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (3, 1,'2024-01-01' , 'no longer friends');
+INSERT INTO Mail (SenderUserId, ReceiverUserId, Message, MailTypeId, CreatedAt, Status)
+VALUES (3, 5, 'hello my friend' , 3, null, 'SENT');
+INSERT INTO Mail (SenderUserId, ReceiverUserId, Message, MailTypeId, CreatedAt, Status)
+VALUES (4, 5, 'multiple_choice' , 2, null, 'SENT');
