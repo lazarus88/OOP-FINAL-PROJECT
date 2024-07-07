@@ -1,5 +1,6 @@
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.Friend" %>
 <%--
   Created by IntelliJ IDEA.
   User: ntati
@@ -21,7 +22,8 @@
 <body>
 <h2 style = "color: #450202;">შენი მეგობრები</h2>
 <ul>
-    <%for(User friend : friendList){ %>
+    <%for(User friend : friendList){%>
+
     <li style = "color: #450202;"><%=friend.fullName%>, user: <%=friend.userName%></li>
     <%}%>
 </ul>
