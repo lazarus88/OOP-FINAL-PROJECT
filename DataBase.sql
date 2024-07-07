@@ -84,9 +84,6 @@ INSERT INTO User (FullName,UserName, HashPassword)
 VALUES ('Nata Tatikishvili', 'Tatika', 'luboiRagaca');
 
 INSERT INTO User (FullName,UserName, HashPassword)
-VALUES ('test', '11', '11');
-
-INSERT INTO User (FullName,UserName, HashPassword)
 VALUES ('lazo pachuliani', 'lestanberi', 'luboiRagaca2');
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
@@ -97,4 +94,7 @@ VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3');
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (3, 1,'2024-01-01' , 'no longer friends');
+
+INSERT INTO User (FullName,UserName, HashPassword)
+VALUES ('test', '11', '11');
 use kgb
