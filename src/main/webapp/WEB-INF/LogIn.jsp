@@ -41,9 +41,7 @@
             <input id="passWord" type="password" name="pass"/><br>
             <input type="submit" value="Login">
         </form>
-        <form action="CreationServlet" method="post">
-            <input type="submit" value="Create Account">
-        </form>
+        <a href="forward?path=newAccount">Create account</a><br>
         <a href="user-profile-servlet">Profile</a>
     </div>
 </div>
