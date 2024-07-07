@@ -31,9 +31,11 @@ public class FriendRepository extends  BaseRepository implements IFriendReposito
     @Override
     public Friend getFriend(int userId, int friendUserId) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM Friend WHERE SenderUserId = %d OR ReceiverUserId = %d  ORDER BY InvitedAt DESC", userId, userId);
+        String query = String.format("SELECT * FROM Friend WHERE ((SenderUserId = %d AND ReceiverUserId = %d) OR (SenderUserId = %d AND ReceiverUserId = %d)) ", userId, friendUserId, friendUserId, userId);
         ResultSet result = statement.executeQuery(query);
-         return new Friend(
+         if(result.getRow() == 0)
+             return null;
+        return new Friend(
                     result.getInt(1),
                     result.getInt(2),
                     result.getInt(3),
