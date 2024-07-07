@@ -42,7 +42,6 @@
             <input type="submit" value="Login">
         </form>
         <a href="forward?path=newAccount">Create account</a><br>
-        <a href="user-profile-servlet">Profile</a>
     </div>
 </div>
 </body>

@@ -1,23 +1,55 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kkerd
-  Date: 25.05.2024
-  Time: 21:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page import="org.w3c.dom.Document" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>inUse</title>
-    <h1>The Name <%=request.getParameter("name")%> is Already In Use</h1>
-    <p> Please enter another name and password.</p>
-    <form action="CreationServlet" method="post">
-        User Name: <input type="text" name="name"/><br>
-        Password: <input type="text" name="pass"/>
-        <input type="submit" value="Login">
-    </form>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        body {background-color: #bac1f8;}
+        h1 {color: #000109; text-align: center;}
+        .form-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-container input{
+            margin: 10px;
+        }
+
+        .red-text{
+            color: red;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("#UserName").hide();
+            });
+        });
+    </script>
 </head>
 <body>
+<h1 style = "text-align:center;">Welcome to Quiz</h1>
+<div class="form-container">
+<p class="red-text" style="text-align: center;">This userName is already in use </p>
+<div class="form-container">
+    <div class="form-container">
+        <form action="CreationServlet" method="post">
 
+            <label for="Fullname">Full Name:</label>
+            <input id="Fullname" type="text" name="fullName"/><br>
+            <label for="User">Username:</label>
+            <input id="User" type="text" name="name"/><br>
+            <label for="passWord">Password:</label>
+            <input id="passWord" type="password" name="pass"/><br>
+            <input type="submit" value="Create Account">
+        </form>
+        <a href="forward?path=LogIn">Log In</a><br>
+
+    </div>
+</div>
 </body>
 </html>
