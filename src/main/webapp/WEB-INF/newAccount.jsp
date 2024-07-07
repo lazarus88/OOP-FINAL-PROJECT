@@ -16,9 +16,11 @@
         .form-container input{
             margin: 10px;
         }
+
         .red-text{
             color: red;
         }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -34,6 +36,7 @@
 <div class="form-container">
     <div class="form-container">
         <form action="CreationServlet" method="post">
+
             <label for="Fullname">Full Name:</label>
             <input id="Fullname" type="text" name="fullName"/><br>
             <label for="User">Username:</label>
@@ -43,6 +46,7 @@
             <input type="submit" value="Create Account">
         </form>
         <a href="forward?path=LogIn">Log In</a><br>
+
     </div>
 </div>
 </body>
