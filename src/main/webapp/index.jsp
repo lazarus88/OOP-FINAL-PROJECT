@@ -2,6 +2,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    body {background-color: lightcoral}
+    h1 {color: indigo}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Welcome dawdadwa</title>
@@ -15,7 +19,7 @@
     </script>
 </head>
 <body>
-<h1>Welcome to Quiz</h1>
+<h1 style = "text-align:center;">Welcome to Quiz</h1>
 <%--<p>Please log in.</p>--%>
 <%--User Name: <input id="UserName" type="text" name="name"/><br>--%>
 <%--Password: <input id="passWord" type="text" name="pass"/>--%>

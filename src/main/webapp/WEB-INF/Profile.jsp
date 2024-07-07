@@ -10,20 +10,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%List<User> friendList = (List<User>) request.getAttribute("friendList"); %>
 <html>
+<style>
+    body {background-color: #e37a7a
+    }
+    h1 {color: indigo}
+</style>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1>შენი მეგობრები</h1>
+<h2 style = "color: #450202;">შენი მეგობრები</h2>
 <ul>
     <%for(User friend : friendList){ %>
-    <li><%=friend.fullName%>, user: <%=friend.userName%></li>
+    <li style = "color: #450202;"><%=friend.fullName%>, user: <%=friend.userName%></li>
     <%}%>
 </ul>
-<h2>შენი მიღწევები</h2>
+<h2 style = "color: #450202;">შენი მიღწევები</h2>
 <ul>
-    <li>საღოლ საღოლ</li>
-    <li>საღოლ საღოლ</li>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
 </ul>
 
 </body>
