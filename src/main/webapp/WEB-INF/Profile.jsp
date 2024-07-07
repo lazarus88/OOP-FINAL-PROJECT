@@ -32,6 +32,6 @@
     <li style = "color: #450202;">საღოლ საღოლ</li>
     <li style = "color: #450202;">საღოლ საღოლ</li>
 </ul>
-
+<a href="other-user-profile-servlet?userId=<%=((User)request.getAttribute("currentUser")).id%>&otherUserId=1">Other User Profile</a>
 </body>
 </html>

@@ -29,8 +29,6 @@
   </style>
   <script type="text/javascript">
     $(document).ready(function() {
-      var isFriend = true; // Assume this value is dynamically determined by server-side logic
-
       // Initialize button based on the friend status
       if (isFriend) {
         $("#friendRequestButton")
