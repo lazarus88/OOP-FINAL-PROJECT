@@ -56,25 +56,22 @@ public class LoginServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
             IFriendService friendService = null;
-            try {
-                friendService = new FriendService();
-                List<Friend> Friends = friendService.getFriends(curUser.id);
-                List<User> userFreinds = new ArrayList<>();
-                for (Friend friend : Friends) {
-                    if(friend.senderUserId == curUser.id) {
-                        userFreinds.add(sercive.getProfileById(friend.receiverUserId));
-                    }else{
-                        userFreinds.add(sercive.getProfileById(friend.senderUserId));
-                    }
-                }
-                request.setAttribute("friendList",userFreinds);
-                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
+
+//                friendService = new FriendService();
+//                List<Friend> Friends = friendService.getFriends(curUser.id);
+//                List<User> userFreinds = new ArrayList<>();
+//                for (Friend friend : Friends) {
+//                    if(friend.senderUserId == curUser.id) {
+//                        userFreinds.add(sercive.getProfileById(friend.receiverUserId));
+//                    }else{
+//                        userFreinds.add(sercive.getProfileById(friend.senderUserId));
+//                    }
+//                }
+                //request.setAttribute("friendList",userFreinds);
+                request.setAttribute("userId",curUser.id );
+                RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet");
                 rd.forward(request,response);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+
 
         }
         else

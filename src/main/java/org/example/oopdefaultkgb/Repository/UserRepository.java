@@ -23,9 +23,9 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     @Override
     public boolean addUser(String userName, String hashPassword,String fullName ,String role) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("INSERT INTO User(FullName, UserName, hashPassword,Status, CreatedAt, Role)" +
-                "VALUES('%s', '%s', '%s', 'ACTIVE', SYSDATE(), '%s')", fullName, userName, hashPassword, role);
-        return statement.execute(query);
+        String query = String.format("INSERT INTO User(FullName, UserName, hashPassword,Status, Role)" +
+                "VALUES('%s', '%s', '%s', 'ACTIVE', '%s')", fullName, userName, hashPassword, role);
+        return true;
 
     }
 
@@ -49,7 +49,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM User WHERE UserName = '%s'", userName);
         ResultSet res = statement.executeQuery(query);
-        if(!res.next()) return null;
+        if(res.getRow() == 0) return null;
         User user = new User(res.getInt(1), res.getString(2),res.getString(3), res.getString(4),
                 res.getString(5),res.getObject(6, LocalDateTime.class), res.getObject(7, LocalDateTime.class), res.getLong(8), res.getString(9));
         return user;

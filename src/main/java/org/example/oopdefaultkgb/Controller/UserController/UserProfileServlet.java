@@ -44,4 +44,28 @@ public class UserProfileServlet extends HttpServlet {
         // სრული სახელი, იუზერნეიმი, რეგისტრაცისს, თარიღი, როლი
         request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+        try {
+            IUserService userService = new UserService();
+            //       List<Achievement>  achievementList = userService.getAchievements(currUser.id);
+            //      List<HistoryQuiz> historyQuizList = userService.getHistories(currUser.id);
+            List<Friend> friendList = userService.getFriends(currUser.id);
+            List<User> userFriendList = new ArrayList<>();
+            for (Friend friend : friendList) {
+                int userId = friend.receiverUserId == currUser.id ? friend.senderUserId : friend.receiverUserId;
+                userFriendList.add(userService.getProfileById(userId));
+            }
+            request.setAttribute("friendList" ,userFriendList);
+            //     request.setAttribute("historyQuizList" ,historyQuizList);
+            //    request.setAttribute("achievementList" ,achievementList);
+            //request.setAttribute("favouriteQuizList" ,);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        request.setAttribute("currentUser",currUser);
+        // სრული სახელი, იუზერნეიმი, რეგისტრაცისს, თარიღი, როლი
+        request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
+    }
 }
