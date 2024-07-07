@@ -4,22 +4,26 @@ import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
 import org.example.oopdefaultkgb.Service.UserService;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.SQLException;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
 @WebServlet(name = "CreationServlet", value = "/CreationServlet")
 public class CreationServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletContext sc = request.getServletContext();
         IUserService sercive = null;
         try {
@@ -45,6 +49,7 @@ public class CreationServlet extends HttpServlet {
         try {
             if (sercive.addUser(usr,psw,null))
             {
+                request.setAttribute("userId",curUser.id);
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
                 rd.forward(request,response);
             }
