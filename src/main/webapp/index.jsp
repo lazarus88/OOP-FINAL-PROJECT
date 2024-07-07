@@ -26,5 +26,6 @@
 <%--    <input type="submit" value="Create Account">--%>
 <%--</form>--%>
 <a href="user-profile-servlet">Profile</a>
+<a href="forward?path=OtherUserProfile">Other User Profile</a>
 </body>
 </html>

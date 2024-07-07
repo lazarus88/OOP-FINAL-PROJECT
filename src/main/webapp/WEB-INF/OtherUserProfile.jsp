@@ -29,7 +29,7 @@
   </style>
   <script type="text/javascript">
     $(document).ready(function() {
-      var isFriend = false; // Assume this value is dynamically determined by server-side logic
+      var isFriend = true; // Assume this value is dynamically determined by server-side logic
 
       // Initialize button based on the friend status
       if (isFriend) {
@@ -69,8 +69,7 @@
   </script>
 </head>
 <body>
-<h1>Dynamic Button Example with jQuery</h1>
-
+<h1>Welcome to other User</h1>
 <!-- Message button -->
 <button id="messageButton" class="default-btn message-btn">Message</button>
 
