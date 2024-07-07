@@ -19,17 +19,21 @@
     </script>
 </head>
 <body>
-<h1 style = "text-align:center;">Create new account</h1>
+<h1 style = "text-align:center;">Welcome to Quiz</h1>
 <p>Please log in.</p>
-<form action="CreationServlet" method="post">
+<form action="LoginServlet" method="post">
     User Name: <input  type="text" name="name"/><br>
     Password: <input  type="text" name="pass"/><br>
-    <input id="UserName" type="submit" value="Create"><br>
-    <a href="forward?path=LogIn">Log in</a><br>
+    <input id="UserName" type="submit" value="Login"><br>
+    <a href="forward?path=newAccount">Create new account</a><br>
     <%--</form>--%>
     <%--<form action="CreationServlet" method="post">--%>
     <%--    <input type="submit" value="Create Account">--%>
     <%--</form>--%>
+    <a href="user-profile-servlet">Profile</a><br>
+    <a href="forward?path=OtherUserProfile">Other User Profile</a><br>
 
 </body>
 </html>
+
+

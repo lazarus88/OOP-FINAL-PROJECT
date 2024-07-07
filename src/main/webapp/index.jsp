@@ -6,31 +6,11 @@
     body {background-color: lightcoral}
     h1 {color: indigo}
 </style>
+<html>
 <head>
-    <meta charset="UTF-8"> //as
-    <title>Welcome</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("button").click(function(){
-                $("#UserName").hide();
-            });
-        });
-    </script>
+    <meta http-equiv="refresh" content="0;URL=forward?path=LogIn" />
 </head>
 <body>
-<h1 style = "text-align:center;">Welcome to Quiz</h1>
-<p>Please log in.</p>
-<form action="LoginServlet" method="post">
-User Name: <input  type="text" name="name"/><br>
-Password: <input  type="text" name="pass"/>
-    <input id="UserName" type="submit" value="Login">
-<%--</form>--%>
-<%--<form action="CreationServlet" method="post">--%>
-<%--    <input type="submit" value="Create Account">--%>
-<%--</form>--%>
-<a href="user-profile-servlet">Profile</a>
-<a href="forward?path=OtherUserProfile">Other User Profile</a>
-    <a href="forward?path=newAccount">Other User Profile</a>
+<p>If you are not redirected automatically, follow the <a href="forward?path=LogIn">Log in</a><br>
 </body>
 </html>
