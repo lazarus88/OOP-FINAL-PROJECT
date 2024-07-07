@@ -30,7 +30,7 @@ Password: <input  type="text" name="pass"/>
 <%--    <input type="submit" value="Create Account">--%>
 <%--</form>--%>
 <a href="user-profile-servlet">Profile</a>
-<a href="forward?path=OtherUserProfile">Other User Profile</a>
+
     <a href="forward?path=newAccount">Other User Profile</a>
 </body>
 </html>

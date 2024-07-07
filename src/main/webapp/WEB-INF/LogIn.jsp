@@ -32,21 +32,20 @@
 <body>
 <h1 style = "text-align:center;">Welcome to Quiz</h1>
 <div class="form-container">
-<p class="red-text" style="text-align: center;">incorrect username or password </p>
-<div class="form-container">
-    <form action="LoginServlet" method="post">
+    <div class="form-container">
+        <form action="LoginServlet" method="post">
 
-        <label for="User">Username:</label>
-        <input id="User" type="text" name="name"/><br>
-        <label for="passWord">Password:</label>
-        <input id="passWord" type="password" name="pass"/><br>
-        <input type="submit" value="Login">
-    </form>
-    <form action="CreationServlet" method="post">
-        <input type="submit" value="Create Account">
-    </form>
-    <a href="user-profile-servlet">Profile</a>
-</div>
+            <label for="User">Username:</label>
+            <input id="User" type="text" name="name"/><br>
+            <label for="passWord">Password:</label>
+            <input id="passWord" type="password" name="pass"/><br>
+            <input type="submit" value="Login">
+        </form>
+        <form action="CreationServlet" method="post">
+            <input type="submit" value="Create Account">
+        </form>
+        <a href="user-profile-servlet">Profile</a>
+    </div>
 </div>
 </body>
 </html>
