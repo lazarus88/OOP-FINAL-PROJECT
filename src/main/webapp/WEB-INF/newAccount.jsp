@@ -16,6 +16,11 @@
         .form-container input{
             margin: 10px;
         }
+
+        .red-text{
+            color: red;
+        }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -32,15 +37,15 @@
     <div class="form-container">
         <form action="CreationServlet" method="post">
 
-            <label for="fullname">Fullname:</label>
-            <input id="fullname" type="text" fullname="fullname"/><br>
-            <label for="username">Username:</label>
-            <input id="username" type="text" username="username"/><br>
-            <label for="password">Password:</label>
-            <input id="password" type="password" name="password"/><br>
-
+            <label for="Fullname">Full Name:</label>
+            <input id="Fullname" type="text" name="fullName"/><br>
+            <label for="User">Username:</label>
+            <input id="User" type="text" name="name"/><br>
+            <label for="passWord">Password:</label>
+            <input id="passWord" type="password" name="pass"/><br>
+            <input type="submit" value="Create Account">
         </form>
-        <a href="forward?path=LogIn.jsp">Create</a><br>
+        <a href="forward?path=LogIn">Log In</a><br>
 
     </div>
 </div>

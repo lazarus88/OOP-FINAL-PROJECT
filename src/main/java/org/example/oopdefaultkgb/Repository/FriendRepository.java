@@ -1,6 +1,5 @@
 package org.example.oopdefaultkgb.Repository;
 
-import lombok.NonNull;
 import org.example.oopdefaultkgb.EntityDTO.Friend;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
 
@@ -29,7 +28,21 @@ public class FriendRepository extends  BaseRepository implements IFriendReposito
             ));
         return resultList;
     }
-
+    @Override
+    public Friend getFriend(int userId, int friendUserId) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * FROM Friend WHERE ((SenderUserId = %d AND ReceiverUserId = %d) OR (SenderUserId = %d AND ReceiverUserId = %d)) ", userId, friendUserId, friendUserId, userId);
+        ResultSet result = statement.executeQuery(query);
+           while(result.next()) {
+               return new Friend(
+                       result.getInt(1),
+                       result.getInt(2),
+                       result.getInt(3),
+                       result.getObject(4, LocalDateTime.class),
+                       result.getString(5));
+           }
+           return null;
+    }
     @Override
     public boolean deleteFriends(int userId, int friendId) throws SQLException {
         Statement statement = ConnectionString.createStatement();

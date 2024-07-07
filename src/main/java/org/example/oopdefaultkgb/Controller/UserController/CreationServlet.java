@@ -24,7 +24,7 @@ public class CreationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ServletContext sc = request.getServletContext();
+        //ServletContext sc = request.getServletContext();
         IUserService sercive = null;
         try {
             sercive = new UserService();
@@ -34,6 +34,7 @@ public class CreationServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         //AccountManager accountManager = (AccountManager) sc.getAttribute("AMG");
+        String fullName = request.getParameter("fullName");
         String usr = request.getParameter("name");
         String psw = request.getParameter("pass");
         User curUser = null;
@@ -43,18 +44,28 @@ public class CreationServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if(curUser != null){
+            System.out.println(curUser.id);
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/inUse.jsp");
             rd.forward(request,response);
         }
         try {
-            if (sercive.addUser(usr,psw,null))
+            if (sercive.addUser(usr,psw,fullName,null))
             {
-                request.setAttribute("userId",curUser.id);
-                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
-                rd.forward(request,response);
+                System.out.println(1111);
+                //request.setAttribute("userId",curUser.id);
+                curUser = sercive.getProfile(usr);
+                if(curUser != null) {
+                    request.setAttribute("curUser",curUser);
+                    RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet");
+                    rd.forward(request, response);
+                }else{
+                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/ErrorPage.jsp");
+                    rd.forward(request, response);
+                }
             }
             else
             {
+
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/inUse.jsp");
                 rd.forward(request,response);
             }

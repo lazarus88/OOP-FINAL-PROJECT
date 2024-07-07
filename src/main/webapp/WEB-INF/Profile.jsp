@@ -27,5 +27,12 @@
     <li><%= friend.fullName %>, user: <%= friend.userName %></li>
     <% } %>
 </ul>
+
+<h2 style = "color: #450202;">შენი მიღწევები</h2>
+<ul>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
+</ul>
+<a href="other-user-profile-servlet?userId=<%=((User)request.getAttribute("currentUser")).id%>&otherUserId=1">Other User Profile</a>
 </body>
 </html>

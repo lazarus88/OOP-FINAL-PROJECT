@@ -1,4 +1,5 @@
-drop database kgb;
+#drop database kgb;
+drop schema  kgb
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -7,8 +8,8 @@ CREATE TABLE `User` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `UserName` varchar(100),
                     `HashPassword` varchar(100),
                     `Status` varchar(100),
-                    `CreatedAt` Date,
-                    `UpdatedAt` Date,
+                    `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    `UpdatedAt` TIMESTAMP DEFAULT null ON UPDATE CURRENT_TIMESTAMP,
                     `UpdateAdminId` bigInt,
                     `Role` varchar(100),
                      PRIMARY KEY (`Id`)
@@ -17,7 +18,7 @@ CREATE TABLE `User` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 CREATE TABLE `UserAchievement` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                                `UserId` bigInt,
                                `AchievementId` int,
-                               `AchievedAt` Date,
+                               `AchievedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                PRIMARY KEY (`Id`)
 );
 
@@ -25,7 +26,7 @@ CREATE TABLE `UserAchievement` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 CREATE TABLE `UserQuizHistory` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                                `UserId` bigInt,
                                `QuizId` int,
-                               `TookAt` Date,
+                               `TookAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                `Duration` bigInt,
                                `Score` int,
                                `Status` varchar(100),
@@ -38,7 +39,7 @@ CREATE TABLE `Mail` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `ReceiverUserId` bigInt,
                     `Message` varchar(100),
                     `MailTypeId` int,
-                    `CreatedAt` Date,
+                    `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     `Status` varchar(100),
                     PRIMARY KEY (`Id`)
 );
@@ -58,7 +59,7 @@ CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 CREATE TABLE `Friend` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       `SenderUserId` bigInt,
                       `ReceiverUserId` bigInt,
-                      `InvitedAt` Date,
+                      `InvitedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                       `Status` varchar(100),
                       PRIMARY KEY (`Id`)
 );
@@ -99,3 +100,4 @@ VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3', 'active', '2023-08-05', 
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (3, 1,'2024-01-01' , 'no longer friends');
+use kgb
