@@ -2,9 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Friend" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <%List<User> friendList = (List<User>) request.getAttribute("friendList");
-            String username = (String) request.getAttribute("username");
-            String fullname = (String) request.getAttribute("fullname");
+   User user = (User)request.getAttribute("currentUser");
 %>
 <html>
 <style>
@@ -15,12 +16,13 @@
     <title>Title</title>
 </head>
 <body>
-<form action="OtherUserProfile.jsp" method="GET">
-    <input id="search" type="text" name="username"/><br>
+<form action="other-user-profile-servlet" method="get">
+    <input id="search" type="text" name="otherUsername"/><br>
     <input type="submit" value="Search"/>
+    <input type="hidden" name="userId" value="<%= user.id %>">
 </form>
-<h1>Fullname: <%= fullname%></h1>
-<h1>Username: <%= username%></h1>
+<h1>Fullname: <%= user.fullName%></h1>
+<h1>Username: <%= user.userName%></h1>
 <h1>Your Friends</h1>
 <ul>
     <% for(User friend : friendList) { %>
@@ -33,6 +35,5 @@
     <li style = "color: #450202;">საღოლ საღოლ</li>
     <li style = "color: #450202;">საღოლ საღოლ</li>
 </ul>
-<a href="other-user-profile-servlet?userId=<%=((User)request.getAttribute("currentUser")).id%>&otherUserId=1">Other User Profile</a>
 </body>
 </html>
