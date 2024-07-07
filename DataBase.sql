@@ -1,4 +1,5 @@
-drop database kgb;
+#drop database kgb;
+drop schema  kgb
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -99,3 +100,4 @@ VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3', 'active', '2023-08-05', 
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (3, 1,'2024-01-01' , 'no longer friends');
+use kgb
