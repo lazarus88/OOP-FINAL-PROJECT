@@ -1,11 +1,17 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Friend;
 import org.example.oopdefaultkgb.EntityDTO.User;
+import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
+import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
+import org.example.oopdefaultkgb.Service.FriendService;
 import org.example.oopdefaultkgb.Service.UserService;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -49,8 +55,27 @@ public class LoginServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
-            rd.forward(request,response);
+            IFriendService friendService = null;
+            try {
+                friendService = new FriendService();
+                List<Friend> Friends = friendService.getFriends(curUser.id);
+                List<User> userFreinds = new ArrayList<>();
+                for (Friend friend : Friends) {
+                    if(friend.senderUserId == curUser.id) {
+                        userFreinds.add(sercive.getProfileById(friend.receiverUserId));
+                    }else{
+                        userFreinds.add(sercive.getProfileById(friend.senderUserId));
+                    }
+                }
+                request.setAttribute("friendList",userFreinds);
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
+                rd.forward(request,response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
         }
         else
         {
