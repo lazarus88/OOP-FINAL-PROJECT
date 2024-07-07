@@ -21,10 +21,10 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 
     }
     @Override
-    public boolean addUser(String userName, String hashPassword, String role) throws SQLException {
+    public boolean addUser(String userName, String hashPassword,String fullName ,String role) throws SQLException {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("INSERT INTO User(FullName, UserName, hashPassword,Status, CreatedAt, Role)" +
-                "VALUES(%s, %s, %s, %s,'ACTIVE', SYSDATE(), %s)", userName, userName, hashPassword, role);
+                "VALUES('%s', '%s', '%s', 'ACTIVE', SYSDATE(), '%s')", fullName, userName, hashPassword, role);
         return statement.execute(query);
 
     }

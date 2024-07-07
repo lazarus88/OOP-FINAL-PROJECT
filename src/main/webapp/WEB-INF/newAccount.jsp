@@ -7,7 +7,7 @@
     h1 {color: indigo}
 </style>
 <head>
-    <meta charset="UTF-8"> //as
+    <meta charset="UTF-8">
     <title>Welcome</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -20,8 +20,9 @@
 </head>
 <body>
 <h1 style = "text-align:center;">Create new account</h1>
-<p>Please log in.</p>
+<p>Enter your account details</p>
 <form action="CreationServlet" method="post">
+    Full Name: <input  type="text" name="fullName"/><br>
     User Name: <input  type="text" name="name"/><br>
     Password: <input  type="text" name="pass"/><br>
     <input id="UserName" type="submit" value="Create"><br>
