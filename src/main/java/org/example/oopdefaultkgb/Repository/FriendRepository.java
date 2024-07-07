@@ -33,14 +33,15 @@ public class FriendRepository extends  BaseRepository implements IFriendReposito
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM Friend WHERE ((SenderUserId = %d AND ReceiverUserId = %d) OR (SenderUserId = %d AND ReceiverUserId = %d)) ", userId, friendUserId, friendUserId, userId);
         ResultSet result = statement.executeQuery(query);
-         if(result.getRow() == 0)
-             return null;
-        return new Friend(
-                    result.getInt(1),
-                    result.getInt(2),
-                    result.getInt(3),
-                    result.getObject(4, LocalDateTime.class),
-                    result.getString(5));
+           while(result.next()) {
+               return new Friend(
+                       result.getInt(1),
+                       result.getInt(2),
+                       result.getInt(3),
+                       result.getObject(4, LocalDateTime.class),
+                       result.getString(5));
+           }
+           return null;
     }
     @Override
     public boolean deleteFriends(int userId, int friendId) throws SQLException {
