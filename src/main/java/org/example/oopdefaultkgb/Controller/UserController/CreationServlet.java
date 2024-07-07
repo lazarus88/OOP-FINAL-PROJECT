@@ -49,6 +49,7 @@ public class CreationServlet extends HttpServlet {
         try {
             if (sercive.addUser(usr,psw,null))
             {
+                request.setAttribute("userId",curUser.id);
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
                 rd.forward(request,response);
             }
