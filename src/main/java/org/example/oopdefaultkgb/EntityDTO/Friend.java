@@ -2,6 +2,8 @@ package org.example.oopdefaultkgb.EntityDTO;
 
 import lombok.AllArgsConstructor;
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 
@@ -11,6 +13,6 @@ public class Friend {
     public int id;
     public int senderUserId;
     public int receiverUserId;
-    public Date invitedAt;
+    public LocalDateTime invitedAt;
     public String status;
 }

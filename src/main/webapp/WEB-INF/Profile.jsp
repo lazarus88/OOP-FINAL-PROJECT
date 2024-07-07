@@ -1,4 +1,6 @@
-<%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %><%--
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: ntati
   Date: 7/5/2024
@@ -6,15 +8,28 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%List<User> friendList = (List<User>) request.getAttribute("friendList"); %>
 <html>
+<style>
+    body {background-color: #e37a7a
+    }
+    h1 {color: indigo}
+</style>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1><%= ((User)request.getAttribute("currentUser")).getFullName() %>
-</h1>
-<br/>
-<a href="mail-servlet?userId=5">My Mails</a>
-</h2>
+<h2 style = "color: #450202;">შენი მეგობრები</h2>
+<ul>
+    <%for(User friend : friendList){ %>
+    <li style = "color: #450202;"><%=friend.fullName%>, user: <%=friend.userName%></li>
+    <%}%>
+</ul>
+<h2 style = "color: #450202;">შენი მიღწევები</h2>
+<ul>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
+    <li style = "color: #450202;">საღოლ საღოლ</li>
+</ul>
+
 </body>
 </html>

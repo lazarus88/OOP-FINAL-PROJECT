@@ -4,6 +4,7 @@ import org.example.oopdefaultkgb.EntityDTO.Friend;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IFriendService {
@@ -11,5 +12,5 @@ public interface IFriendService {
 
     boolean deleteFriends(int userId, int friendId) throws SQLException;
 
-    boolean AcceptFriends(int userId, int friendId, Date InvitedAt) throws SQLException;
+    boolean AcceptFriends(int userId, int friendId, LocalDateTime InvitedAt) throws SQLException;
 }

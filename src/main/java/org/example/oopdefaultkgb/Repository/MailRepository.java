@@ -55,28 +55,28 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     @Override
     public boolean acceptFriendRequest(int userId, int userIdFrom) throws SQLException {
         Statement statement =ConnectionString.createStatement();
-    String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = %s)", ACCEPTED,userIdFrom, userId, FRIEND_REQUEST_ID, SENT);
+    String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", ACCEPTED,userIdFrom, userId, FRIEND_REQUEST_ID, SENT);
         return statement.execute(query);
 }
 
     @Override
     public boolean acceptChallengeRequest(int userId, int userIdFrom, String quizName) throws SQLException {
         Statement statement =ConnectionString.createStatement();
-        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = %s AND message = %s)", ACCEPTED, userIdFrom, userId, CHALLENGE_REQUEST_ID, SENT, quizName);
+        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s' AND message = '%s')", ACCEPTED, userIdFrom, userId, CHALLENGE_REQUEST_ID, SENT, quizName);
         return statement.execute(query);
     }
 
     @Override
     public boolean rejectFriendRequest(int userId, int userIdFrom) throws SQLException {
         Statement statement =ConnectionString.createStatement();
-        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = %s)", REJECTED,userIdFrom, userId, FRIEND_REQUEST_ID, SENT);
+        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", REJECTED,userIdFrom, userId, FRIEND_REQUEST_ID, SENT);
         return statement.execute(query);
     }
 
     @Override
     public boolean rejectChallengeRequest(int userId, int userIdFrom, String quizName) throws SQLException {
         Statement statement =ConnectionString.createStatement();
-        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = %s AND message = %s)",REJECTED, userIdFrom, userId, CHALLENGE_REQUEST_ID, SENT, quizName);
+        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s' AND message = '%s')",REJECTED, userIdFrom, userId, CHALLENGE_REQUEST_ID, SENT, quizName);
         return statement.execute(query);
     }
 
@@ -84,17 +84,13 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     public List<Mail> getMails(int userId, int mailTypeId) throws SQLException {
         var MailList = new ArrayList<Mail>();
         Statement statement =ConnectionString.createStatement();
-        String query;
-        if(mailTypeId == 0)
-            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND Status = '%s')", userId, SENT);
-        else
-            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userId, mailTypeId, SENT);
+        String query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userId, mailTypeId, SENT);
         ResultSet res = statement.executeQuery(query);
         while(res.next())
               MailList.add(new Mail(
                       res.getInt(1), res.getInt(2),
                       res.getInt(3), res.getString(4),
-                      res.getInt(5), res.getDate(6),
+                      res.getInt(5), res.getObject(6, LocalDateTime.class),
                       res.getString(7)));
         return MailList;
     }

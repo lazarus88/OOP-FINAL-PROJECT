@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "MailServlet", value = "/mail-servlet")
 public class MailServlet extends HttpServlet {
@@ -20,16 +22,18 @@ public class MailServlet extends HttpServlet {
         String userId = req.getParameter("userId");
         try {
             IMailService mailService = new MailService();
-            req.setAttribute("AllMails",mailService.getMails(Integer.parseInt(userId),0));
+            List<Mail> fMails = mailService.getMails(Integer.parseInt(userId), 1);
+            List<Mail> cMails = mailService.getMails(Integer.parseInt(userId), 2);
+            List<Mail> nMails = mailService.getMails(Integer.parseInt(userId), 3);
+            req.setAttribute("friendRequests",fMails);
+            req.setAttribute("challengeRequests",cMails);
+            req.setAttribute("notes",nMails);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-
-        Mail mail = new Mail(1,1, 2, "hello my friends",3,null,"SENT");
-
         req.getRequestDispatcher("WEB-INF/Mail.jsp").forward(req, resp);
     }
 
