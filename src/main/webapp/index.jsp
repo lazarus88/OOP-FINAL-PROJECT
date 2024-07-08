@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <meta http-equiv="refresh" content="0;URL=forward?path=LogIn" />
+   <meta http-equiv="refresh" content="0;URL=forward?path=LogIn" />
 </head>
 <body>
 <p>If you are not redirected automatically, follow the <a href="forward?path=LogIn">Log in</a><br>
