@@ -23,7 +23,6 @@ public class OtherUserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the path parameter from the request
         int userId = Integer.parseInt(request.getParameter("userId"));
-        request.setAttribute("userId", userId);
         String otherUsername = (request.getParameter("otherUsername"));
         try {
             IUserService userService = new UserService();
@@ -42,7 +41,7 @@ public class OtherUserProfileServlet extends HttpServlet {
             boolean isFriend = friendService.checkIfUserIsFriend(userId, otherUserId);
             System.out.println(isFriend + " " + userId + " " + otherUserId);
             request.setAttribute("isFriend", isFriend);
-
+            request.setAttribute("userId", userId);
             List<Achievement> otherUserAchievementList = userService.getAchievements(otherUserId);
             request.setAttribute("otherUserAchievementList", otherUserAchievementList);
         }

@@ -112,7 +112,10 @@
     <h1>კეთილები:</h1>
     <ul>
         <% for (User friend : friendList) { %>
-        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %></li>
+        <form action="other-user-profile-servlet" method="get">
+            <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
+            <input type="hidden" name="userId" value="<%= user.id %>">
+        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %> <input type="submit" value="forward profile"/></li>
         <% } %>
     </ul>
 

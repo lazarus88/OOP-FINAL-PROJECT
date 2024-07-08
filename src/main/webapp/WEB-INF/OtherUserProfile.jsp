@@ -210,12 +210,12 @@
 
   <!-- Friend request button -->
   <button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
+  <h1 style="color: #450202;">მიღწევები</h1>
+  <ul>
+    <% for (Achievement achievement : achievements) { %>
+    <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
+    <% } %>
+  </ul>
 </div>
-<h1 style="color: #450202;">მიღწევები</h1>
-<ul>
-  <% for (Achievement achievement : achievements) { %>
-  <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
-  <% } %>
-</ul>
 </body>
 </html>
