@@ -22,6 +22,7 @@ public class UserService implements IUserService {
     public UserService() throws SQLException, ClassNotFoundException {
         userRepository = new UserRepository();
         friendRepository = new FriendRepository();
+        achievementRepository = new AchievementRepository();
     }
     @Override
     public User getProfileById(int userId) throws SQLException {

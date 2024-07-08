@@ -20,11 +20,11 @@ import java.util.List;
 
 @WebServlet(name = "UserProfileServlet", value = "/user-profile-servlet")
 public class UserProfileServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        User currUser = (User) request.getAttribute("currentUser");
         try {
             IUserService userService = new UserService();
-     //       List<Achievement>  achievementList = userService.getAchievements(currUser.id);
+            List<Achievement>  achievementList = userService.getAchievements(currUser.id);
       //      List<HistoryQuiz> historyQuizList = userService.getHistories(currUser.id);
             List<Friend> friendList = userService.getFriends(currUser.id);
             List<User> userFriendList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class UserProfileServlet extends HttpServlet {
             }
             request.setAttribute("friendList" ,userFriendList);
        //     request.setAttribute("historyQuizList" ,historyQuizList);
-        //    request.setAttribute("achievementList" ,achievementList);
+            request.setAttribute("achievementList" ,achievementList);
             //request.setAttribute("favouriteQuizList" ,);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
