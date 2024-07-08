@@ -3,8 +3,10 @@ package org.example.oopdefaultkgb.Controller.UserController;
 import org.example.oopdefaultkgb.EntityDTO.Mail;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Enum.MailTypeEnum;
+import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IMailService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
+import org.example.oopdefaultkgb.Service.FriendService;
 import org.example.oopdefaultkgb.Service.MailService;
 import org.example.oopdefaultkgb.Service.UserService;
 
@@ -50,12 +52,25 @@ public class MailSendServlet extends HttpServlet {
         try {
             IMailService mailService = new MailService();
             IUserService userService = new UserService();
+            IFriendService friendService = new FriendService();
             User otherUser =userService.getProfileById(otherUserId);
             req.setAttribute("otherUser", otherUser);
             req.setAttribute("userId", userIdFrom);
             if(mailTypeId == MailTypeEnum.FriendRequest.ordinal()) {
                 if(action.equals("sendFriendRequest"))
                 mailService.sendFriendRequest(userIdFrom, otherUserId);
+                else if(action.equals("cancelFriendRequest"))
+                    mailService.cancelFriendRequest(userIdFrom, otherUserId);
+                else if(action.equals("acceptFriendRequest")) {
+                    mailService.acceptFriendRequest(userIdFrom, otherUserId);
+                    friendService.AcceptFriends(userIdFrom, otherUserId);
+                }
+                else if(action.equals("rejectFriendRequest"))
+                    mailService.rejectFriendRequest(userIdFrom, otherUserId);
+                else if(action.equals("deleteFriend")){
+                    System.out.println("deleted");
+                    friendService.deleteFriends(userIdFrom, otherUserId);
+                }
             }
              else if(mailTypeId == MailTypeEnum.ChallengeRequest.ordinal()) {
                 String quizName = "";

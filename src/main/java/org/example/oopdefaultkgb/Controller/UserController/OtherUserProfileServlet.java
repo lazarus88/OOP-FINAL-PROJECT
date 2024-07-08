@@ -40,6 +40,8 @@ public class OtherUserProfileServlet extends HttpServlet {
             boolean isFriend = friendService.checkIfUserIsFriend(userId, otherUserId);
             System.out.println(isFriend + " " + userId + " " + otherUserId);
             request.setAttribute("isFriend", isFriend);
+            System.out.println("isFriend " + isFriend);
+            System.out.println();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
