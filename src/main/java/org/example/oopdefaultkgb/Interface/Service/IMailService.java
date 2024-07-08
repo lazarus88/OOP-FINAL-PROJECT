@@ -15,4 +15,5 @@ public interface IMailService {
     boolean rejectFriendRequest(int userId, int userIdFrom) throws SQLException;
     boolean rejectChallengeRequest(int userId, int userIdFrom, String quizName) throws SQLException;
     String getFriendRequestStatus(int userIdFrom, int userIdTo) throws SQLException;
+    boolean receivedFriendRequest(int userIdFrom, int userId) throws SQLException;
 }
