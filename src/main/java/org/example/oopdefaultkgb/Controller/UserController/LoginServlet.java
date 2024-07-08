@@ -56,8 +56,6 @@ public class LoginServlet extends HttpServlet {
                 rd.forward(request,response);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
             }
 
         }

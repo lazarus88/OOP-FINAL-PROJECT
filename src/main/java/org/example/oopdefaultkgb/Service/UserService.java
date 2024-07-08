@@ -8,6 +8,7 @@ import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IUserRepository;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
+import org.example.oopdefaultkgb.Repository.AchievementRepository;
 import org.example.oopdefaultkgb.Repository.FriendRepository;
 import org.example.oopdefaultkgb.Repository.UserRepository;
 
