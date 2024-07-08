@@ -52,26 +52,11 @@ public class LoginServlet extends HttpServlet {
         {
             try {
                 request.setAttribute("currentUser",sercive.getProfile(usr));
+                RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet");
+                rd.forward(request,response);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            IFriendService friendService = null;
-
-//                friendService = new FriendService();
-//                List<Friend> Friends = friendService.getFriends(curUser.id);
-//                List<User> userFreinds = new ArrayList<>();
-//                for (Friend friend : Friends) {
-//                    if(friend.senderUserId == curUser.id) {
-//                        userFreinds.add(sercive.getProfileById(friend.receiverUserId));
-//                    }else{
-//                        userFreinds.add(sercive.getProfileById(friend.senderUserId));
-//                    }
-//                }
-                //request.setAttribute("friendList",userFreinds);
-                request.setAttribute("userId",curUser.id );
-                RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet");
-                rd.forward(request,response);
-
 
         }
         else
