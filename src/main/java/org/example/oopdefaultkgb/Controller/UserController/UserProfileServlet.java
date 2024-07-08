@@ -21,7 +21,8 @@ import java.util.List;
 @WebServlet(name = "UserProfileServlet", value = "/user-profile-servlet")
 public class UserProfileServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+//        User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+        User currUser = (User)request.getAttribute("currentUser");
         try {
             IUserService userService = new UserService();
      //       List<Achievement>  achievementList = userService.getAchievements(currUser.id);
@@ -40,12 +41,13 @@ public class UserProfileServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("currentUser",currUser);
+        //request.setAttribute("currentUser",currUser);
         // სრული სახელი, იუზერნეიმი, რეგისტრაცისს, თარიღი, როლი
         request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+        //User currUser = new User(1,"ლაზარე ფაჩუაშვილი", "Lazarus21", null,"ACTIVE", LocalDateTime.now(),null,0,"CUSTOMER");
+        User currUser = (User)request.getAttribute("currentUser");
         try {
             IUserService userService = new UserService();
             //       List<Achievement>  achievementList = userService.getAchievements(currUser.id);
@@ -64,7 +66,7 @@ public class UserProfileServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("currentUser",currUser);
+        //request.setAttribute("currentUser",currUser);
         // სრული სახელი, იუზერნეიმი, რეგისტრაცისს, თარიღი, როლი
         request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }

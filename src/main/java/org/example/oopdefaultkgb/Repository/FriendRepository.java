@@ -33,7 +33,7 @@ public class FriendRepository extends  BaseRepository implements IFriendReposito
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM Friend WHERE ((SenderUserId = %d AND ReceiverUserId = %d) OR (SenderUserId = %d AND ReceiverUserId = %d)) ", userId, friendUserId, friendUserId, userId);
         ResultSet result = statement.executeQuery(query);
-           while(result.next()) {
+           if(result.next()) {
                return new Friend(
                        result.getInt(1),
                        result.getInt(2),

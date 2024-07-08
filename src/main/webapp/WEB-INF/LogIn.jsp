@@ -34,7 +34,6 @@
 <div class="form-container">
     <div class="form-container">
         <form action="LoginServlet" method="post">
-
             <label for="User">Username:</label>
             <input id="User" type="text" name="name"/><br>
             <label for="passWord">Password:</label>
