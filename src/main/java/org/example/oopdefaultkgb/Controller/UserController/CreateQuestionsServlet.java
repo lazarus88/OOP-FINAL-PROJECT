@@ -62,6 +62,7 @@ public class CreateQuestionsServlet extends HttpServlet {
         System.out.println("isImmediate:" + isImmediate);
         System.out.println("isPracticeEnabled:" +isPracticeEnabled);
         System.out.println("userId: " + userId);
+        System.out.println(request.getParameter("quizType"));
 
     }
 }
