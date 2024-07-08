@@ -59,4 +59,9 @@ public class MailService implements IMailService {
     public String getFriendRequestStatus(int userIdFrom, int userIdTo) throws SQLException {
         return mailRepository.getFriendRequestStatus(userIdFrom, userIdTo);
     }
+
+    @Override
+    public boolean receivedFriendRequest(int userIdFrom, int userId) throws SQLException {
+        return mailRepository.receivedFriendRequest(userIdFrom, userId);
+    }
 }

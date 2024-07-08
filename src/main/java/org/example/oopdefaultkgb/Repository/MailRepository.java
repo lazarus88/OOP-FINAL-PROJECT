@@ -108,6 +108,12 @@ public class MailRepository extends BaseRepository implements IMailRepository {
         return "";
     }
 
+    @Override
+    public boolean receivedFriendRequest(int userIdFrom, int userId) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * FROM Mail WHERE(SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userIdFrom, userId, FRIEND_REQUEST_ID, SENT );
+        return statement.execute(query);
     }
+}
 
 

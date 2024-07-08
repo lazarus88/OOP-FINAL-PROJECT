@@ -30,6 +30,10 @@ public class OtherUserProfileServlet extends HttpServlet {
             User otherUser = userService.getProfile(otherUsername);
             int otherUserId = otherUser.id;
             String friendRequestStatus = mailService.getFriendRequestStatus(userId, otherUserId);
+           if(mailService.receivedFriendRequest(otherUserId, userId)) {
+               System.out.println("received");
+               request.setAttribute("receivedFriendRequest", true);
+           }
             if(friendRequestStatus.equals("SENT"))
                 request.setAttribute("alreadySent", true);
             request.setAttribute("otherUser", otherUser);

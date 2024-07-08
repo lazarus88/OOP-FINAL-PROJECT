@@ -31,8 +31,13 @@
     .delete-btn {
       background-color: grey;
     }
+    .reject-btn {
+       background-color: brown;
+     }
   </style>
   <script type="text/javascript">
+    var action = "";
+    var rejectButton;
     $(document).ready(function() {
       console.log("Document is ready!");
 
@@ -44,6 +49,18 @@
                 .text("Delete Friend");
         console.log("Friend button initialized as 'Delete Friend'");
       }
+      else if(receivedFriendRequest){
+        $("#friendRequestButton")
+                .removeClass("friend-btn")
+                .addClass("accept-btn")
+                .text("Accept Friend Request");
+        console.log("Friend button initialized as 'Accept Friend Request'");
+         rejectButton = $("<button></button>")
+                .addClass("default-btn reject-btn")
+                .text("Reject Friend Request")
+                .attr("id", "rejectFriendRequestButton");
+        $("#friendRequestButton").after(rejectButton);
+    }
       else if(alreadySent){
         $("#friendRequestButton")
                 .removeClass("friend-btn")
@@ -53,15 +70,32 @@
       }
 
       // Handle the click event for the friend request button
+
+      // Handle click event for the reject button
+      rejectButton.click(function() {
+        console.log("Reject Friend Request button clicked!");
+        action = "rejectFriendRequest";
+        rejectButton.remove();
+        $("#friendRequestButton")
+                .removeClass("accept-btn")
+                .addClass("friend-btn")
+                .text("Send Friend Request");
+      });
       $("#friendRequestButton").click(function() {
         console.log("Friend request button clicked!");
         var button = $(this);
-        var action = "";
+
         if (button.hasClass("friend-btn")) {
           button.removeClass("friend-btn").addClass("cancel-btn");
           button.text("Cancel Friend Request");
           action = "sendFriendRequest";
-        } else if (button.hasClass("cancel-btn")) {
+        } else if (button.hasClass("accept-btn")) {
+          button.removeClass("accept-btn").addClass("friend-btn");
+          button.text("Delete Friend");
+          action = "acceptFriendRequest";
+          rejectButton.remove();
+
+        }else if (button.hasClass("cancel-btn")) {
           button.removeClass("cancel-btn").addClass("friend-btn");
           button.text("Send Friend Request");
           action = "cancelFriendRequest";
@@ -72,7 +106,6 @@
             action = "deleteFriend";
           }
         }
-
         console.log("Action determined: " + action);
 
         if (action) {
@@ -123,6 +156,8 @@
     // JavaScript to set isFriend variable, make sure it is executed before the ready function
     var isFriend = <%= request.getAttribute("isFriend") != null ? request.getAttribute("isFriend") : "false" %>;
     var alreadySent =<%=request.getAttribute("alreadySent") != null ?  request.getAttribute("alreadySent") : "false"%>;
+    var receivedFriendRequest =<%=request.getAttribute("receivedFriendRequest") != null ?  request.getAttribute("receivedFriendRequest") : "false"%>;
+
     console.log("isFriend variable set to: " + isFriend);
   </script>
 </head>
