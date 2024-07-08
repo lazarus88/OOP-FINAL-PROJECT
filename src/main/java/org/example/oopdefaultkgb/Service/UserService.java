@@ -66,7 +66,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean addUser(String userName, String hashPassword, String role) throws SQLException {
-        return userRepository.addUser(userName, hashPassword, role);
+    public boolean addUser(String userName, String hashPassword,String fullname ,String role) throws SQLException {
+        return userRepository.addUser(userName, hashPassword, fullname,role);
     }
 }

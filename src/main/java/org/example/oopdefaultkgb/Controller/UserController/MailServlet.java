@@ -22,9 +22,9 @@ public class MailServlet extends HttpServlet {
         String userId = req.getParameter("userId");
         try {
             IMailService mailService = new MailService();
-            List<Mail> fMails = mailService.getMails(Integer.parseInt(userId), 1);
-            List<Mail> cMails = mailService.getMails(Integer.parseInt(userId), 2);
-            List<Mail> nMails = mailService.getMails(Integer.parseInt(userId), 3);
+            List<Mail> fMails = mailService.getMails(Integer.parseInt(userId), 0);
+            List<Mail> cMails = mailService.getMails(Integer.parseInt(userId), 1);
+            List<Mail> nMails = mailService.getMails(Integer.parseInt(userId), 2);
             req.setAttribute("friendRequests",fMails);
             req.setAttribute("challengeRequests",cMails);
             req.setAttribute("notes",nMails);

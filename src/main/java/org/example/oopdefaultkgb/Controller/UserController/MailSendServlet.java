@@ -4,7 +4,9 @@ import org.example.oopdefaultkgb.EntityDTO.Mail;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Enum.MailTypeEnum;
 import org.example.oopdefaultkgb.Interface.Service.IMailService;
+import org.example.oopdefaultkgb.Interface.Service.IUserService;
 import org.example.oopdefaultkgb.Service.MailService;
+import org.example.oopdefaultkgb.Service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,18 +42,28 @@ public class MailSendServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       int mailTypeId = 1;
-       int userIdTo = 0;
-       int userIdFrom = 0;
-       String quizName = "";
-       String note = "";
+       int mailTypeId = Integer.parseInt(req.getParameter("mailTypeId"));
+       int userIdFrom = Integer.parseInt(req.getParameter("userId"));
+       int otherUserId = Integer.parseInt(req.getParameter("otherUserId"));
+       String action = req.getParameter("action");
+        System.out.println("request from " + userIdFrom + "MailTypeId "+mailTypeId +" ord " + MailTypeEnum.FriendRequest.ordinal());
         try {
             IMailService mailService = new MailService();
-            if(mailTypeId == MailTypeEnum.FriendRequest.ordinal())
-            mailService.sendFriendRequest(userIdTo, userIdFrom);
-             else if(mailTypeId == MailTypeEnum.ChallengeRequest.ordinal())
-                mailService.sendChallengeRequest(userIdFrom, userIdTo, quizName );
-             else mailService.sendNote(userIdFrom, userIdTo, note);
+            IUserService userService = new UserService();
+            User otherUser =userService.getProfileById(otherUserId);
+            req.setAttribute("otherUser", otherUser);
+            req.setAttribute("userId", userIdFrom);
+            if(mailTypeId == MailTypeEnum.FriendRequest.ordinal()) {
+                if(action.equals("sendFriendRequest"))
+                mailService.sendFriendRequest(userIdFrom, otherUserId);
+            }
+             else if(mailTypeId == MailTypeEnum.ChallengeRequest.ordinal()) {
+                String quizName = "";
+                mailService.sendChallengeRequest(userIdFrom, otherUser.id, quizName);
+            }
+             else {
+                  String note = "";
+                 mailService.sendNote(userIdFrom, otherUser.id, note);}
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

@@ -54,4 +54,9 @@ public class MailService implements IMailService {
     public boolean rejectChallengeRequest(int userId, int userIdFrom, String quizName) throws SQLException {
         return mailRepository.rejectChallengeRequest(userId,userIdFrom,quizName);
     }
+
+    @Override
+    public String getFriendRequestStatus(int userIdFrom, int userIdTo) throws SQLException {
+        return mailRepository.getFriendRequestStatus(userIdFrom, userIdTo);
+    }
 }
