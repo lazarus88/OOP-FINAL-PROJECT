@@ -32,8 +32,8 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public boolean AcceptFriends(int userId, int friendId, LocalDateTime InvitedAt) throws SQLException {
-        return friendRepository.AcceptFriends(userId,friendId,InvitedAt);
+    public boolean AcceptFriends(int userId, int friendId) throws SQLException {
+        return friendRepository.AcceptFriends(userId,friendId);
     }
     @Override
     public boolean checkIfUserIsFriend(int userId, int friendId) throws SQLException {

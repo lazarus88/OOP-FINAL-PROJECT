@@ -13,7 +13,7 @@ public interface IFriendService {
 
     boolean deleteFriends(int userId, int friendId) throws SQLException;
 
-    boolean AcceptFriends(int userId, int friendId, LocalDateTime InvitedAt) throws SQLException;
+    boolean AcceptFriends(int userId, int friendId) throws SQLException;
 
     boolean checkIfUserIsFriend(int userId, int friendId) throws SQLException;
 

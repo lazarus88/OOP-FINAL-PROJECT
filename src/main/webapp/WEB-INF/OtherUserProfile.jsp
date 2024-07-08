@@ -74,7 +74,16 @@
   </style>
   <script type="text/javascript">
     $(document).ready(function() {
-      console.log("Document is ready!");
+      var action = "";
+      var rejectButton;
+
+      var isFriend = <%= request.getAttribute("isFriend") != null ? request.getAttribute("isFriend") : "false" %>;
+      var alreadySent = <%= request.getAttribute("alreadySent") != null ? request.getAttribute("alreadySent") : "false" %>;
+      var receivedFriendRequest = <%= request.getAttribute("receivedFriendRequest") != null ? request.getAttribute("receivedFriendRequest") : "false" %>;
+
+      console.log("isFriend: " + isFriend);
+      console.log("alreadySent: " + alreadySent);
+      console.log("receivedFriendRequest: " + receivedFriendRequest);
 
       var action = "";
       var rejectButton;
@@ -113,6 +122,7 @@
                   .removeClass("accept-btn")
                   .addClass("friend-btn")
                   .text("Send Friend Request");
+          performAction(action);
         });
       } else if (alreadySent) {
         $("#friendRequestButton")
@@ -124,8 +134,8 @@
 
       // Handle the click event for the friend request button
       $("#friendRequestButton").click(function() {
-        console.log("Friend request button clicked!");
         var button = $(this);
+        console.log("Friend request button clicked!");
 
         if (button.hasClass("friend-btn")) {
           button.removeClass("friend-btn").addClass("cancel-btn");
@@ -135,7 +145,7 @@
           button.removeClass("accept-btn").addClass("delete-btn");
           button.text("Delete Friend");
           action = "acceptFriendRequest";
-          rejectButton.remove();
+          if (rejectButton) rejectButton.remove();
         } else if (button.hasClass("cancel-btn")) {
           button.removeClass("cancel-btn").addClass("friend-btn");
           button.text("Send Friend Request");
@@ -149,6 +159,7 @@
         }
         console.log("Action determined: " + action);
 
+        performAction(action);
         if (action) {
           // Perform the AJAX call to the servlet
           $.ajax({
@@ -179,7 +190,7 @@
           type: "POST",
           data: {
             userId: "<%= otherUser.getId() %>",
-            message: "Your message content here"
+            message: "Your message content here" 
           },
           success: function(response) {
             console.log("Message sent successfully: " + response);
@@ -191,6 +202,28 @@
           }
         });
       });
+
+      function performAction(action) {
+        if (action) {
+          $.ajax({
+            url: "<%= request.getContextPath() %>/mail-send-servlet",
+            type: "POST",
+            data: {
+              userId: "<%= userId %>",
+              action: action,
+              mailTypeId: 0,
+              otherUserId: "<%= otherUser.getId() %>"
+            },
+            success: function() {
+              console.log("Action performed successfully");
+            },
+            error: function(xhr, status, error) {
+              console.log("Error occurred while performing action: " + error);
+              alert("Error: " + error);
+            }
+          });
+        }
+      }
     });
   </script>
 </head>
@@ -204,6 +237,10 @@
   <h1>სრული სახელი: <%= otherUser.getFullName() %></h1>
   <h1>იუზერნეიმი: <%= otherUser.getUserName() %></h1>
   <h1>რეგისტრაციის თარიღი: <%= otherUser.getCreatedAt() %></h1>
+
+
+<!-- Friend request button -->
+<button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
 
   <!-- Message button -->
   <button id="messageButton" class="default-btn message-btn">Message</button>
