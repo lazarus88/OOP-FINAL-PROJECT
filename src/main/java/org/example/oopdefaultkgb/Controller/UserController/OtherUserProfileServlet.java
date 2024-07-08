@@ -1,5 +1,6 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IMailService;
@@ -15,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "OtherUserProfileServlet", value = "/other-user-profile-servlet")
 public class OtherUserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the path parameter from the request
         int userId = Integer.parseInt(request.getParameter("userId"));
-        request.setAttribute("userId", userId);
         String otherUsername = (request.getParameter("otherUsername"));
         try {
             IUserService userService = new UserService();
@@ -30,19 +31,21 @@ public class OtherUserProfileServlet extends HttpServlet {
             User otherUser = userService.getProfile(otherUsername);
             int otherUserId = otherUser.id;
             String friendRequestStatus = mailService.getFriendRequestStatus(userId, otherUserId);
-           if(mailService.receivedFriendRequest(otherUserId, userId)) {
-               System.out.println("received");
-               request.setAttribute("receivedFriendRequest", true);
-           }
-            if(friendRequestStatus.equals("SENT"))
+            if (mailService.receivedFriendRequest(otherUserId, userId)) {
+                System.out.println("received");
+                request.setAttribute("receivedFriendRequest", true);
+            }
+            if (friendRequestStatus.equals("SENT"))
                 request.setAttribute("alreadySent", true);
             request.setAttribute("otherUser", otherUser);
             boolean isFriend = friendService.checkIfUserIsFriend(userId, otherUserId);
             System.out.println(isFriend + " " + userId + " " + otherUserId);
             request.setAttribute("isFriend", isFriend);
-            System.out.println("isFriend " + isFriend);
-            System.out.println();
-        } catch (SQLException e) {
+            request.setAttribute("userId", userId);
+            List<Achievement> otherUserAchievementList = userService.getAchievements(otherUserId);
+            request.setAttribute("otherUserAchievementList", otherUserAchievementList);
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

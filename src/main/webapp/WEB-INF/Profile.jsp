@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile Page</title>
+    <title>პროფილის გვერდის</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,13 +48,14 @@
             display: inline;
             padding: 0 20px 0 20px;
         }
+        .main-conteiner
         .main-content {
             padding: 20px;
             background: #fff;
             margin-top: 20px;
         }
         .main-content h1 {
-            text-align: center;
+            text-align: left;
             color: #333;
         }
         .main-content ul {
@@ -93,7 +94,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>Profile Page</h1>
+        <h1>პროფილის გვერდი</h1>
     </div>
 </header>
 <div class="container main-content">
@@ -106,15 +107,19 @@
     </div>
     <h1>სრული სახელი: <%= user.fullName %></h1>
     <h1>იუზერნეიმი: <%= user.userName %></h1>
+    <h1>რეგისტრაციის თარიღი: <%= user.createdAt %></h1>
 
-    <h1>შენი კეთილები</h1>
+    <h1>კეთილები:</h1>
     <ul>
         <% for (User friend : friendList) { %>
-        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %></li>
+        <form action="other-user-profile-servlet" method="get">
+            <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
+            <input type="hidden" name="userId" value="<%= user.id %>">
+        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %> <input type="submit" value="forward profile"/></li>
         <% } %>
     </ul>
 
-    <h1 style="color: #450202;">შენი მიღწევები</h1>
+    <h1 style="color: #450202;">მიღწევები</h1>
     <ul>
         <% for (Achievement achievement : achievementList) { %>
         <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
