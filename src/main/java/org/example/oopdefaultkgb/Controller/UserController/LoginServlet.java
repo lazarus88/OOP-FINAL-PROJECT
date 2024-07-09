@@ -1,12 +1,15 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.Friend;
 import org.example.oopdefaultkgb.EntityDTO.Mail;
 import org.example.oopdefaultkgb.EntityDTO.User;
+import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
 import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IMailService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
+import org.example.oopdefaultkgb.Repository.AchievementRepository;
 import org.example.oopdefaultkgb.Service.FriendService;
 import org.example.oopdefaultkgb.Service.MailService;
 import org.example.oopdefaultkgb.Service.UserService;
@@ -64,6 +67,9 @@ public class LoginServlet extends HttpServlet {
                 for(Mail mail: mails){
                     otherUsers.add(userService1.getProfileById(mail.getSenderUserId()));
                 }
+                List<Achievement> achievements = new ArrayList<>();
+                achievements = userService1.getAchievements(curUser1.id);
+                request.setAttribute("achievements", achievements);
                 request.setAttribute("senderUsers", otherUsers);
                 request.setAttribute("mails", mails);
                 request.setAttribute("userId",curUser1.id);
