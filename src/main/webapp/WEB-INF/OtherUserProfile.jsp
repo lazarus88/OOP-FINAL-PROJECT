@@ -191,14 +191,37 @@
           }
         });
       });
+      $("#quiz-icon").click(function() {
+        console.log("Message button clicked!");
+        $.ajax({
+          url: "<%= request.getContextPath() %>/user-profile-servlet",
+          type: "POST",
+          data: {
+            userId: "<%= userId %>",
+          },
+          success: function(response) {
+            console.log("Message sent successfully: " + response);
+            alert("Message sent successfully: " + response);
+          },
+          error: function(xhr, status, error) {
+            console.log("Error occurred while sending message: " + error);
+            alert("Error: Could not send message");
+          }
+        });
+      });
     });
   </script>
 </head>
 <body>
 <header>
-  <div class="container">
-    <h1>სხვისი პროფილის გვერდი</h1>
-  </div>
+  <header>
+    <div class="container">
+      <a href="user-profile-servlet?userId=<%=userId%>">
+        <img src="some.jpg" alt="Quiz Icon" class="quiz-icon" />
+      </a>
+      <h1>Profile Page</h1>
+    </div>
+  </header>
 </header>
 <div class="container">
   <h1>სრული სახელი: <%= otherUser.getFullName() %></h1>

@@ -102,7 +102,7 @@
         <form action="other-user-profile-servlet" method="get">
             <input id="search" type="text" name="otherUsername" placeholder="Search for a user..."/><br>
             <input type="submit" value="Search"/>
-            <input type="hidden" name="userId" value="<%= user.id %>">
+            <input type="hidden" name="userId" value=<%= user.id %>>
         </form>
     </div>
     <h1>სრული სახელი: <%= user.fullName %></h1>
@@ -114,7 +114,7 @@
         <% for (User friend : friendList) { %>
         <form action="other-user-profile-servlet" method="get">
             <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
-            <input type="hidden" name="userId" value="<%= user.id %>">
+            <input type="hidden" name="userId" value=<%= user.id %>>
         <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %> <input type="submit" value="forward profile"/></li>
         <% } %>
     </ul>
