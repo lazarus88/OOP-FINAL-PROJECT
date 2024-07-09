@@ -11,9 +11,9 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
         super();
     }
     @Override
-    public boolean addQuiz(int creatorUserId, String quizName, boolean isRandom, boolean isImmediate, boolean isPracticeEnable) throws SQLException{
+    public boolean addQuiz(int creatorUserId, String quizName, boolean isRandom, boolean isOneVsMultiple,boolean isImmediate, boolean isPracticeEnable,int quizTypeId) throws SQLException{
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("insert into Quiz(creatorUserId,QuizName,isRandom,isImmediate,isPracticeEnable,quizTypeId,status) vales(%d,%S,%b,%b,%b'ACTIVE') ",creatorUserId ,quizName,isRandom,isImmediate,isPracticeEnable );
+        String query = String.format("insert into Quiz(creatorUserId,QuizName,isRandom,isOneVsMultiple,isImmediate,isPracticeEnable,quizTypeId,status) values(%d,'%S',%b,%b,%b,%b,%d,'ACTIVE') ",creatorUserId ,quizName,isRandom,isOneVsMultiple,isImmediate,isPracticeEnable,quizTypeId );
         return statement.execute(query); //not null
     }
     @Override
