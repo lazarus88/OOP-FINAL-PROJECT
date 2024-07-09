@@ -54,8 +54,9 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
                     result.getBoolean(5),
                     result.getBoolean(6),
                     result.getBoolean(7),
-                    result.getString(8),
-                    result.getInt(9));
+                    result.getInt(8),
+                    result.getString(9),
+                    result.getInt(10));
         }
         return null;
     }
