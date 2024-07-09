@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
                 User curUser1 = sercive.getProfile(usr);
                 request.setAttribute("userId",curUser1.id);
                 request.setAttribute("currentUser", curUser1);
-                RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet?userId="+curUser1.id);
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/HomePage.jsp");
                 rd.forward(request,response);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
