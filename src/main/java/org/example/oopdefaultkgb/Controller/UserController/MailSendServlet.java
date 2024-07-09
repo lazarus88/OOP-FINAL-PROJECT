@@ -55,7 +55,6 @@ public class MailSendServlet extends HttpServlet {
             IFriendService friendService = new FriendService();
             User otherUser =userService.getProfileById(otherUserId);
             req.setAttribute("otherUser", otherUser);
-            req.setAttribute("userId", userIdFrom);
             if(mailTypeId == MailTypeEnum.FriendRequest.ordinal()) {
                 if(action.equals("sendFriendRequest"))
                 mailService.sendFriendRequest(userIdFrom, otherUserId);
@@ -84,7 +83,7 @@ public class MailSendServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        req.getRequestDispatcher("WEB-INF/OtherUserProfile.jsp").forward(req, resp);
+        req.getRequestDispatcher("other-user-profile-servlet").forward(req, resp);
 
     }
 }
