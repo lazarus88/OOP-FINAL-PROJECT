@@ -15,7 +15,7 @@ public class QuestionRepository  extends  BaseRepository implements IQuestionRep
     @Override
     public boolean addQuestion(int quizId, String question, int questionTypeId) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("insert into Question(quizId,question,questionTypeId,status) vales(%d,%s,%d,'ACTIVE') ",quizId ,question,questionTypeId);
+        String query = String.format("insert into Question(quizId,question,questionTypeId,status) values(%d,'%s',%d,'ACTIVE') ",quizId ,question,questionTypeId);
         return statement.execute(query); //not null
     }
     @Override
@@ -57,6 +57,16 @@ public class QuestionRepository  extends  BaseRepository implements IQuestionRep
     public Question getQuestion(int questionId) throws SQLException {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM Question WHERE UserName = %s", questionId);
+        ResultSet res = statement.executeQuery(query);
+        if(!res.next()) return null;
+        Question question = new Question(res.getInt(1), res.getInt(2),res.getString(3), res.getInt(4),
+                res.getString(5));
+        return question;
+    }
+    @Override
+    public Question getQuestion(int quizId, String questionS) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * FROM Question WHERE (quizId = %d and question = '%s')", quizId,questionS);
         ResultSet res = statement.executeQuery(query);
         if(!res.next()) return null;
         Question question = new Question(res.getInt(1), res.getInt(2),res.getString(3), res.getInt(4),
