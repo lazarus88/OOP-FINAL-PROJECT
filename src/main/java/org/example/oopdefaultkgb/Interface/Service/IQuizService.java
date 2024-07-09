@@ -1,6 +1,7 @@
 package org.example.oopdefaultkgb.Interface.Service;
 
 import org.example.oopdefaultkgb.EntityDTO.Question;
+import org.example.oopdefaultkgb.EntityDTO.Quiz;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,4 +15,6 @@ public interface IQuizService  {
     ArrayList<Question> getAllQuestions(int quizID) throws SQLException;
 
     boolean deleteAllQuestions(int quizID)  throws SQLException;
+
+    Quiz getQuiz(int CreatorUserId, String quizName) throws SQLException;
 }

@@ -1,5 +1,6 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Quiz;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Service.IQuizService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
@@ -56,22 +57,16 @@ public class CreateQuestionsServlet extends HttpServlet {
             isPracticeEnabled = false;
         }
         int userId = Integer.parseInt(request.getParameter("userId"));
-        System.out.println("nquest: " + numQuestions);
-        System.out.println("isRandom:" + isRandom);
-        System.out.println("isOnePage:"+isOnePage);
-        System.out.println("isImmediate:" + isImmediate);
-        System.out.println("isPracticeEnabled:" +isPracticeEnabled);
-        System.out.println("userId: " + userId);
         String quizType = request.getParameter("quizType");
-        System.out.println(quizType);
         String quizName = request.getParameter("quizName");
-        System.out.println("quizName: " +quizName);
         if(quizType.equals("Multiple Choice")) {
             System.out.println(quizType);
             try {
                 quizService.addQuiz(userId, quizName, isRandom, isOnePage, isImmediate, isPracticeEnabled, 0);
+                Quiz quiz = quizService.getQuiz(userId,quizName);
                 System.out.println("gadavdivar");
                 request.setAttribute("Nquestion",1);
+                request.setAttribute("quiz",quiz);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
                 dispatcher.forward(request, response);
             } catch (SQLException e) {
