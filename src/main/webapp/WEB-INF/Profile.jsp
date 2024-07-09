@@ -11,8 +11,9 @@
     User user = (User)request.getAttribute("currentUser");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>პროფილის გვერდის</title>
     <style>
         body {
@@ -21,52 +22,45 @@
             color: #333;
             margin: 0;
             padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
             background: #50b3a2;
             color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #e8491d 3px solid;
+            width: 100%;
+            padding: 30px 0;
+            border-bottom: 3px solid #e8491d;
         }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
+        header h1 {
+            text-align: center;
+            margin: 0;
         }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        .main-conteiner
-        .main-content {
+        .container {
+            width: 80%;
+            margin: 20px auto;
             padding: 20px;
             background: #fff;
-            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .main-content h1 {
-            text-align: left;
+        .container h1 {
             color: #333;
+            text-align: left;
         }
-        .main-content ul {
+        .container ul {
             list-style: none;
             padding: 0;
         }
-        .main-content ul li {
+        .container ul li {
             background: #e8e8e8;
             margin: 10px 0;
             padding: 10px;
             border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .search-box {
             text-align: center;
