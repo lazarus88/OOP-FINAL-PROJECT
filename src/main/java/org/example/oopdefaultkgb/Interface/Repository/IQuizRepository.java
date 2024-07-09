@@ -18,5 +18,5 @@ public interface IQuizRepository {
 
     List<Quiz> getPopularQuizList() throws SQLException;
 
-    List<Quiz> getRecentQuizList();
+    Quiz getQuizById(int quizId) throws SQLException;
 }
