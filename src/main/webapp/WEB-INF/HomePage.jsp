@@ -22,20 +22,26 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f8f9fa;
+      background-color: #121212;
+      color: #ffffff;
     }
     .container {
       margin-top: 20px;
     }
     .card {
       margin-bottom: 20px;
+      background-color: #1e1e1e;
+      border: none;
     }
     .card-header {
-      background-color: #007bff;
+      background-color: #333333;
       color: white;
+      text-align: center;
     }
     .list-group-item {
-      cursor: pointer;
+      background-color: #1e1e1e;
+      border: none;
+      color: white;
     }
     .badge {
       float: right;
@@ -44,15 +50,42 @@
       max-height: 200px;
       overflow-y: auto;
     }
+    .navbar-dark .navbar-brand {
+      color: #ffffff;
+    }
+    .navbar-dark .nav-link {
+      color: #ffffff;
+    }
+    .navbar {
+      background-color: #333333;
+    }
+    .logout-button {
+      background-color: transparent;
+      border: none;
+      color: #ffffff;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+    }
+    .logout-button:hover {
+      color: #ff4d4d;
+    }
   </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <a class="navbar-brand" href="#">Quiz Hub</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <form id="logoutForm" action="logout" method="POST" style="display: inline;">
+          <button class="nav-link logout-button" type="submit">Logout</button>
+        </form>
+      </li>
+    </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <form id="profileForm" action="user-profile-servlet" method="POST" style="display: inline;">
@@ -113,7 +146,7 @@
           for (Achievement achievement : achievements) {
       %>
       <li class="list-group-item">
-      <%= AchievementEnum.intToString(achievement.achievementId) %>
+        <%= AchievementEnum.intToString(achievement.achievementId) %>
         <br>
         <small>Achieved <%= achievement.achievedAt.format(formatter) %></small>
       </li>
@@ -137,18 +170,19 @@
           int index = 0;
           for (Mail mail : mails) {
             String messageType;
-            if(mail.getMailTypeId() == 1) messageType = "Challenge From " + senderUsers.get(index).userName;
-            else if(mail.getMailTypeId() == 0)
-              messageType ="Friend Request From "+ senderUsers.get(index).userName;
-            else messageType = "Note from "+ senderUsers.get(index).userName;
+            if (mail.getMailTypeId() == 1) messageType = "Challenge From " + senderUsers.get(index).getUserName();
+            else if (mail.getMailTypeId() == 0) messageType = "Friend Request From " + senderUsers.get(index).getUserName();
+            else messageType = "Note from " + senderUsers.get(index).getUserName();
+            String badgeClass = (mail.getMailTypeId() == 1) ? "badge-danger" : "badge-info";
       %>
       <li class="list-group-item">
         <%= mail.getMessage() %>
-        <span class="badge badge-info"><%= messageType %></span>
+        <span class="badge <%= badgeClass %>"><%= messageType %></span>
         <br>
         <small><%= mail.getCreatedAt().format(formatter) %></small>
       </li>
       <%
+          index++;
         }
       } else {
       %>

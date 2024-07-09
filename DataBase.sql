@@ -1,5 +1,4 @@
-#drop database kgb;
-#drop schema  kgb;
+drop database kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
