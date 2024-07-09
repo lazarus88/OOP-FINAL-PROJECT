@@ -96,15 +96,16 @@ import java.sql.SQLException;
             System.out.println(quiz.getId());
             int numQuestions = (int)session.getAttribute("numQuestions");
             if(nQuestion > numQuestions){
+                System.out.println("numqeues" + nQuestion +" " +numQuestions);
                 request.setAttribute("userId",quiz.getCreatorUserId());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/EndQuiz.jsp");
                 dispatcher.forward(request, response);
+            }else {
+                request.setAttribute("Nquestion", nQuestion);
+                request.setAttribute("quiz", quiz);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
+                dispatcher.forward(request, response);
             }
-            request.setAttribute("Nquestion",nQuestion);
-            request.setAttribute("quiz",quiz);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
-            dispatcher.forward(request, response);
-
         }
     }
 

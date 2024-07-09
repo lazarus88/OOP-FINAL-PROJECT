@@ -100,5 +100,10 @@
         <a href="forward?path=newAccount">Create account</a><br>
     </div>
 </div>
+<form action="ShowQuizServlet" method="post">
+    <input type="hidden" name="userId" value="<%= 2 %>">
+    <input type="hidden" name="quizId" value="<%= 3 %>">
+    <input type="submit" value="Start quiz"/>
+</form>
 </body>
 </html>

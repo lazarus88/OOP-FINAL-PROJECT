@@ -3,10 +3,13 @@
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Mail" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.Achievement" %>
+<%@ page import="org.example.oopdefaultkgb.Enum.AchievementEnum" %>
 <%
   // Assuming "mails" is a request attribute containing a list of Mail objects
   List<Mail> mails = (List<Mail>) request.getAttribute("mails");
   List<User> senderUsers = (List<User>)request.getAttribute("senderUsers");
+  List<Achievement> achievements = (List<Achievement>)request.getAttribute("achievements");
   // Formatter for displaying the date
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 %>
@@ -104,9 +107,24 @@
   <!-- User's Achievements -->
   <div class="card">
     <div class="card-header">Your Achievements</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Achievement 1 <span class="badge badge-warning">New</span></li>
-      <li class="list-group-item">Achievement 2 <span class="badge badge-warning">New</span></li>
+    <ul class="list-group list-group-flush scrollable-list">
+      <%
+        if (achievements != null && !achievements.isEmpty()) {
+          for (Achievement achievement : achievements) {
+      %>
+      <li class="list-group-item">
+      <%= AchievementEnum.intToString(achievement.achievementId) %>
+        <br>
+        <small>Achieved <%= achievement.achievedAt.format(formatter) %></small>
+      </li>
+      <%
+        }
+      } else {
+      %>
+      <li class="list-group-item">No Achievements</li>
+      <%
+        }
+      %>
     </ul>
   </div>
 

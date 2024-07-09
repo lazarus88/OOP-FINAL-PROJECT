@@ -11,9 +11,10 @@ public class Quiz {
     public String quizName;
     public int creatorUserId;
     public boolean isRandom;
+    public boolean IsOneVsMultiple;
     public boolean isImmediate;
     public boolean isPracticeEnable;
-    public boolean quizTypeId;
+    public int quizTypeId;
     public String status;
     public int takenCount;
 }
