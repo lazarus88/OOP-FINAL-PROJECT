@@ -89,11 +89,22 @@
         .search-box input[type="submit"]:hover {
             background: #429184;
         }
+        header .quiz-icon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            cursor: pointer;
+            width: 40px; /* Adjust the size as needed */
+            height: auto;
+        }
     </style>
 </head>
 <body>
 <header>
     <div class="container">
+        <a href="user-profile-servlet?userId=<%=user.id%>">
+            <img src="some.png" alt="Quiz Icon" class="quiz-icon" />
+        </a>
         <h1>პროფილის გვერდი</h1>
     </div>
 </header>

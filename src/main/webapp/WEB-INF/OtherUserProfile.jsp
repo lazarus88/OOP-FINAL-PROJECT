@@ -68,6 +68,14 @@
     .main-container h1{
       text-align: left;
     }
+    header .quiz-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      cursor: pointer;
+      width: 40px; /* Adjust the size as needed */
+      height: auto;
+    }
   </style>
   <script type="text/javascript">
     $(document).ready(function() {
@@ -196,6 +204,9 @@
 <body>
 <header>
   <div class="container">
+    <a href="user-profile-servlet?userId=<%=userId%>">
+      <img src="some.png" alt="Quiz Icon" class="quiz-icon" />
+    </a>
     <h1>სხვისი პროფილის გვერდი</h1>
   </div>
 </header>
