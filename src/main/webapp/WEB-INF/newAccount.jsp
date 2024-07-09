@@ -8,7 +8,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #bac1f8;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,16 +18,16 @@
         }
 
         h1 {
-            font-size: 2em;
-            color: #000109;
+            font-size: 2.5em;
+            color: #ffffff;
             text-align: center;
             margin-bottom: 20px;
         }
 
         .form-container {
-            background: #fff;
+            background: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             padding: 20px;
             max-width: 400px;
             width: 100%;
