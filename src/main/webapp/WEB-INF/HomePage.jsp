@@ -1,3 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.Mail" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
+<%
+  // Assuming "mails" is a request attribute containing a list of Mail objects
+  List<Mail> mails = (List<Mail>) request.getAttribute("mails");
+  List<User> senderUsers = (List<User>)request.getAttribute("senderUsers");
+  // Formatter for displaying the date
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +37,10 @@
     .badge {
       float: right;
     }
+    .scrollable-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
@@ -37,7 +53,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <form id="profileForm" action="user-profile-servlet" method="POST" style="display: inline;">
-          <input type="hidden" name="userId" value=<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId")%>>
+          <input type="hidden" name="userId" value="<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId") %>">
           <a class="nav-link" href="user-profile-servlet" onclick="document.getElementById('profileForm').submit(); return false;">Profile</a>
         </form>
       </li>
@@ -97,9 +113,31 @@
   <!-- User's Messages -->
   <div class="card">
     <div class="card-header">Messages</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Friend Request from User A <span class="badge badge-info">Friend Request</span></li>
-      <li class="list-group-item">Challenge from User B <span class="badge badge-danger">Challenge</span></li>
+    <ul class="list-group list-group-flush scrollable-list">
+      <%
+        if (mails != null && !mails.isEmpty()) {
+          int index = 0;
+          for (Mail mail : mails) {
+            String messageType;
+            if(mail.getMailTypeId() == 1) messageType = "Challenge From " + senderUsers.get(index).userName;
+            else if(mail.getMailTypeId() == 0)
+              messageType ="Friend Request From "+ senderUsers.get(index).userName;
+            else messageType = "Note from "+ senderUsers.get(index).userName;
+      %>
+      <li class="list-group-item">
+        <%= mail.getMessage() %>
+        <span class="badge badge-info"><%= messageType %></span>
+        <br>
+        <small><%= mail.getCreatedAt().format(formatter) %></small>
+      </li>
+      <%
+        }
+      } else {
+      %>
+      <li class="list-group-item">No messages</li>
+      <%
+        }
+      %>
     </ul>
   </div>
 

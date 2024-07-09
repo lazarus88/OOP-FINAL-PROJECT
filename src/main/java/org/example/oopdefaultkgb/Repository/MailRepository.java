@@ -88,7 +88,11 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     public List<Mail> getMails(int userId, int mailTypeId) throws SQLException {
         var MailList = new ArrayList<Mail>();
         Statement statement =ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userId, mailTypeId, SENT);
+        String query;
+        if(mailTypeId == -1){
+            query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND Status = '%s')  ORDER BY CreatedAt DESC", userId, SENT);
+        }
+         else query = String.format("SELECT * FROM Mail WHERE (ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')  ORDER BY CreatedAt DESC", userId, mailTypeId, SENT);
         ResultSet res = statement.executeQuery(query);
         while(res.next())
               MailList.add(new Mail(
@@ -134,6 +138,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
         String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s' AND Message = '%s')",CANCELLED, userIdFrom, userIdTo, CHALLENGE_REQUEST_ID, SENT, quizName);
         return statement.execute(query);
     }
+
 }
 
 
