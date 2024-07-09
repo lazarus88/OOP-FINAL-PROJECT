@@ -1,6 +1,7 @@
 
     package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Quiz;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Service.IQuizService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
 
@@ -27,6 +29,7 @@ import java.sql.SQLException;
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+            HttpSession session = request.getSession();
             IQuizService quizService = null;
             try {
                 quizService = new QuizService();
@@ -35,46 +38,21 @@ import java.sql.SQLException;
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            int numQuestions = Integer.parseInt(request.getParameter("numQuestions"));
-            String isRandomS = request.getParameter("isRandom");
-            boolean isRandom = true;
-            if(isRandomS == null) {
-                isRandom = false;
+            int nQuestion = Integer.parseInt(request.getParameter("Nquestion"));
+            //Quiz quiz = null;
+            Quiz quiz =  (Quiz)session.getAttribute("quiz");
+            System.out.println(nQuestion);
+            System.out.println(quiz.getId());
+            if(nQuestion > 2){
+                request.setAttribute("userId",quiz.getCreatorUserId());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/HomePage.jsp");
+                dispatcher.forward(request, response);
             }
-            String isOnePageS = request.getParameter("isOnePage");
-            boolean isOnePage = true;
-            if(isOnePageS == null) {
-                isOnePage = false;
-            }
-            String isImmediateS = request.getParameter("isImmediate");
-            boolean isImmediate = true;
-            if(isImmediateS == null) {
-                isImmediate = false;
-            }
-            String isPracticeEnabledS = request.getParameter("isPracticeEnabled");
-            boolean isPracticeEnabled = true;
-            if(isPracticeEnabledS == null) {
-                isPracticeEnabled = false;
-            }
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            System.out.println("nquest: " + numQuestions);
-            System.out.println("isRandom:" + isRandom);
-            System.out.println("isOnePage:"+isOnePage);
-            System.out.println("isImmediate:" + isImmediate);
-            System.out.println("isPracticeEnabled:" +isPracticeEnabled);
-            System.out.println("userId: " + userId);
-            String quizType = request.getParameter("quizType");
-            System.out.println(quizType);
-            System.out.println("quizName: " + request.getParameter("quizName"));
-            if(quizType.equals("Multiple Choice")) {
-                System.out.println(quizType);
-                try {
-                    quizService.addQuiz(userId, "default", isRandom, isOnePage, isImmediate, isPracticeEnabled, 0);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+            request.setAttribute("Nquestion",nQuestion);
+            request.setAttribute("quiz",quiz);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
+            dispatcher.forward(request, response);
 
-            }
         }
     }
 
