@@ -7,6 +7,8 @@ import org.example.oopdefaultkgb.Interface.Repository.IQuizRepository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public  class QuizRepository extends  BaseRepository implements IQuizRepository {
     public QuizRepository() throws SQLException, ClassNotFoundException {
@@ -18,6 +20,31 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
         String query = String.format("insert into Quiz(creatorUserId,QuizName,isRandom,isOneVsMultiple,isImmediate,isPracticeEnable,quizTypeId,status) values(%d,'%S',%b,%b,%b,%b,%d,'ACTIVE') ",creatorUserId ,quizName,isRandom,isOneVsMultiple,isImmediate,isPracticeEnable,quizTypeId );
         return statement.execute(query); //not null
     }
+    @Override
+    public List<Quiz> getPopularQuizList() throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * from Quiz  ORDER BY takenCount Desc");
+        ResultSet result = statement.executeQuery(query);
+        List<Quiz> quizList = new ArrayList<>();
+        while (result.next()) {
+            quizList.add(new Quiz(result.getInt(1),
+                    result.getString(2),
+                    result.getInt(3),
+                    result.getBoolean(4),
+                    result.getBoolean(5),
+                    result.getBoolean(6),
+                    result.getBoolean(7),
+                    result.getString(8),
+                    result.getInt(9)));
+        }
+        return quizList;
+    }
+
+    @Override
+    public List<Quiz> getRecentQuizList() {
+        return List.of();
+    }
+
     @Override
     public boolean deleteQuiz(int quizId) throws SQLException{
         Statement statement = ConnectionString.createStatement();
@@ -37,7 +64,8 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
                             result.getBoolean(5),
                             result.getBoolean(6),
                             result.getBoolean(7),
-                            result.getString(8));
+                            result.getString(8),
+                    result.getInt(9));
         }
         return null;
     }

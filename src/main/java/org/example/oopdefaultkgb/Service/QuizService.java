@@ -10,6 +10,7 @@ import org.example.oopdefaultkgb.Repository.QuizRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizService implements IQuizService {
 
@@ -39,6 +40,10 @@ public class QuizService implements IQuizService {
     @Override
     public Quiz getQuiz(int CreatorUserId, String quizName)throws SQLException{
         return quizRepository.getQuiz(quizName,CreatorUserId);
+    }
+    @Override
+    public List<Quiz> getPopularQuizList() throws SQLException {
+        return quizRepository.getPopularQuizList();
     }
 
 

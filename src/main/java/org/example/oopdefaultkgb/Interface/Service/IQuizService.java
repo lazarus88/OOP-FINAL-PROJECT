@@ -5,6 +5,7 @@ import org.example.oopdefaultkgb.EntityDTO.Quiz;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IQuizService  {
 
@@ -17,4 +18,7 @@ public interface IQuizService  {
     boolean deleteAllQuestions(int quizID)  throws SQLException;
 
     Quiz getQuiz(int CreatorUserId, String quizName) throws SQLException;
+
+    List<Quiz> getPopularQuizList() throws SQLException;
+
 }

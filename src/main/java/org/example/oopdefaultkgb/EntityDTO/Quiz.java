@@ -15,4 +15,5 @@ public class Quiz {
     public boolean isPracticeEnable;
     public boolean quizTypeId;
     public String status;
+    public int takenCount;
 }

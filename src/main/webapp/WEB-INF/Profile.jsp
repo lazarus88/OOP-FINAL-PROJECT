@@ -3,12 +3,14 @@
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Friend" %>
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Achievement" %>
 <%@ page import="org.example.oopdefaultkgb.Enum.AchievementEnum" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
     List<Achievement> achievementList = (List<Achievement>) request.getAttribute("achievementList");
     List<User> friendList = (List<User>) request.getAttribute("friendList");
     User user = (User)request.getAttribute("currentUser");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +96,7 @@
         .search-box h4{
             color: #860808;
         }
+
     </style>
 </head>
 <body>
@@ -118,7 +121,7 @@
     </div>
     <h1>სრული სახელი: <%= user.fullName %></h1>
     <h1>იუზერნეიმი: <%= user.userName %></h1>
-    <h1>რეგისტრაციის თარიღი: <%= user.createdAt %></h1>
+    <h1>რეგისტრაციის თარიღი: <%= user.createdAt.format(formatter) %></h1>
 
     <h1>კეთილები:</h1>
     <ul>
@@ -135,7 +138,7 @@
     <h1 style="color: #450202;">მიღწევები</h1>
     <ul>
         <% for (Achievement achievement : achievementList) { %>
-        <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
+        <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt.format(formatter)%> - დროს</li>
         <% } %>
     </ul>
     <form action="CreateQuizServlet" method="post">

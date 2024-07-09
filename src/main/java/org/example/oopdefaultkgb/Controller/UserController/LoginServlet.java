@@ -74,9 +74,7 @@ public class LoginServlet extends HttpServlet {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
-            }
-
-        }
+            }       }
         else
         {
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/illegalPassword.jsp");

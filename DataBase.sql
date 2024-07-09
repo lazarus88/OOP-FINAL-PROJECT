@@ -1,5 +1,5 @@
 #drop database kgb;
-drop schema  kgb
+drop schema  kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -53,6 +53,7 @@ CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `IsPracticeEnable` bit,
                     `QuizTypeId` int,
                     `Status` varchar(100) DEFAULT 'ACTIVE',
+                     'TakenCount' TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (`Id`)
 );
 
@@ -97,5 +98,19 @@ VALUES (3, 1,'2024-01-01' , 'no longer friends');
 
 INSERT INTO User (FullName,UserName, HashPassword)
 VALUES ('test', '11', '11');
-use kgb
+use kgb;
+select * from quiz;
+
+CREATE TABLE `UserQuizHistory` (
+                                   `Id` bigInt,
+                                   `UserId` bigInt,
+                                   `QuizId` int,
+                                   `TookAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                   `Duration` bigInt,
+                                   `Score` int,
+                                   `Status` varchar,
+                                   `IsPractice` bit
+);
+
+use kgb;
 select * from quiz
