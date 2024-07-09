@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet(name = "ShowQuizServlet", value = "/ShowQuizServlet")
@@ -62,17 +63,10 @@ public class ShowQuizServlet extends HttpServlet {
         }
         int userId = Integer.parseInt(request.getParameter("userId"));
         int quizId = Integer.parseInt(request.getParameter("quizId"));
-        System.out.println(request.getParameter("userId"));
-        System.out.println(request.getParameter("quizId"));
-        ArrayList<Question> questions = null;
-        try {
-            quizService.getAllQuestions(quizId);
-            for (int i = 0; i < questions.size(); i++) {
-                System.out.println(questions.get(i).getId());
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println(userId);
+        System.out.println(quizId);
+        session.setAttribute("userId",userId);
+        session.setAttribute("quizId",quizId);
 
     }
 }

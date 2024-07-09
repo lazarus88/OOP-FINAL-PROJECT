@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionRepository  extends  BaseRepository implements IQuestionRepository {
     public QuestionRepository() throws SQLException, ClassNotFoundException {
@@ -31,12 +32,12 @@ public class QuestionRepository  extends  BaseRepository implements IQuestionRep
         return statement.execute(query); //not null
     }
     @Override
-    public ArrayList<Question> getAllQuestions(int quizId) throws SQLException{
+    public List<Question> getAllQuestions(int quizId) throws SQLException{
         var resultList = new ArrayList<Question>();
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM Question WHERE  QuizId = %d ORDER BY id ",  quizId);
         ResultSet result = statement.executeQuery(query);
-        if(!result.next()) return null;
+
         while(result.next())
             resultList.add(new Question(
                     result.getInt(1),

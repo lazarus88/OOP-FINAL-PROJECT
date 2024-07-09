@@ -9,7 +9,6 @@ import org.example.oopdefaultkgb.Repository.QuestionRepository;
 import org.example.oopdefaultkgb.Repository.QuizRepository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizService implements IQuizService {
@@ -30,7 +29,7 @@ public class QuizService implements IQuizService {
         return quizRepository.deleteQuiz(quizId);
     }
     @Override
-    public ArrayList<Question> getAllQuestions(int quizID) throws SQLException  {
+    public List<Question> getAllQuestions(int quizID) throws SQLException  {
         return questionRepository.getAllQuestions(quizID);
     }
     @Override

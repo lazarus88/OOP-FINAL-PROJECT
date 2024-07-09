@@ -100,8 +100,9 @@ VALUES ('test', '11', '11');
 use kgb;
 select * from quiz;
 
-
-
+select * from user
+    select * from quiz
+select * from question
 use kgb;
 select * from quiz
 SELECT * from Quiz

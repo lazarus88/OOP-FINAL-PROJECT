@@ -4,7 +4,6 @@ import org.example.oopdefaultkgb.EntityDTO.Question;
 import org.example.oopdefaultkgb.EntityDTO.Quiz;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IQuizService  {
@@ -13,7 +12,7 @@ public interface IQuizService  {
 
     boolean deleteQuiz(int quizId) throws SQLException;
 
-    ArrayList<Question> getAllQuestions(int quizID) throws SQLException;
+    List<Question> getAllQuestions(int quizID) throws SQLException;
 
     boolean deleteAllQuestions(int quizID)  throws SQLException;
 

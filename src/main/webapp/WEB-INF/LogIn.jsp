@@ -101,8 +101,8 @@
     </div>
 </div>
 <form action="ShowQuizServlet" method="post">
-    <input type="hidden" name="userId" value="<%= 2 %>">
-    <input type="hidden" name="quizId" value="<%= 3 %>">
+    <input type="hidden" name="userId" value="<%= 4 %>">
+    <input type="hidden" name="quizId" value="<%= 1 %>">
     <input type="submit" value="Start quiz"/>
 </form>
 </body>
