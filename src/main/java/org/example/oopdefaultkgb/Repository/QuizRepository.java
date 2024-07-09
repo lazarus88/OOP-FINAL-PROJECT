@@ -42,10 +42,23 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
     }
 
     @Override
-    public List<Quiz> getRecentQuizList() {
-        return List.of();
+    public Quiz getQuizById(int quizId) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * from Quiz  WHERE QuizId = %d", quizId);
+        ResultSet result = statement.executeQuery(query);
+        if(result.next()) {
+            return new Quiz(result.getInt(1),
+                    result.getString(2),
+                    result.getInt(3),
+                    result.getBoolean(4),
+                    result.getBoolean(5),
+                    result.getBoolean(6),
+                    result.getBoolean(7),
+                    result.getString(8),
+                    result.getInt(9));
+        }
+        return null;
     }
-
     @Override
     public boolean deleteQuiz(int quizId) throws SQLException{
         Statement statement = ConnectionString.createStatement();
