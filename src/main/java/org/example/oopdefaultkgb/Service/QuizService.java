@@ -1,6 +1,7 @@
 package org.example.oopdefaultkgb.Service;
 
 import org.example.oopdefaultkgb.EntityDTO.Question;
+import org.example.oopdefaultkgb.EntityDTO.Quiz;
 import org.example.oopdefaultkgb.Interface.Repository.IQuestionRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IQuizRepository;
 import org.example.oopdefaultkgb.Interface.Service.IQuizService;
@@ -35,7 +36,10 @@ public class QuizService implements IQuizService {
     public boolean deleteAllQuestions(int quizID)  throws SQLException{
         return questionRepository.deleteAllQuestions(quizID);
     }
-
+    @Override
+    public Quiz getQuiz(int CreatorUserId, String quizName)throws SQLException{
+        return quizRepository.getQuiz(quizName,CreatorUserId);
+    }
 
 
 }
