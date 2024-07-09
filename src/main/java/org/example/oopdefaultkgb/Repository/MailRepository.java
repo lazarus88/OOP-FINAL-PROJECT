@@ -19,6 +19,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     private final String SENT = "SENT";
     private final String ACCEPTED = "ACCEPTED";
     private final String REJECTED = "REJECTED";
+    private final String CANCELLED = "CANCELLED";
 
 
     public MailRepository() throws SQLException, ClassNotFoundException {
@@ -112,6 +113,25 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     public boolean receivedFriendRequest(int userIdFrom, int userId) throws SQLException {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * FROM Mail WHERE(SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')", userIdFrom, userId, FRIEND_REQUEST_ID, SENT );
+        ResultSet res = statement.executeQuery(query);
+        if(res.next()){
+            System.out.println("received friend request");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean cancelFriendRequest(int userIdFrom, int userIdTo) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s')",CANCELLED, userIdFrom, userIdTo, FRIEND_REQUEST_ID, SENT);
+        return statement.execute(query);
+    }
+
+    @Override
+    public boolean cancelChallengeRequest(int userIdFrom, int userIdTo, String quizName) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("UPDATE Mail SET Status = '%s' WHERE (SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d AND Status = '%s' AND Message = '%s')",CANCELLED, userIdFrom, userIdTo, CHALLENGE_REQUEST_ID, SENT, quizName);
         return statement.execute(query);
     }
 }

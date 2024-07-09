@@ -125,6 +125,11 @@
         <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
         <% } %>
     </ul>
+    <form action="CreateQuizServlet" method="post">
+        <input type="submit" value="Create quiz"/>
+        <input type="hidden" name="userId" value="<%= user.id %>">
+    </form>
+
 </div>
 </body>
 </html>

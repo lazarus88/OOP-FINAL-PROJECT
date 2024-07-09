@@ -13,6 +13,7 @@ public class BaseRepository {
     }
 
     public Connection getBaseRepository(){
+
         return ConnectionString;
     }
 }
