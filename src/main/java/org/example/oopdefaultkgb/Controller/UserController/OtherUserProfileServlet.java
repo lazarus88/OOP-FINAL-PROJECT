@@ -37,6 +37,10 @@ public class OtherUserProfileServlet extends HttpServlet {
             IFriendService friendService = new FriendService();
             IMailService mailService = new MailService();
             User otherUser = userService.getProfile(otherUsername);
+            if(otherUser == null) {
+                request.setAttribute("otherUserNotFound", true);
+                request.getRequestDispatcher("user-profile-servlet").forward(request, response);
+            }
             String friendRequestStatus = mailService.getFriendRequestStatus(userId, otherUser.id);
             if (mailService.receivedFriendRequest(otherUser.id, userId)) {
                 System.out.println("received");

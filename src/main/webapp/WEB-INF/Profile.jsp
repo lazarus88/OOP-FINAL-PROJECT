@@ -91,6 +91,9 @@
             width: 40px; /* Adjust the size as needed */
             height: auto;
         }
+        .search-box h4{
+            color: #860808;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +107,9 @@
 </header>
 <div class="container main-content">
     <div class="search-box">
+        <% if(request.getAttribute("otherUserNotFound") != null && (Boolean)request.getAttribute("otherUserNotFound")){%>
+            <h4>მომხმარებელი ვერ მოიძებნა</h4>
+        <%}%>
         <form action="other-user-profile-servlet" method="get">
             <input id="search" type="text" name="otherUsername" placeholder="Search for a user..."/><br>
             <input type="submit" value="Search"/>
