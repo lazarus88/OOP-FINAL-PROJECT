@@ -40,7 +40,7 @@ public class AnswerRepository  extends BaseRepository implements IAnswerReposito
     @Override
     public boolean addAnswer(int questionId, String answer, boolean isCorrect) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("insert into Answer(QuestionId,Answer,IsCorrect,status) vales(%d,%s,%b,'ACTIVE') ",questionId ,answer,isCorrect);
+        String query = String.format("insert into Answer(QuestionId,Answer,IsCorrect,status) values(%d,'%s',%b,'ACTIVE') ",questionId ,answer,isCorrect);
         return statement.execute(query); //not null
     }
 }

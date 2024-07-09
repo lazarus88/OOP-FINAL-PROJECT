@@ -28,5 +28,9 @@ public class QuestionService implements IQuestionService {
     public Question getQuestion(int questionId)  throws SQLException{
         return questionRepository.getQuestion(questionId);
     }
+    @Override
+    public Question getQuestion(int quizId, String question) throws SQLException {
+        return questionRepository.getQuestion(quizId,question);
+    }
 
 }

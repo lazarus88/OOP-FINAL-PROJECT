@@ -18,4 +18,6 @@ public interface IQuestionRepository {
     boolean deleteAllQuestions(int quizID) throws SQLException;
 
     Question getQuestion(int questionId) throws SQLException;
+
+    Question getQuestion(int quizId, String question) throws SQLException;
 }
