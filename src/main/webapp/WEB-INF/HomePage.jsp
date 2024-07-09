@@ -37,7 +37,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <form id="profileForm" action="user-profile-servlet" method="POST" style="display: inline;">
-          <input type="hidden" name="userId" value=<%= (int)request.getAttribute("userId") %>>
+          <input type="hidden" name="userId" value=<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId")%>>
           <a class="nav-link" href="user-profile-servlet" onclick="document.getElementById('profileForm').submit(); return false;">Profile</a>
         </form>
       </li>

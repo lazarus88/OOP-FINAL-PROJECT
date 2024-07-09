@@ -96,7 +96,7 @@
 <body>
 <header>
     <div class="container">
-        <a href="user-profile-servlet?userId=<%=user.id%>">
+        <a href="forward?path=HomePage&userId=<%=user.id%>">
             <img src="some.png" alt="Quiz Icon" class="quiz-icon" />
         </a>
         <h1>პროფილის გვერდი</h1>
