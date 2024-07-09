@@ -120,7 +120,9 @@
         <form action="other-user-profile-servlet" method="get">
             <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
             <input type="hidden" name="userId" value=<%= user.id %>>
-        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %> <input type="submit" value="forward profile"/></li>
+        <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %>
+            <input type="submit" value="forward profile"/></li>
+        </form>
         <% } %>
     </ul>
 
