@@ -95,8 +95,8 @@
     <div class="form-container">
         <form action="CreationServlet" method="post">
 
-            <label for="Fullname">Full Name:</label>
-            <input id="Fullname" type="text" name="fullName" required/><br>
+            <label for="fullname">Full Name:</label>
+            <input id="fullname" type="text" name="fullName" required/><br>
             <label for="User">Username:</label>
             <input id="User" type="text" name="name" required/><br>
             <label for="passWord">Password:</label>

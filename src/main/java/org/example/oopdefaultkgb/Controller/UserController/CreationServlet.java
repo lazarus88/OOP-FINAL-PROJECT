@@ -1,5 +1,6 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
+import org.example.oopdefaultkgb.EntityDTO.Achievement;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
 import org.example.oopdefaultkgb.Service.UserService;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet(name = "CreationServlet", value = "/CreationServlet")
@@ -55,8 +58,13 @@ public class CreationServlet extends HttpServlet {
                 //request.setAttribute("userId",curUser.id);
                 curUser = sercive.getProfile(usr);
                 if(curUser != null) {
-                    request.setAttribute("curUser",curUser);
-                    RequestDispatcher rd = request.getRequestDispatcher("user-profile-servlet");
+                    System.out.println(curUser.id + " "+curUser.userName + " "+curUser.fullName);
+                    List<User> friends = new ArrayList<>();
+                    List<Achievement> achivments = new ArrayList<>();
+                    request.setAttribute("friendList",friends);
+                    request.setAttribute("achievementList",achivments);
+                    request.setAttribute("currentUser",curUser);
+                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Profile.jsp");
                     rd.forward(request, response);
                 }else{
                     RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/ErrorPage.jsp");
