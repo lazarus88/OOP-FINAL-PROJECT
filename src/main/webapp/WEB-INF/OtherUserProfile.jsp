@@ -9,72 +9,128 @@
   List<Achievement> achievements = (List<Achievement>) request.getAttribute("otherUserAchievementList");
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dynamic Button Example with jQuery</title>
-  <!-- Include jQuery from a CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Other User Profile</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
+      background-color: #121212;
+      color: #ffffff;
       margin: 0;
       padding: 0;
-    }
-    .container {
-      width: 80%;
-      margin: auto;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     header {
-      background: #50b3a2;
-      color: #fff;
-      padding-top: 30px;
-      min-height: 70px;
-      border-bottom: #e8491d 3px solid;
+      background: #333333;
+      color: #ffffff;
+      width: 100%;
+      padding: 20px 0;
+      border-bottom: 3px solid #00ffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
     header h1 {
-      text-align: center;
-    }
-    .main-content h1 {
-      text-align: left;
-      color: #333;
-    }
-    button {
-      background-color: blue;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      margin: 5px;
-      border-radius: 5px;
-    }
-    .message-btn {
-      background-color: green;
-    }
-    .friend-btn {
-      background-color: orange;
-    }
-    .cancel-btn {
-      background-color: red;
-    }
-    .delete-btn {
-      background-color: grey;
-    }
-    .reject-btn {
-      background-color: brown;
-    }
-    .main-container h1{
-      text-align: left;
+      margin: 0;
     }
     header .quiz-icon {
       position: absolute;
       top: 15px;
       left: 15px;
       cursor: pointer;
-      width: 40px; /* Adjust the size as needed */
+      width: 40px;
       height: auto;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .main-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: flex-start;
+    }
+    .section {
+      flex: 1;
+      margin: 10px;
+    }
+    .section h2 {
+      color: #00ffff;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .profile-info p,
+    .achievements-list ul li {
+      background: #2b2b2b;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .achievements-list ul {
+      list-style: none;
+      padding: 0;
+    }
+    .achievements-list ul li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .profile-image-container {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .profile-image {
+      text-align: center;
+      margin-right: 20px;
+    }
+    .profile-image img {
+      max-width: 200px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .profile-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .profile-buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #50b3a2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .profile-buttons .message-btn {
+      background-color: #5ac57e;
+    }
+    .profile-buttons .friend-btn {
+      background-color: #7f972e;
+    }
+    .profile-buttons .cancel-btn {
+      background-color: #243710;
+    }
+    .profile-buttons .delete-btn {
+      background-color: grey;
+    }
+    .profile-buttons .reject-btn {
+      background-color: brown;
     }
     #messageBox {
       display: none;
@@ -94,6 +150,7 @@
       margin-top: 10px;
     }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       var action = "";
@@ -238,32 +295,43 @@
     <a href="user-profile-servlet?userId=<%=userId%>">
       <img src="some.png" alt="Quiz Icon" class="quiz-icon" />
     </a>
-    <h1>სხვისი პროფილის გვერდი</h1>
+    <h1>Other User Profile Page</h1>
   </div>
 </header>
 <div class="container">
-  <h1>სრული სახელი: <%= otherUser.getFullName() %></h1>
-  <h1>იუზერნეიმი: <%= otherUser.getUserName() %></h1>
-  <h1>რეგისტრაციის თარიღი: <%= otherUser.getCreatedAt() %></h1>
+  <div class="profile-image-container">
+    <div class="profile-image">
+      <img src="default-profile.png" alt="Profile Image"/>
+    </div>
+    <div class="profile-buttons">
+      <button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
+      <button id="messageButton" class="default-btn message-btn">Message</button>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="section profile-info">
+      <h2>Profile Information</h2>
+      <p>Full Name: <%= otherUser.getFullName() %></p>
+      <p>Username: <%= otherUser.getUserName() %></p>
+      <p>Registration Date: <%= otherUser.getCreatedAt() %></p>
+    </div>
 
+    <div class="section achievements-list">
+      <h2>Achievements</h2>
+      <ul>
+        <% for (Achievement achievement : achievements) { %>
+        <li><%= AchievementEnum.intToString(achievement.achievementId) %>, Achieved on: <%= achievement.achievedAt %></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
 
-  <!-- Message button -->
-  <button id="messageButton" class="default-btn message-btn">Message</button>
-
-  <!-- Friend request button -->
-  <button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
   <div id="messageBox">
     <textarea id="messageContent" placeholder="Write your message here..."></textarea>
     <br>
     <button id="sendMessageButton" class="default-btn message-btn">Send</button>
     <button id="cancelMessageButton" class="default-btn">Cancel</button>
   </div>
-  <h1 style="color: #450202;">მიღწევები</h1>
-  <ul>
-    <% for (Achievement achievement : achievements) { %>
-    <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
-    <% } %>
-  </ul>
 </div>
 </body>
 </html>
