@@ -6,9 +6,6 @@
 <%
   User otherUser = (User) request.getAttribute("otherUser");
   int userId = (int) request.getAttribute("userId");
-  Boolean isFriend = (Boolean) request.getAttribute("isFriend");
-  Boolean alreadySent = (Boolean) request.getAttribute("alreadySent");
-  Boolean receivedFriendRequest = (Boolean) request.getAttribute("receivedFriendRequest");
   List<Achievement> achievements = (List<Achievement>) request.getAttribute("otherUserAchievementList");
 %>
 <!DOCTYPE html>
@@ -85,16 +82,6 @@
       console.log("alreadySent: " + alreadySent);
       console.log("receivedFriendRequest: " + receivedFriendRequest);
 
-      var action = "";
-      var rejectButton;
-      var isFriend = <%= isFriend != null ? isFriend : "false" %>;
-      var alreadySent = <%= alreadySent != null ? alreadySent : "false" %>;
-      var receivedFriendRequest = <%= receivedFriendRequest != null ? receivedFriendRequest : "false" %>;
-
-      console.log("isFriend: " + isFriend);
-      console.log("alreadySent: " + alreadySent);
-      console.log("receivedFriendRequest: " + receivedFriendRequest);
-
       // Initialize button based on the friend status
       if (isFriend) {
         $("#friendRequestButton")
@@ -158,28 +145,7 @@
           }
         }
         console.log("Action determined: " + action);
-
         performAction(action);
-        if (action) {
-          // Perform the AJAX call to the servlet
-          $.ajax({
-            url: "<%= request.getContextPath() %>/mail-send-servlet",
-            type: "POST",
-            data: {
-              userId: "<%= userId %>",
-              action: action,
-              mailTypeId: 0,
-              otherUserId: "<%= otherUser.getId() %>"
-            },
-            success: function() {
-              console.log("Action performed successfully");
-            },
-            error: function() {
-              console.log("Error occurred while performing action");
-              alert("Error: Could not perform action");
-            }
-          });
-        }
       });
 
       // Handle the click event for the message button
@@ -239,9 +205,6 @@
   <h1>რეგისტრაციის თარიღი: <%= otherUser.getCreatedAt() %></h1>
 
 
-<!-- Friend request button -->
-<button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
-
   <!-- Message button -->
   <button id="messageButton" class="default-btn message-btn">Message</button>
 
@@ -250,8 +213,8 @@
   <h1 style="color: #450202;">მიღწევები</h1>
   <ul>
     <% for (Achievement achievement : achievements) { %>
-    <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
-    <% } %>
+   <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
+   <% } %>
   </ul>
 </div>
 </body>
