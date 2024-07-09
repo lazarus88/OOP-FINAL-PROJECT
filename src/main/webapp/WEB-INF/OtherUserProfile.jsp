@@ -156,7 +156,7 @@
           type: "POST",
           data: {
             userId: "<%= otherUser.getId() %>",
-            message: "Your message content here" 
+            message: "Your message content here"
           },
           success: function(response) {
             console.log("Message sent successfully: " + response);
@@ -213,8 +213,8 @@
   <h1 style="color: #450202;">მიღწევები</h1>
   <ul>
     <% for (Achievement achievement : achievements) { %>
-   <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
-   <% } %>
+    <li style="color: #450202;"><%= AchievementEnum.intToString(achievement.achievementId) %>, მიღწეულია: <%= achievement.achievedAt%> - დროს</li>
+    <% } %>
   </ul>
 </div>
 </body>

@@ -20,17 +20,23 @@ import java.util.List;
 
 @WebServlet(name = "UserProfileServlet", value = "/user-profile-servlet")
 public class UserProfileServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
+    }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        User currUser = (User) request.getAttribute("currentUser");
         try {
             IUserService userService = new UserService();
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            //System.out.println(((User)request.getAttribute("currentUser")).userName);
+            User currUser = userService.getProfileById(userId);
+            request.setAttribute("currentUser", currUser);
             List<Achievement>  achievementList = userService.getAchievements(currUser.id);
       //      List<HistoryQuiz> historyQuizList = userService.getHistories(currUser.id);
             List<Friend> friendList = userService.getFriends(currUser.id);
             List<User> userFriendList = new ArrayList<>();
             for (Friend friend : friendList) {
-                int userId = friend.receiverUserId == currUser.id ? friend.senderUserId : friend.receiverUserId;
-                userFriendList.add(userService.getProfileById(userId));
+                int friendUserId = friend.receiverUserId == currUser.id ? friend.senderUserId : friend.receiverUserId;
+                userFriendList.add(userService.getProfileById(friendUserId));
             }
             request.setAttribute("friendList" ,userFriendList);
        //     request.setAttribute("historyQuizList" ,historyQuizList);
@@ -40,7 +46,6 @@ public class UserProfileServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("currentUser",currUser);
         // სრული სახელი, იუზერნეიმი, რეგისტრაცისს, თარიღი, როლი
         request.getRequestDispatcher("WEB-INF/Profile.jsp").forward(request, response);
     }
