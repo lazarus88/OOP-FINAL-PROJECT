@@ -100,5 +100,10 @@
         <a href="forward?path=newAccount">Create account</a><br>
     </div>
 </div>
+<form action="StartQuiz" method="post">
+    <input type="hidden" name="userId" value="<%= 2 %>">
+    <input type="hidden" name="QuizId" value="<%= 3 %>">
+    <input type="submit" value="Create quiz"/>
+</form>
 </body>
 </html>

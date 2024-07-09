@@ -33,7 +33,6 @@ CREATE TABLE `UserQuizHistory` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                                `IsPractice` bit,
                                PRIMARY KEY (`Id`)
 );
-
 CREATE TABLE `Mail` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `SenderUserId` bigInt,
                     `ReceiverUserId` bigInt,
@@ -53,7 +52,7 @@ CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `IsPracticeEnable` bit,
                     `QuizTypeId` int,
                     `Status` varchar(100) DEFAULT 'ACTIVE',
-                     'TakenCount' TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                     `TakenCount` int ,
                     PRIMARY KEY (`Id`)
 );
 
@@ -101,16 +100,7 @@ VALUES ('test', '11', '11');
 use kgb;
 select * from quiz;
 
-CREATE TABLE `UserQuizHistory` (
-                                   `Id` bigInt,
-                                   `UserId` bigInt,
-                                   `QuizId` int,
-                                   `TookAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                   `Duration` bigInt,
-                                   `Score` int,
-                                   `Status` varchar,
-                                   `IsPractice` bit
-);
+
 
 use kgb;
 select * from quiz
