@@ -1,5 +1,5 @@
 #drop database kgb;
-drop schema  kgb;
+#drop schema  kgb;
 CREATE SCHEMA `kgb` ;
 USe kgb;
 
@@ -104,3 +104,6 @@ select * from quiz;
 
 use kgb;
 select * from quiz
+SELECT * from Quiz
+                  SELECT * from Quiz  WHERE (QuizName = 'ADAWD' and CreatorUserId = 4)
+SELECT * from Quiz  WHERE (QuizName = 'wawad' and CreatorUserId = 4)

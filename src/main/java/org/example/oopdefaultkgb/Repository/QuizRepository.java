@@ -34,8 +34,9 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
                     result.getBoolean(5),
                     result.getBoolean(6),
                     result.getBoolean(7),
-                    result.getString(8),
-                    result.getInt(9)));
+                    result.getInt(8),
+                    result.getString(9),
+                    result.getInt(10) ));
         }
         return quizList;
     }
@@ -56,6 +57,7 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
         Statement statement = ConnectionString.createStatement();
         String query = String.format("SELECT * from Quiz  WHERE (QuizName = '%s' and CreatorUserId = %d)",quizName,creatorUserId);
         ResultSet result = statement.executeQuery(query);
+        System.out.println("esaa");
         if(result.next()) {
             return new Quiz(result.getInt(1),
                             result.getString(2),
@@ -64,8 +66,9 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
                             result.getBoolean(5),
                             result.getBoolean(6),
                             result.getBoolean(7),
-                            result.getString(8),
-                    result.getInt(9));
+                            result.getInt(8),
+                            result.getString(9),
+                            result.getInt(10) );
         }
         return null;
     }
