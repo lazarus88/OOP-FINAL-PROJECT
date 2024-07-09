@@ -76,7 +76,7 @@ public class MailSendServlet extends HttpServlet {
                 mailService.sendChallengeRequest(userIdFrom, otherUser.id, quizName);
             }
              else {
-                  String note = "";
+                  String note = req.getParameter("message");
                  mailService.sendNote(userIdFrom, otherUser.id, note);}
         } catch (SQLException e) {
             throw new RuntimeException(e);
