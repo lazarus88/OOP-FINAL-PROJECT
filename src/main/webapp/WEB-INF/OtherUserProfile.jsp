@@ -76,6 +76,23 @@
       width: 40px; /* Adjust the size as needed */
       height: auto;
     }
+    #messageBox {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #messageBox textarea {
+      width: 300px;
+      height: 100px;
+    }
+    #messageBox button {
+      margin-top: 10px;
+    }
   </style>
   <script type="text/javascript">
     $(document).ready(function() {
@@ -157,23 +174,37 @@
       });
 
       // Handle the click event for the message button
-      $("#messageButton").click(function() {
-        console.log("Message button clicked!");
-        $.ajax({
-          url: "<%= request.getContextPath() %>/message-servlet",
-          type: "POST",
-          data: {
-            userId: "<%= otherUser.getId() %>",
-            message: "Your message content here"
-          },
-          success: function(response) {
-            console.log("Message sent successfully: " + response);
-            alert("Message sent successfully: " + response);
-          },
-          error: function(xhr, status, error) {
-            console.log("Error occurred while sending message: " + error);
-            alert("Error: Could not send message");
-          }
+      $(document).ready(function() {
+        $("#messageButton").click(function() {
+          $("#messageBox").show();
+        });
+
+        $("#sendMessageButton").click(function() {
+          var messageContent = $("#messageContent").val();
+          $.ajax({
+            url: "<%= request.getContextPath() %>/mail-send-servlet",
+            type: "POST",
+            data: {
+              userId: "<%= userId %>",
+              message: messageContent,
+              action: "send message",
+              mailTypeId: 2,
+              otherUserId: "<%= otherUser.getId() %>"
+            },
+            success: function(response) {
+              alert("Message sent successfully: " + response);
+              $("#messageBox").hide();
+              $("#messageContent").val('');
+            },
+            error: function(xhr, status, error) {
+              alert("Error: Could not send message");
+            }
+          });
+        });
+
+        $("#cancelMessageButton").click(function() {
+          $("#messageBox").hide();
+          $("#messageContent").val('');
         });
       });
 
@@ -221,6 +252,12 @@
 
   <!-- Friend request button -->
   <button id="friendRequestButton" class="default-btn friend-btn">Send Friend Request</button>
+  <div id="messageBox">
+    <textarea id="messageContent" placeholder="Write your message here..."></textarea>
+    <br>
+    <button id="sendMessageButton" class="default-btn message-btn">Send</button>
+    <button id="cancelMessageButton" class="default-btn">Cancel</button>
+  </div>
   <h1 style="color: #450202;">მიღწევები</h1>
   <ul>
     <% for (Achievement achievement : achievements) { %>
