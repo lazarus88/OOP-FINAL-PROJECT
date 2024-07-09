@@ -62,12 +62,18 @@ public class CreateQuestionsServlet extends HttpServlet {
         System.out.println("isImmediate:" + isImmediate);
         System.out.println("isPracticeEnabled:" +isPracticeEnabled);
         System.out.println("userId: " + userId);
-        System.out.println(request.getParameter("quizType"));
-        System.out.println("quizName: " + request.getParameter("quizName"));
-        try {
-            quizService.addQuiz(userId,"default",isRandom,isOnePage,isImmediate,isPracticeEnabled,0);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        String quizType = request.getParameter("quizType");
+        System.out.println(quizType);
+        String quizName = request.getParameter("quizName");
+        System.out.println("quizName: " +quizName);
+        if(quizType.equals("Multiple Choice")) {
+            System.out.println(quizType);
+            try {
+                quizService.addQuiz(userId, quizName, isRandom, isOnePage, isImmediate, isPracticeEnabled, 0);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }

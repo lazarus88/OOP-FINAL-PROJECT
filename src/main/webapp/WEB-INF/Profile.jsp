@@ -117,7 +117,7 @@
     <h1>კეთილები:</h1>
     <ul>
         <% for (User friend : friendList) { %>
-        <form action="other-user-profile-servlet" method="get">
+        <form action="other-user-profile-servlet" method="post">
             <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
             <input type="hidden" name="userId" value=<%= user.id %>>
         <li><%= friend.fullName %>,     იუზერნეიმი: <%= friend.userName %>
@@ -133,8 +133,8 @@
         <% } %>
     </ul>
     <form action="CreateQuizServlet" method="post">
-        <input type="submit" value="Create quiz"/>
         <input type="hidden" name="userId" value="<%= user.id %>">
+        <input type="submit" value="Create quiz"/>
     </form>
 
 </div>
