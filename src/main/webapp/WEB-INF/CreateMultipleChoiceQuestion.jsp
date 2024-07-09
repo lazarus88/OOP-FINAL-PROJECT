@@ -1,3 +1,4 @@
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.Quiz" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,34 +73,37 @@
     </style>
 </head>
 <% int i = (int) request.getAttribute("Nquestion");
-    request.setAttribute("Nquestion", i + 1); %>
+Quiz quiz = (Quiz) request.getAttribute("quiz");
+    session.setAttribute("quiz",quiz);
+%>
 <body>
 <h1>Create Question # <%= i %></h1>
-<form action="saveQuestion.jsp" method="post">
+<form action="CreateMultipleChoiceQuestionServlet" method="post">
     <label for="question">Question:</label><br>
-    <input type="text" id="question" name="question" size="100"><br><br>
+    <input type="text" id="question" name="question" size="100" required><br><br>
 
     <div class="option-group">
-        <input type="radio" id="correctAnswer1" name="correctAnswer" value="1" >
+        <input type="radio" id="correctAnswer1" name="correctAnswer" value="1" required>
         <label for="correctAnswer1">Answer #1:</label>
-        <input type="text" id="option1" name="option1">
+        <input type="text" id="option1" name="option1" required>
     </div>
     <div class="option-group">
         <input type="radio" id="correctAnswer2" name="correctAnswer" value="2">
         <label for="correctAnswer2">Answer #2:</label>
-        <input type="text" id="option2" name="option2">
+        <input type="text" id="option2" name="option2" required>
     </div>
     <div class="option-group">
         <input type="radio" id="correctAnswer3" name="correctAnswer" value="3">
         <label for="correctAnswer3">Answer #3:</label>
-        <input type="text" id="option3" name="option3">
+        <input type="text" id="option3" name="option3" required>
     </div>
     <div class="option-group">
         <input type="radio" id="correctAnswer4" name="correctAnswer" value="4">
         <label for="correctAnswer4">Answer #4:</label>
-        <input type="text" id="option4" name="option4">
+        <input type="text" id="option4" name="option4" required>
     </div><br>
-
+<%--    <input type="hidden" name="quiz" value="<%= quiz %>">--%>
+    <input type="hidden" name="Nquestion" value="<%= i+1 %>">
     <input type="submit" value="Create Question">
 </form>
 </body>
