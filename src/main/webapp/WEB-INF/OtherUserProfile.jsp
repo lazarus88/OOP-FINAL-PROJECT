@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Achievement" %>
 <%@ page import="org.example.oopdefaultkgb.Enum.AchievementEnum" %>
+<%@ page import="org.example.oopdefaultkgb.Enum.MailTypeEnum" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   User otherUser = (User) request.getAttribute("otherUser");
@@ -123,11 +124,23 @@
       $("#friendRequestButton").click(function() {
         var button = $(this);
         console.log("Friend request button clicked!");
-
+        var userId = <%= userId%>;
+        var otherUserId = <%=otherUser.id%>;
+        var emailTypeId = <%=MailTypeEnum.FriendRequest.ordinal()%>;
         if (button.hasClass("friend-btn")) {
           button.removeClass("friend-btn").addClass("cancel-btn");
           button.text("Cancel Friend Request");
           action = "sendFriendRequest";
+          $.ajax({
+            url: "<%= request.getContextPath() %>/mail-send-servlet",
+            type: "POST",
+            data: {
+              userId: "<%= userId %>",
+              otherUserId: "<%= otherUser.id %>",
+              mailTypeId: "<%= MailTypeEnum.FriendRequest.ordinal()%>",
+              action: "sendFriendRequest",
+              message: "Your message content here"
+            }});
         } else if (button.hasClass("accept-btn")) {
           button.removeClass("accept-btn").addClass("delete-btn");
           button.text("Delete Friend");
@@ -137,15 +150,34 @@
           button.removeClass("cancel-btn").addClass("friend-btn");
           button.text("Send Friend Request");
           action = "cancelFriendRequest";
+          $.ajax({
+            url: "<%= request.getContextPath() %>/mail-send-servlet",
+            type: "POST",
+            data: {
+              userId: "<%= userId %>",
+              otherUserId: "<%= otherUser.id %>",
+              mailTypeId: "<%= MailTypeEnum.FriendRequest.ordinal()%>",
+              action: "cancelFriendRequest",
+            }});
         } else if (button.hasClass("delete-btn")) {
           if (confirm("Are you sure you want to delete this friend?")) {
             button.removeClass("delete-btn").addClass("friend-btn");
             button.text("Send Friend Request");
+            var userId = "<%= userId %>";
+            var friendUserId = "<%= otherUser.getId() %>";
+
+            // Create a form dynamically and submit it
+            var form = $('<form action="<%= request.getContextPath() %>/delete-friend-servlet" method="POST">' +
+                    '<input type="hidden" name="userId" value="' + userId + '" />' +
+                    '<input type="hidden" name="otherUserId" value="' + otherUserId + '" />' +
+                    '</form>');
+            $('body').append(form);
+            form.submit();
             action = "deleteFriend";
           }
         }
         console.log("Action determined: " + action);
-        performAction(action);
+        // performAction(action);
       });
 
       // Handle the click event for the message button
@@ -176,7 +208,7 @@
   <header>
     <div class="container">
       <a href="user-profile-servlet?userId=<%=userId%>">
-        <img src="some.jpg" alt="Quiz Icon" class="quiz-icon" />
+        <img src="WEB-INF/some.png" alt="Quiz Icon" class="quiz-icon" />
       </a>
       <h1>Profile Page</h1>
     </div>
