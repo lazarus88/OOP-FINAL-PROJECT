@@ -70,6 +70,10 @@ public class CreateQuestionsServlet extends HttpServlet {
             System.out.println(quizType);
             try {
                 quizService.addQuiz(userId, quizName, isRandom, isOnePage, isImmediate, isPracticeEnabled, 0);
+                System.out.println("gadavdivar");
+                request.setAttribute("Nquestion",1);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
+                dispatcher.forward(request, response);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
