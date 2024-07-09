@@ -102,7 +102,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     @Override
     public String getFriendRequestStatus(int userIdFrom, int userIdTo) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM Mail WHERE(SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d)", userIdFrom, userIdTo, FRIEND_REQUEST_ID );
+        String query = String.format("SELECT * FROM Mail WHERE(SenderUserId = %d AND ReceiverUserId = %d AND MailTypeId = %d) ORDER BY CreatedAt DESC", userIdFrom, userIdTo, FRIEND_REQUEST_ID );
         ResultSet res = statement.executeQuery(query);
         if(res.next())
             return res.getString(7);
