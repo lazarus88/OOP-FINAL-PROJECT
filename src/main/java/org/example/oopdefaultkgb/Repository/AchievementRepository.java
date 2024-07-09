@@ -21,10 +21,9 @@ public class AchievementRepository extends BaseRepository implements IAchievemen
     @Override
     public List<Achievement> getAchievements(int userId) throws SQLException {
         Statement statement = ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM Achievement WHERE UserId = %d ORDER BY AchievedAt DESC", userId);
+        String query = String.format("SELECT * FROM userAchievement WHERE UserId = %d ORDER BY AchievedAt DESC", userId);
         ResultSet result = statement.executeQuery(query);
         List<Achievement> resultList = new ArrayList<Achievement>();
-        if(!result.next()) return null;
         while(result.next())
             resultList.add(new Achievement(
                     result.getInt(1),

@@ -11,7 +11,9 @@ public interface IFriendRepository {
     List<Friend> getFriends(int userId) throws SQLException;
 
 
+    Friend getFriend(int userId, int friendUserId) throws SQLException;
+
     boolean deleteFriends(int userId, int friendId) throws SQLException;
 
-    boolean AcceptFriends(int userId, int friendId, LocalDateTime InvitedAt) throws SQLException;
+    boolean AcceptFriends(int userId, int friendId) throws SQLException;
 }

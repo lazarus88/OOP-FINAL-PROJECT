@@ -13,9 +13,11 @@ public interface IQuestionRepository {
 
     boolean editQuestion(int questionId, String question) throws SQLException;
 
-    ArrayList<Question> getAllQuestions(int quizID) throws SQLException;
+    List<Question> getAllQuestions(int quizID) throws SQLException;
 
     boolean deleteAllQuestions(int quizID) throws SQLException;
 
     Question getQuestion(int questionId) throws SQLException;
+
+    Question getQuestion(int quizId, String question) throws SQLException;
 }

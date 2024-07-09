@@ -12,4 +12,6 @@ public interface IQuestionService {
     boolean editQuestion(int questionId, String question) throws SQLException;
 
     Question getQuestion(int questionId) throws SQLException;
+
+    Question getQuestion(int quizId, String question) throws SQLException;
 }
