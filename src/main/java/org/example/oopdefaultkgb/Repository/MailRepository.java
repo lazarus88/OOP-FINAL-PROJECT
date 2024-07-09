@@ -44,7 +44,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     public boolean sendChallengeRequest(int userIdFrom, int userIdTo, String quizName) throws SQLException {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("INSERT INTO  Mail(SenderUserId, ReceiverUserId, message, MailTypeId, CreatedAt, status)" +
-                "VALUES(%d, %d, %s, %d, %s, %s)", userIdFrom, userIdTo, quizName, CHALLENGE_REQUEST_ID, LocalDateTime.now(), SENT);
+                "VALUES(%d, %d, '%s', %d, '%s', '%s')", userIdFrom, userIdTo, quizName, CHALLENGE_REQUEST_ID, LocalDateTime.now(), SENT);
         return statement.execute(query);
     }
 
@@ -52,7 +52,7 @@ public class MailRepository extends BaseRepository implements IMailRepository {
     public boolean sendNote(int userIdFrom, int userIdTo, String note) throws SQLException {
         Statement statement = ConnectionString.createStatement();
         String query = String.format("INSERT INTO  Mail(SenderUserId, ReceiverUserId, message, MailTypeId, CreatedAt, status)" +
-                "VALUES(%d, %d, %s, %d, %s, %s)", userIdFrom, userIdTo, note, NOTE_ID, LocalDateTime.now(), SENT);
+                "VALUES(%d, %d, '%s', %d, '%s', '%s')", userIdFrom, userIdTo, note, NOTE_ID, LocalDateTime.now(), SENT);
         return statement.execute(query);
     }
 
