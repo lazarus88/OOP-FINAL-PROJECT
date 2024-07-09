@@ -36,6 +36,8 @@
 
         input[type="number"],
         input[type="checkbox"],
+        input[type="radio"],
+        input[type="text"],
         input[type="submit"],
         button {
             font-size: 1em; /* Form elements font size */
@@ -81,7 +83,10 @@
 </head>
 <body>
 <h1>Quiz Parameters</h1>
-<form action="CreateQuestionsServlet" method="post" >
+<form action="CreateQuestionsServlet" method="post" id="quizParametersForm">
+    <label for="quizName">Quiz Name:</label>
+    <input type="text" id="quizName" name="quizName" required><br><br>
+
     <label for="numQuestions">Number of Questions:</label>
     <input type="number" id="numQuestions" name="numQuestions" min="1" max="50" value="10"><br><br>
 

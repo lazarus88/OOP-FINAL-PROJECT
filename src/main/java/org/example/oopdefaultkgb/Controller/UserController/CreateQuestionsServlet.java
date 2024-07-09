@@ -63,6 +63,11 @@ public class CreateQuestionsServlet extends HttpServlet {
         System.out.println("isPracticeEnabled:" +isPracticeEnabled);
         System.out.println("userId: " + userId);
         System.out.println(request.getParameter("quizType"));
-
+        System.out.println("quizName: " + request.getParameter("quizName"));
+        try {
+            quizService.addQuiz(userId,"default",isRandom,isOnePage,isImmediate,isPracticeEnabled,0);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
