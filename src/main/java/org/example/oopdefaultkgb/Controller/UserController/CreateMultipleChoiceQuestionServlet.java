@@ -86,14 +86,18 @@ import java.sql.SQLException;
             try {
                 Question question = questionService.getQuestion(quiz.getId(),questionS);
                 answerService.addAnswer(question.getId(),request.getParameter("option1"),ans1);
+                answerService.addAnswer(question.getId(),request.getParameter("option2"),ans2);
+                answerService.addAnswer(question.getId(),request.getParameter("option3"),ans3);
+                answerService.addAnswer(question.getId(),request.getParameter("option4"),ans4);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             System.out.println(nQuestion);
             System.out.println(quiz.getId());
-            if(nQuestion > 2){
+            int numQuestions = (int)session.getAttribute("numQuestions");
+            if(nQuestion > numQuestions){
                 request.setAttribute("userId",quiz.getCreatorUserId());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/HomePage.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/EndQuiz.jsp");
                 dispatcher.forward(request, response);
             }
             request.setAttribute("Nquestion",nQuestion);

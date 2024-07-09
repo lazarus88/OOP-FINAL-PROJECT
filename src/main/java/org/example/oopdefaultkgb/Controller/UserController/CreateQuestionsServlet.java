@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
 
@@ -27,6 +28,7 @@ public class CreateQuestionsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
         IQuizService quizService = null;
         try {
             quizService = new QuizService();
@@ -66,6 +68,7 @@ public class CreateQuestionsServlet extends HttpServlet {
                 Quiz quiz = quizService.getQuiz(userId,quizName);
                 System.out.println("gadavdivar");
                 request.setAttribute("Nquestion",1);
+                session.setAttribute("numQuestions",numQuestions);
                 request.setAttribute("quiz",quiz);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
                 dispatcher.forward(request, response);
