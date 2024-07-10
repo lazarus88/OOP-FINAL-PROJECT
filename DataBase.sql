@@ -97,13 +97,3 @@ VALUES (3, 1,'2024-01-01' , 'no longer friends');
 INSERT INTO User (FullName,UserName, HashPassword)
 VALUES ('test', '11', '11');
 use kgb;
-select * from quiz;
-
-select * from user
-    select * from quiz
-select * from question
-use kgb;
-select * from quiz
-SELECT * from Quiz
-                  SELECT * from Quiz  WHERE (QuizName = 'ADAWD' and CreatorUserId = 4)
-SELECT * from Quiz  WHERE (QuizName = 'wawad' and CreatorUserId = 4)
