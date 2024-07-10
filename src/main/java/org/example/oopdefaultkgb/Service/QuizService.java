@@ -53,4 +53,9 @@ public class QuizService implements IQuizService {
     public boolean updateQuizCounter(int quizId) throws SQLException {
         return quizRepository.updateQuizCounter(quizId);
   }
+
+    @Override
+    public Quiz getQuizById(int quizId) throws SQLException {
+        return quizRepository.getQuizById(quizId);
+    }
 }

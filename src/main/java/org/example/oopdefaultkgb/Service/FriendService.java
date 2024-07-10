@@ -45,7 +45,7 @@ public class FriendService implements IFriendService {
         List<User> userFriendList = new ArrayList<>();
         for (Friend friend : friendList) {
             int friendUserId = friend.receiverUserId == userId ? friend.senderUserId : friend.receiverUserId;
-            userFriendList.add(userRepository.getUser(userId));
+            userFriendList.add(userRepository.getUser(friendUserId));
         }
         return userFriendList;
     }

@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.example.oopdefaultkgb.EntityDTO.Answer;
 import org.example.oopdefaultkgb.EntityDTO.Question;
 import org.example.oopdefaultkgb.Interface.Service.IAnswerService;
+import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IHistoryService;
 import org.example.oopdefaultkgb.Interface.Service.IQuizService;
 import org.example.oopdefaultkgb.Service.AnswerService;
+import org.example.oopdefaultkgb.Service.FriendService;
 import org.example.oopdefaultkgb.Service.HistoryService;
 import org.example.oopdefaultkgb.Service.QuizService;
 
@@ -32,8 +34,13 @@ public class SubmitQuizServlet extends HttpServlet {
         IAnswerService answerService;
         int quizId = (int)request.getSession().getAttribute("quizId");
         int userId = (int)request.getSession().getAttribute("userId");
+        request.setAttribute("userId", userId);
         try {
             IQuizService quizService = new QuizService();
+            IFriendService friendService = new FriendService();
+            request.setAttribute("friendList",friendService.getFriendUsers(userId));
+            System.out.println(userId + " friend " + friendService.getFriendUsers(userId).get(0));
+            request.setAttribute("quiz", quizService.getQuizById(quizId));;
             quizService.updateQuizCounter(quizId);
             answerService = new AnswerService();
             IHistoryService historyService = new HistoryService();
