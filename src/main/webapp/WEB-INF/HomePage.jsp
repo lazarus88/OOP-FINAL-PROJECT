@@ -8,12 +8,11 @@
 <%
   // Assuming "mails" is a request attribute containing a list of Mail objects
   List<Mail> mails = (List<Mail>) request.getAttribute("mails");
-  List<User> senderUsers = (List<User>)request.getAttribute("senderUsers");
-  List<Achievement> achievements = (List<Achievement>)request.getAttribute("achievements");
+  List<User> senderUsers = (List<User>) request.getAttribute("senderUsers");
+  List<Achievement> achievements = (List<Achievement>) request.getAttribute("achievements");
   // Formatter for displaying the date
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  int userId = (int)request.getAttribute("userId");
-  System.out.println(userId + " userID");
+  int userId = ((User) request.getAttribute("currentUser")).id;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +45,10 @@
       color: white;
     }
     .badge {
-      float: right;
+      position: absolute;
+      top: 50%;
+      right: 25px; /* Adjust this value as needed */
+      transform: translateY(-50%);
     }
     .scrollable-list {
       max-height: 200px;
@@ -72,6 +74,15 @@
     .logout-button:hover {
       color: #ff4d4d;
     }
+    .btn-accept, .btn-reject {
+      margin-top: 10px;
+    }
+    .message-content {
+      padding: 10px;
+      border: 1px solid #444444;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -88,13 +99,13 @@
         </form>
       </li>
     </ul>
-    < <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <form id="mailForm" action="mail-servlet" method="GET" style="display: inline;">
-        <input type="hidden" name="userId" value="<%= request.getAttribute("userId") %>">
-        <button class="nav-link btn btn-link" type="submit">Inbox</button>
-      </form>
-    </li>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <form id="mailForm" action="mail-servlet" method="GET" style="display: inline;">
+          <input type="hidden" name="userId" value="<%=userId%>">
+          <button class="nav-link btn btn-link" type="submit">Inbox</button>
+        </form>
+      </li>
       <li class="nav-item">
         <form id="showQuizzesForm" action="ShowQuizServlet" method="GET" target="_blank" style="display: inline;">
           <input type="hidden" name="userId" value="<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId") %>">
@@ -185,16 +196,33 @@
           int index = 0;
           for (Mail mail : mails) {
             String messageType;
-            if (mail.getMailTypeId() == 1) messageType = "Challenge From " + senderUsers.get(index).getUserName();
-            else if (mail.getMailTypeId() == 0) messageType = "Friend Request From " + senderUsers.get(index).getUserName();
-            else messageType = "Note from " + senderUsers.get(index).getUserName();
+            String messageContent = "";
+            boolean showButtons = true;
+            if (mail.getMailTypeId() == 1) {
+              messageType = "Challenge";
+              messageContent = senderUsers.get(index).getUserName() + " sent you a challenge in " + mail.getMessage();
+            } else if (mail.getMailTypeId() == 0) {
+              messageType = "Friend Request";
+              messageContent = senderUsers.get(index).getUserName() + " sent you a friend request";
+              showButtons = true;
+            } else {
+              messageType = "Note";
+              messageContent = senderUsers.get(index).getUserName() + " sent you a note: " + mail.getMessage();
+              showButtons = false;
+            }
             String badgeClass = (mail.getMailTypeId() == 1) ? "badge-danger" : "badge-info";
       %>
       <li class="list-group-item">
-        <%= mail.getMessage() %>
-        <span class="badge <%= badgeClass %>"><%= messageType %></span>
-        <br>
-        <small><%= mail.getCreatedAt().format(formatter) %></small>
+        <div class="message-content">
+          <p><%= messageContent %></p>
+          <% if (showButtons) { %>
+          <div>
+            <button class="btn btn-success btn-accept" onclick="handleResponse('<%= mail.getId() %>', 'accept')">Accept</button>
+            <button class="btn btn-danger btn-reject" onclick="handleResponse('<%= mail.getId() %>', 'reject')">Reject</button>
+          </div>
+          <% } %>
+          <span class="badge <%= badgeClass %>"><%= messageType %></span>
+        </div>
       </li>
       <%
           index++;
@@ -245,6 +273,24 @@
       $('#quizCreatingActivitiesCard').show();
     }
   });
+
+  function handleResponse(mailId, action) {
+    $.ajax({
+      url: 'handle-response-servlet',
+      type: 'POST',
+      data: {
+        mailId: mailId,
+        action: action
+      },
+      success: function(response) {
+        // Reload the page or handle the response appropriately
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
 </script>
 </body>
 </html>
