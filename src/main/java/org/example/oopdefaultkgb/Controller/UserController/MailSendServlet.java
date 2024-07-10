@@ -1,13 +1,16 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
 import org.example.oopdefaultkgb.EntityDTO.Mail;
+import org.example.oopdefaultkgb.EntityDTO.Quiz;
 import org.example.oopdefaultkgb.EntityDTO.User;
 import org.example.oopdefaultkgb.Enum.MailTypeEnum;
 import org.example.oopdefaultkgb.Interface.Service.IFriendService;
 import org.example.oopdefaultkgb.Interface.Service.IMailService;
+import org.example.oopdefaultkgb.Interface.Service.IQuizService;
 import org.example.oopdefaultkgb.Interface.Service.IUserService;
 import org.example.oopdefaultkgb.Service.FriendService;
 import org.example.oopdefaultkgb.Service.MailService;
+import org.example.oopdefaultkgb.Service.QuizService;
 import org.example.oopdefaultkgb.Service.UserService;
 
 import javax.servlet.ServletException;
@@ -72,8 +75,13 @@ public class MailSendServlet extends HttpServlet {
                 }
             }
              else if(mailTypeId == MailTypeEnum.ChallengeRequest.ordinal()) {
-                String quizName = "";
-                mailService.sendChallengeRequest(userIdFrom, otherUser.id, quizName);
+                int quizId = Integer.parseInt(req.getParameter("quizId"));
+                IQuizService quizService = new QuizService();
+                Quiz quiz = quizService.getQuizById(quizId);
+                mailService.sendChallengeRequest(userIdFrom, otherUser.id, quiz.quizName);
+                req.setAttribute("userId", userIdFrom);
+                req.setAttribute("quizId", quizId);
+                req.getRequestDispatcher("submit-quiz-servlet").forward(req, resp);
             }
              else {
                   String note = req.getParameter("message");
