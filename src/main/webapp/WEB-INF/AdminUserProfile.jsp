@@ -99,12 +99,7 @@
         <div class="card-body">
             <form action="AdminActionServlet" method="post">
                 <input type="hidden" name="action" value="removeUser">
-                <!-- Display list of users with checkboxes -->
-                <!-- Example: -->
-                <!-- <div class="form-check">
-                     <input class="form-check-input" type="checkbox" name="userIds" value="userId" id="userId">
-                     <label class="form-check-label" for="userId">User Name</label>
-                 </div> -->
+
                 <button type="submit" class="btn btn-danger mt-3">Remove Selected Users</button>
             </form>
         </div>
@@ -115,12 +110,7 @@
         <div class="card-body">
             <form action="AdminActionServlet" method="post">
                 <input type="hidden" name="action" value="removeQuiz">
-                <!-- Display list of quizzes with checkboxes -->
-                <!-- Example: -->
-                <!-- <div class="form-check">
-                     <input class="form-check-input" type="checkbox" name="quizIds" value="quizId" id="quizId">
-                     <label class="form-check-label" for="quizId">Quiz Name</label>
-                 </div> -->
+
                 <button type="submit" class="btn btn-danger mt-3">Remove Selected Quizzes</button>
             </form>
         </div>
@@ -134,8 +124,6 @@
                 <div class="form-group">
                     <label for="quizId">Select Quiz:</label>
                     <select class="form-control" id="quizId" name="quizId">
-                        <!-- Options populated dynamically from database -->
-                        <!-- Example: <option value="quizId">Quiz Name</option> -->
                     </select>
                 </div>
                 <button type="submit" class="btn btn-warning">Clear Quiz History</button>
@@ -148,12 +136,6 @@
         <div class="card-body">
             <form action="AdminActionServlet" method="post">
                 <input type="hidden" name="action" value="promoteUser">
-                <!-- Display list of users with checkboxes -->
-                <!-- Example: -->
-                <!-- <div class="form-check">
-                     <input class="form-check-input" type="checkbox" name="userIds" value="userId" id="promoteUserId">
-                     <label class="form-check-label" for="promoteUserId">User Name</label>
-                 </div> -->
                 <button type="submit" class="btn btn-success mt-3">Promote Selected Users to Admin</button>
             </form>
         </div>
@@ -162,9 +144,8 @@
     <div class="card mb-4">
         <div class="card-header">Site Statistics</div>
         <div class="card-body">
-            <!-- Display site statistics -->
-            <p>Number of Users: <!-- Retrieve from backend --></p>
-            <p>Number of Quizzes Taken: <!-- Retrieve from backend --></p>
+            <p>Number of Users:</p>
+            <p>Number of Quizzes Taken: </p>
         </div>
     </div>
 </div>
