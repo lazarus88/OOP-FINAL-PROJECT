@@ -104,6 +104,8 @@ select * from user
 select * from question
 use kgb;
 select * from quiz
+select * from question a where a.QuizId = 102
 SELECT * from Quiz
                   SELECT * from Quiz  WHERE (QuizName = 'ADAWD' and CreatorUserId = 4)
 SELECT * from Quiz  WHERE (QuizName = 'wawad' and CreatorUserId = 4)
+select * from answer

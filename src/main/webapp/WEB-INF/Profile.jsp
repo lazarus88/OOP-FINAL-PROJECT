@@ -125,6 +125,7 @@
 
     <h1>კეთილები:</h1>
     <ul>
+
         <% for (User friend : friendList) { %>
         <form action="other-user-profile-servlet" method="post">
             <input type="hidden" name="otherUsername" value="<%= friend.userName %>">
