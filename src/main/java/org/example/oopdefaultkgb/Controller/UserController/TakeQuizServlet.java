@@ -28,7 +28,11 @@ import java.util.Map;
 public class TakeQuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int quizId = (int)req.getSession().getAttribute("quizId");
+        int quizId = req.getSession().getAttribute("quizId") != null ? (int)req.getSession().getAttribute("quizId")
+                : Integer.parseInt(req.getParameter("quizId"));
+        req.setAttribute("quizId", quizId);
+        int userId = (int)req.getSession().getAttribute("userId");
+        req.setAttribute("userId", userId);
         System.out.println(quizId + " quizId");
         try {
             IQuestionService questionService = new QuestionService();
@@ -40,6 +44,7 @@ public class TakeQuizServlet extends HttpServlet {
                 answerMap.put(question.id, answerService.getAllAnswers(question.id));
             }
             req.setAttribute("questions", questionList);
+            System.out.println(questionList);
             req.setAttribute("answers", answerMap);
         } catch (SQLException e) {
             throw new RuntimeException(e);

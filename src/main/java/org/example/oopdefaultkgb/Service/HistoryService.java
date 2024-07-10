@@ -9,7 +9,6 @@ import org.example.oopdefaultkgb.Repository.HistoryRepository;
 import org.example.oopdefaultkgb.Repository.QuizRepository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,5 +27,9 @@ public class HistoryService implements IHistoryService {
         for(HistoryQuiz hq : userQuiz)
             mp.put(hq, quizRepository.getQuizById(hq.quizId));
         return mp;
+    }
+    @Override
+    public boolean addHistory(int userId, int quizId, int score) throws SQLException {
+        return  historyRepository.addHistory(userId,quizId,score);
     }
 }

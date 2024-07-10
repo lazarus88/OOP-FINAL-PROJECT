@@ -8,6 +8,8 @@
   List<Question> questions = (List<Question>) request.getAttribute("questions");
   Map<Integer, List<Answer>> answersMap = (Map<Integer, List<Answer>>) request.getAttribute("answers");
   session.setAttribute("questions", questions);
+  session.setAttribute("quizId", request.getAttribute("quizId"));
+  session.setAttribute("userId", request.getAttribute("userId"));
 %>
 <!DOCTYPE html>
 <html lang="en">

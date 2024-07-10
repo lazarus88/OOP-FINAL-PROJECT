@@ -47,11 +47,13 @@ public class HomeServlet extends HttpServlet {
                 otherUsers.add(userService.getProfileById(mail.getSenderUserId()));
             }
             request.setAttribute("senderUsers", otherUsers);
-            request.setAttribute("senderUsers", otherUsers);
             List<Achievement> achievements = userService.getAchievements(userId);
             request.setAttribute("achievements", achievements);
             List<Quiz> popularQuiz = quizService.getPopularQuizList();
-            Map<HistoryQuiz, Quiz> recentQuiz = historyService.getRecentQuizList(userId);
+            request.setAttribute("quizList", popularQuiz);
+            request.setAttribute("recentlyCreated", quizService.getActiveQuizs());
+            Map<HistoryQuiz, Quiz> historyQuiz = historyService.getRecentQuizList(userId);
+            request.setAttribute("historyQuiz", historyQuiz);
             request.setAttribute("mails", mails);
             request.setAttribute("userId",user.id);
             request.setAttribute("currentUser", user);

@@ -22,4 +22,6 @@ public interface IQuizRepository {
     Quiz getQuizById(int quizId) throws SQLException;
 
     List<Quiz> getAllActiveQuizs() throws SQLException;
+
+    boolean updateQuizCounter(int quizId) throws SQLException;
 }

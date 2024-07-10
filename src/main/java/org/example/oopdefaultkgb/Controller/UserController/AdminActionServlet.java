@@ -29,7 +29,7 @@ public class AdminActionServlet extends HttpServlet {
             IUserService userService = new UserService();
             IQuizService quizService = new QuizService();
             int activeUserCount = userService.getActiveUsers();
-            int activeQuizCount = quizService.getActiveQuizs();
+            int activeQuizCount = quizService.getActiveQuizs().size();
             switch (action) {
                 case "promoteUser":
                     User user = userService.getProfile(username);

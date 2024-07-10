@@ -32,6 +32,7 @@ public class ShowQuizServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         IQuizService quizService = null;
+        request.setAttribute("userId", request.getSession().getAttribute("userId"));
         try {
             quizService = new QuizService();
         } catch (SQLException | ClassNotFoundException e) {

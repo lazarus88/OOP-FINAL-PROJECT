@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface IHistoryRepository {
 
+    boolean addHistory(int userId, int quizId, int score) throws SQLException;
+
     List<HistoryQuiz> getRecentQuizList(int userId) throws SQLException;
 }
 

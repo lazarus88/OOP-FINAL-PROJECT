@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.example.oopdefaultkgb.EntityDTO.Answer;
 import org.example.oopdefaultkgb.EntityDTO.Question;
 import org.example.oopdefaultkgb.Interface.Service.IAnswerService;
+import org.example.oopdefaultkgb.Interface.Service.IHistoryService;
+import org.example.oopdefaultkgb.Interface.Service.IQuizService;
 import org.example.oopdefaultkgb.Service.AnswerService;
+import org.example.oopdefaultkgb.Service.HistoryService;
+import org.example.oopdefaultkgb.Service.QuizService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,8 +30,14 @@ public class SubmitQuizServlet extends HttpServlet {
         int correctCount = 0;
         List<Question> questions = (List<Question>) request.getSession().getAttribute("questions");
         IAnswerService answerService;
+        int quizId = (int)request.getSession().getAttribute("quizId");
+        int userId = (int)request.getSession().getAttribute("userId");
         try {
+            IQuizService quizService = new QuizService();
+            quizService.updateQuizCounter(quizId);
             answerService = new AnswerService();
+            IHistoryService historyService = new HistoryService();
+
             for (Question question : questions) {
                 Answer answer = answerService.getCorrectAnswer(question.id);
                 String submittedAnswerIdStr = request.getParameter("question_" + question.id);
@@ -38,6 +48,7 @@ public class SubmitQuizServlet extends HttpServlet {
                     }
                 }
             }
+            historyService.addHistory(userId,quizId, (correctCount/questions.size())*100);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

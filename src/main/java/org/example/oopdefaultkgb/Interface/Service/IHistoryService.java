@@ -10,4 +10,6 @@ import java.util.Map;
 public interface IHistoryService {
 
     Map<HistoryQuiz, Quiz> getRecentQuizList(int userId) throws SQLException;
+
+    boolean addHistory(int userId, int quizId, int score) throws SQLException;
 }
