@@ -104,7 +104,6 @@
             </form>
         </div>
     </div>
-
     <div class="card mb-4">
         <div class="card-header">Remove Quizzes</div>
         <div class="card-body">
