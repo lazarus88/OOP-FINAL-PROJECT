@@ -26,7 +26,7 @@ public class CreateQuizServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        IQuizService quizService = null;
+        IQuizService quizService;
         try {
             quizService = new QuizService();
         } catch (SQLException e) {

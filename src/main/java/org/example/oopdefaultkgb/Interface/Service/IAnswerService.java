@@ -11,4 +11,5 @@ public interface IAnswerService {
     boolean deleteAnswer(int answerId)throws SQLException;
 
     boolean addAnswer(int questionId, String answer, boolean isCorrect) throws SQLException;
+     Answer getCorrectAnswer(int questionId) throws SQLException;
 }

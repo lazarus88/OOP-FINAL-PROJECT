@@ -6,6 +6,7 @@ import org.example.oopdefaultkgb.Interface.Service.IQuestionService;
 import org.example.oopdefaultkgb.Repository.QuestionRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class QuestionService implements IQuestionService {
     public IQuestionRepository questionRepository;
@@ -31,6 +32,10 @@ public class QuestionService implements IQuestionService {
     @Override
     public Question getQuestion(int quizId, String question) throws SQLException {
         return questionRepository.getQuestion(quizId,question);
+    }
+    @Override
+    public List<Question> getAllQuestions(int quizId) throws SQLException{
+        return questionRepository.getAllQuestions(quizId);
     }
 
 }

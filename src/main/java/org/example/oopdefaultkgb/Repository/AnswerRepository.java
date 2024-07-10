@@ -19,7 +19,6 @@ public class AnswerRepository  extends BaseRepository implements IAnswerReposito
         String query = String.format("SELECT * FROM Answer WHERE QuestionId = %d ORDER BY Id", questionId);
         ResultSet result = statement.executeQuery(query);
         List<Answer> resultList = new ArrayList<Answer>();
-        if(!result.next()) return null;
         while(result.next())
             resultList.add(new Answer(
                     result.getInt(1),
@@ -42,5 +41,19 @@ public class AnswerRepository  extends BaseRepository implements IAnswerReposito
         Statement statement = ConnectionString.createStatement();
         String query = String.format("insert into Answer(QuestionId,Answer,IsCorrect,status) values(%d,'%s',%b,'ACTIVE') ",questionId ,answer,isCorrect);
         return statement.execute(query); //not null
+    }
+    @Override
+    public Answer getCorrectAnswer(int questionId) throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * FROM Answer WHERE QuestionId = %d  AND IsCorrect = %b And status = 'ACTIVE' ORDER BY Id", questionId, true);
+        ResultSet result = statement.executeQuery(query);
+        if(result.next())
+            return  new Answer( result.getInt(1),
+                    result.getInt(2),
+                    result.getString(3),
+                    result.getBoolean(4),
+                    result.getString(5)
+            );
+        return null;
     }
 }

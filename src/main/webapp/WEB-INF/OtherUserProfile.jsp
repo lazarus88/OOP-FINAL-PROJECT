@@ -248,8 +248,8 @@
               mailTypeId: 2,
               otherUserId: "<%= otherUser.getId() %>"
             },
-            success: function(response) {
-              alert("Message sent successfully: " + response);
+            success: function() {
+              alert("Message sent successfully");
               $("#messageBox").hide();
               $("#messageContent").val('');
             },
