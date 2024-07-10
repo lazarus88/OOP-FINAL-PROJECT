@@ -12,6 +12,8 @@
   List<Achievement> achievements = (List<Achievement>)request.getAttribute("achievements");
   // Formatter for displaying the date
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  int userId = (int)request.getAttribute("userId");
+  System.out.println(userId + " userID");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +90,8 @@
     </ul>
     < <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <form id="mailForm" action="Mail.jsp" method="GET" style="display: inline;">
+      <form id="mailForm" action="mail-servlet" method="GET" style="display: inline;">
+        <input type="hidden" name="userId" value="<%= request.getAttribute("userId") %>">
         <button class="nav-link btn btn-link" type="submit">Inbox</button>
       </form>
     </li>
