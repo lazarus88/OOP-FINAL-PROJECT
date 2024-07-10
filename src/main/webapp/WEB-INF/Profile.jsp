@@ -143,7 +143,7 @@
 </head>
 <body>
 <header>
-    <a href="forward?path=HomePage&userId=<%=user.id%>">
+    <a href="HomeServlet?userId=<%=user.id%>">
         <img src="some.png" alt="Quiz Icon" class="quiz-icon" />
     </a>
     <h1>Profile Page</h1>

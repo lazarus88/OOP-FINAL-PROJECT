@@ -6,11 +6,9 @@
 <%@ page import="org.example.oopdefaultkgb.EntityDTO.Achievement" %>
 <%@ page import="org.example.oopdefaultkgb.Enum.AchievementEnum" %>
 <%
-  // Assuming "mails" is a request attribute containing a list of Mail objects
   List<Mail> mails = (List<Mail>) request.getAttribute("mails");
   List<User> senderUsers = (List<User>) request.getAttribute("senderUsers");
   List<Achievement> achievements = (List<Achievement>) request.getAttribute("achievements");
-  // Formatter for displaying the date
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   int userId = ((User) request.getAttribute("currentUser")).id;
 %>
@@ -43,11 +41,13 @@
       background-color: #1e1e1e;
       border: none;
       color: white;
+      position: relative;
+      padding-right: 100px;
     }
     .badge {
       position: absolute;
       top: 50%;
-      right: 25px; /* Adjust this value as needed */
+      right: 25px;
       transform: translateY(-50%);
     }
     .scrollable-list {
@@ -102,7 +102,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <form id="mailForm" action="mail-servlet" method="GET" style="display: inline;">
-          <input type="hidden" name="userId" value="<%=userId%>">
+          <input type="hidden" name="userId" value="<%= userId %>">
           <button class="nav-link btn btn-link" type="submit">Inbox</button>
         </form>
       </li>
@@ -212,13 +212,13 @@
             }
             String badgeClass = (mail.getMailTypeId() == 1) ? "badge-danger" : "badge-info";
       %>
-      <li class="list-group-item">
+      <li class="list-group-item" data-mail-id="<%= mail.getId() %>">
         <div class="message-content">
           <p><%= messageContent %></p>
           <% if (showButtons) { %>
           <div>
-            <button class="btn btn-success btn-accept" onclick="handleResponse('<%= mail.getId() %>', 'accept')">Accept</button>
-            <button class="btn btn-danger btn-reject" onclick="handleResponse('<%= mail.getId() %>', 'reject')">Reject</button>
+            <button class="btn btn-success btn-accept" data-sender-id="<%= mail.getSenderUserId() %>" data-mail-type-id="<%= mail.getMailTypeId() %>" data-message="<%= mail.getMessage() %>">Accept</button>
+            <button class="btn btn-danger btn-reject" data-sender-id="<%= mail.getSenderUserId() %>" data-mail-type-id="<%= mail.getMailTypeId() %>" data-message="<%= mail.getMessage() %>">Reject</button>
           </div>
           <% } %>
           <span class="badge <%= badgeClass %>"><%= messageType %></span>
@@ -253,41 +253,54 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
   $(document).ready(function() {
-    // Sample data: user's recent quiz creating activities
-    var userQuizCreatingActivities = [
-      'Created Quiz 1',
-      'Created Quiz 2'
-    ];
+    console.log('jQuery version:', $.fn.jquery);
 
-    // Check if user has created any quizzes
-    if (userQuizCreatingActivities.length > 0) {
-      var list = $('#quizCreatingActivitiesList');
-      userQuizCreatingActivities.forEach(function(activity) {
-        list.append('<li class="list-group-item">' + activity + ' <span class="badge badge-info">New</span></li>');
-      });
-      $('#quizCreatingActivitiesCard').show();
-    }
+    // Event listener for accept buttons
+    $('.btn-accept').click(function() {
+      console.log('Accept button clicked');
+      var parentLi = $(this).closest('li');
+      handleResponse($(this).data('sender-id'), 'accept', $(this).data('mail-type-id'), $(this).data('message'), parentLi);
+    });
+
+    // Event listener for reject buttons
+    $('.btn-reject').click(function() {
+      console.log('Reject button clicked');
+      var parentLi = $(this).closest('li');
+      handleResponse($(this).data('sender-id'), 'reject', $(this).data('mail-type-id'), $(this).data('message'), parentLi);
+    });
   });
 
-  function handleResponse(mailId, action) {
+  function handleResponse(mailSenderId, action, mailTypeId, message, parentLi) {
+    console.log('handleResponse called with:', {
+      mailSenderId: mailSenderId,
+      action: action,
+      mailTypeId: mailTypeId,
+      message: message
+    });
     $.ajax({
-      url: 'handle-response-servlet',
-      type: 'POST',
+      url: "<%= request.getContextPath() %>/receive-mail-servlet",
+      type: "POST",
       data: {
-        mailId: mailId,
-        action: action
+        mailTypeId: mailTypeId,
+        mailSenderId: mailSenderId,
+        action: action,
+        userId: <%= userId %>,
+        message: message
       },
       success: function(response) {
-        // Reload the page or handle the response appropriately
-        location.reload();
+        console.log('AJAX success:', response);
+        // Remove the parent <li> element
+        parentLi.fadeOut(10, function() {
+          $(this).remove();
+        });
       },
       error: function(xhr, status, error) {
-        console.error(error);
+        console.error('AJAX error:', error);
       }
     });
   }
