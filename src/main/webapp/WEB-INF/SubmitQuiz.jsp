@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="mt-3 text-center">
-        <a href="quiz" class="btn btn-primary">Take Another Quiz</a>
+        <a href="ShowQuizServlet" class="btn btn-primary">Take Another Quiz</a>
     </div>
 </div>
 
