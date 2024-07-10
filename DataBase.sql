@@ -97,3 +97,5 @@ VALUES (3, 1,'2024-01-01' , 'no longer friends');
 INSERT INTO User (FullName,UserName, HashPassword)
 VALUES ('test', '11', '11');
 use kgb;
+INSERT INTO User (FullName,UserName, HashPassword, Role)
+VALUES ('testAdmin', '1', '1', 'ADMIN');
