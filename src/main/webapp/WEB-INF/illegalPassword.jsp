@@ -101,7 +101,7 @@
 <div class="form-container">
     <form action="LoginServlet" method="post">
         <label for="User">Username:</label>
-        <span id="error-message" class="error-message">incorrect password or username</span>
+        <span id="error-message" class="error-message"><%=(String) request.getAttribute("error")%>></span>
         <input id="User" type="text" name="name"/><br>
         <label for="passWord">Password:</label>
         <input id="passWord" type="password" name="pass"/><br>

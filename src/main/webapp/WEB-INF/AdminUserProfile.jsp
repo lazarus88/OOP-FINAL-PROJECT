@@ -116,21 +116,6 @@
     </div>
 
     <div class="card mb-4">
-        <div class="card-header">Clear Quiz History</div>
-        <div class="card-body">
-            <form action="AdminActionServlet" method="post">
-                <input type="hidden" name="action" value="clearQuizHistory">
-                <div class="form-group">
-                    <label for="quizId">Select Quiz:</label>
-                    <select class="form-control" id="quizId" name="quizId">
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-warning">Clear Quiz History</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="card mb-4">
         <div class="card-header">Promote User Accounts</div>
         <div class="card-body">
             <form action="AdminActionServlet" method="post">

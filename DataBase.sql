@@ -77,6 +77,13 @@ CREATE TABLE `Answer` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                       `status` varchar(100) DEFAULT 'ACTIVE',
                       PRIMARY KEY (`Id`)
 );
+CREATE  TABLE 'Announcement' (
+                                 `Id` bigInt NOT NULL AUTO_INCREMENT,
+                                 `Announcement` varchar(500),
+                                 `AdminId` int,
+                                 'CreatedAt'TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                 PRIMARY KEY (`Id`)
+);
 
 
 INSERT INTO User (FullName,UserName, HashPassword,Role)

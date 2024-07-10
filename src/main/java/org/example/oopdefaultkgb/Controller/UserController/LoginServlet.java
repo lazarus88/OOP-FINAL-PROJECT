@@ -61,6 +61,16 @@ public class LoginServlet extends HttpServlet {
         {
             try {
                 User curUser1 = sercive.getProfile(usr);
+                if(curUser1.Status.equals("DELETED")) {
+                    request.setAttribute("error", "User Is Deleted By Admin");
+                    request.getRequestDispatcher("WEB-INF/illegalPassword.jsp").forward(request,response);
+                    return;
+                }
+                if(curUser1.Status.equals("BLOCKED")) {
+                    request.setAttribute("error", "User Is Blocked By Admin");
+                    request.getRequestDispatcher("WEB-INF/illegalPassword.jsp").forward(request,response);
+                    return;
+                }
                 if(curUser1.Role.equals("ADMIN")) {
                     request.setAttribute("currentAdminUser", curUser1);
                     request.getRequestDispatcher("WEB-INF/AdminUserProfile.jsp").forward(request,response);
@@ -88,8 +98,8 @@ public class LoginServlet extends HttpServlet {
             }       }
         else
         {
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/illegalPassword.jsp");
-            rd.forward(request,response);
+            request.setAttribute("error", "Incorrect Credentials");
+            request.getRequestDispatcher("WEB-INF/illegalPassword.jsp").forward(request,response);
         }
     }
 }
