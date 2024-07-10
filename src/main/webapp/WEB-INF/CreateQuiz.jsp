@@ -108,17 +108,7 @@
         <label for="4">Practice is enabled</label>
     </div>
     <input type="hidden" name="userId" value="<%= request.getParameter("userId") %>">
-    <label>Quiz Type:</label><br>
-    <div class="radio-group">
-        <input type="radio" id="questionResponse" name="quizType" value="Question-Response" checked>
-        <label for="questionResponse">Question-Response</label>
-        <input type="radio" id="fillInTheBlank" name="quizType" value="Fill in the Blank">
-        <label for="fillInTheBlank">Fill in the blank</label>
-        <input type="radio" id="multipleChoice" name="quizType" value="Multiple Choice">
-        <label for="multipleChoice">Multiple choice</label>
-        <input type="radio" id="pictureResponse" name="quizType" value="Picture-Response">
-        <label for="pictureResponse">Picture-Response</label>
-    </div>
+
     <input type="submit" value="Create Quiz">
 
 </form>

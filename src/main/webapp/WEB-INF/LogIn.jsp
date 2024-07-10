@@ -88,16 +88,16 @@
 </head>
 <body>
 <h1>Welcome to Quiz</h1>
-<div class="form-container">
-    <form action="LoginServlet" method="post">
-        <label for="User">Username:</label>
-        <input id="User" type="text" name="name"/><br>
-        <label for="passWord">Password:</label>
-        <input id="passWord" type="password" name="pass"/><br>
-        <input type="submit" value="Login">
-    </form>
-    <a href="forward?path=newAccount">Create account</a><br>
-</div>
+<div class="form-container" >
+    <form action = "LoginServlet" method = "post" >
+        <label for="User" > Username:</label >
+        <input id = "User" type = "text" name = "name" / ><br >
+        <label for="passWord" > Password:</label >
+        <input id = "passWord" type = "password" name = "pass" / ><br >
+        <input type = "submit" value = "Login" >
+    </form >
+    <a href = "forward?path=newAccount" > Create account </a ><br >
+</div >
 <form action="ShowQuizServlet" method="post" style="margin-top: 20px;">
     <input type="hidden" name="userId" value="<%= 4 %>">
     <input type="hidden" name="quizId" value="<%= 1 %>">

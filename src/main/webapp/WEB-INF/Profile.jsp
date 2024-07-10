@@ -177,6 +177,7 @@
         </div>
     </div>
 
+
     <div class="main-content">
         <div class="section profile-info">
             <h2>Profile Information</h2>

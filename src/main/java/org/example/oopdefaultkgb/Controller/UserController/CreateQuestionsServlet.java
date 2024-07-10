@@ -59,10 +59,7 @@ public class CreateQuestionsServlet extends HttpServlet {
             isPracticeEnabled = false;
         }
         int userId = Integer.parseInt(request.getParameter("userId"));
-        String quizType = request.getParameter("quizType");
         String quizName = request.getParameter("quizName");
-        if(quizType.equals("Multiple Choice")) {
-            System.out.println(quizType);
             try {
                 quizService.addQuiz(userId, quizName, isRandom, isOnePage, isImmediate, isPracticeEnabled, 0);
                 Quiz quiz = quizService.getQuiz(userId,quizName);
@@ -75,6 +72,5 @@ public class CreateQuestionsServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
 }
