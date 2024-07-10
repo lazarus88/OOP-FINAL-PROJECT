@@ -2,6 +2,8 @@ package org.example.oopdefaultkgb.EntityDTO;
 
 import lombok.AllArgsConstructor;
 import java.sql.Date;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -17,4 +19,5 @@ public class Quiz {
     public int quizTypeId;
     public String status;
     public int takenCount;
+    public LocalDateTime CreatedAt;
 }

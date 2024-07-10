@@ -15,6 +15,12 @@ public class HistoryRepository  extends  BaseRepository implements IHistoryRepos
         super();
     }
     @Override
+    public boolean addHistory(int userId, int quizId, int score) throws SQLException {
+        Statement statement =ConnectionString.createStatement();
+        String query = String.format("insert into UserQuizHistory(UserId, QuizId, TookAt, Score)" + "values(%d, %d, '%s', %d)", userId, quizId, LocalDateTime.now(), score);
+        return statement.execute(query);
+    }
+    @Override
     public List<HistoryQuiz> getRecentQuizList(int userId) throws SQLException {
         List<HistoryQuiz> historyQuizList = new ArrayList<>();
         Statement statement =ConnectionString.createStatement();

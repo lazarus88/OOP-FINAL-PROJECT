@@ -51,7 +51,8 @@ CREATE TABLE `Quiz` (`Id` bigInt NOT NULL AUTO_INCREMENT,
                     `IsPracticeEnable` bit,
                     `QuizTypeId` int,
                     `Status` varchar(100) DEFAULT 'ACTIVE',
-                     `TakenCount` int ,
+                     `TakenCount` int,
+                     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (`Id`)
 );
 

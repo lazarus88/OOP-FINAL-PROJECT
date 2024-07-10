@@ -5,7 +5,7 @@
 <%
     // Assuming "quizzes" is a request attribute containing a list of Quiz objects
     List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
-    // Formatter for displaying the date
+    session.setAttribute("userId", request.getAttribute("userId"));
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 %>
 <!DOCTYPE html>

@@ -1,16 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.oopdefaultkgb.EntityDTO.Mail" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="org.example.oopdefaultkgb.EntityDTO.User" %>
-<%@ page import="org.example.oopdefaultkgb.EntityDTO.Achievement" %>
 <%@ page import="org.example.oopdefaultkgb.Enum.AchievementEnum" %>
+<%@ page import="org.example.oopdefaultkgb.EntityDTO.*" %>
+<%@ page import="java.util.Map" %>
 <%
   List<Mail> mails = (List<Mail>) request.getAttribute("mails");
   List<User> senderUsers = (List<User>) request.getAttribute("senderUsers");
   List<Achievement> achievements = (List<Achievement>) request.getAttribute("achievements");
+  List<Quiz> popularQuizList = (List<Quiz>) request.getAttribute("quizList");
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   int userId = ((User) request.getAttribute("currentUser")).id;
+  session.setAttribute("userId", userId);
+  List<Quiz> recentQuizList = (List<Quiz>) request.getAttribute("recentlyCreated");
+  Map<HistoryQuiz, Quiz> historyQuiz = (Map<HistoryQuiz, Quiz>) request.getAttribute("historyQuiz");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,37 +132,71 @@
   <!-- Popular Quizzes -->
   <div class="card">
     <div class="card-header">Popular Quizzes</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Quiz 1 <span class="badge badge-primary">Popular</span></li>
-      <li class="list-group-item">Quiz 2 <span class="badge badge-primary">Popular</span></li>
-      <li class="list-group-item">Quiz 3 <span class="badge badge-primary">Popular</span></li>
+    <ul class="list-group list-group-flush scrollable-list">
+      <%
+        if (popularQuizList != null && !popularQuizList.isEmpty()) {
+          for (Quiz quiz : popularQuizList) {
+      %>
+      <li class="list-group-item">
+        <a href="take-quiz-servlet?quizId=<%=quiz.id%>" target="_blank"><%= quiz.quizName %></a>
+        <span class="badge badge-primary">Popular</span>
+      </li>
+      <%
+        }
+      } else {
+      %>
+      <li class="list-group-item">No popular quizzes available</li>
+      <%
+        }
+      %>
     </ul>
   </div>
 
   <!-- Recently Created Quizzes -->
   <div class="card">
     <div class="card-header">Recently Created Quizzes</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">New Quiz 1 <span class="badge badge-info">New</span></li>
-      <li class="list-group-item">New Quiz 2 <span class="badge badge-info">New</span></li>
-      <li class="list-group-item">New Quiz 3 <span class="badge badge-info">New</span></li>
+    <ul class="list-group list-group-flush scrollable-list">
+      <%
+        if (recentQuizList != null && !recentQuizList.isEmpty()) {
+          for (Quiz quiz : recentQuizList) {
+      %>
+      <li class="list-group-item">
+        <a href="take-quiz-servlet?quizId=<%=quiz.id%>" target="_blank"><%= quiz.quizName %></a>
+        <span class="badge badge-primary">New</span>
+      </li>
+      <%
+        }
+      } else {
+      %>
+      <li class="list-group-item">No popular quizzes available</li>
+      <%
+        }
+      %>
     </ul>
   </div>
 
   <!-- User's Recent Quiz Taking Activities -->
   <div class="card">
     <div class="card-header">Your Recent Quiz Taking Activities</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Took Quiz 1 <span class="badge badge-success">Completed</span></li>
-      <li class="list-group-item">Took Quiz 2 <span class="badge badge-success">Completed</span></li>
-    </ul>
-  </div>
-
-  <!-- User's Recent Quiz Creating Activities -->
-  <div class="card" id="quizCreatingActivitiesCard" style="display: none;">
-    <div class="card-header">Your Recent Quiz Creating Activities</div>
-    <ul class="list-group list-group-flush" id="quizCreatingActivitiesList">
-      <!-- Items will be added dynamically -->
+    <ul class="list-group list-group-flush scrollable-list">
+      <%
+        if (historyQuiz != null && !historyQuiz.isEmpty()) {
+          for (Map.Entry<HistoryQuiz, Quiz> entry : historyQuiz.entrySet()) {
+            HistoryQuiz history = entry.getKey();
+            Quiz quiz = entry.getValue();
+      %>
+      <li class="list-group-item">
+        <a href="take-quiz-servlet?quizId=<%=quiz.id%>" target="_blank"><%= quiz.quizName %></a>
+        <span class="badge badge-success">Completed</span>
+      </li>
+      <%
+        }
+      } else {
+      %>
+      <li class="list-group-item">No recent quiz taking activities</li>
+      <%
+        }
+      %>
     </ul>
   </div>
 

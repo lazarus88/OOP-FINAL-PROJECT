@@ -1,23 +1,17 @@
 package org.example.oopdefaultkgb.Controller.UserController;
 
-import org.example.oopdefaultkgb.EntityDTO.Achievement;
-import org.example.oopdefaultkgb.EntityDTO.Friend;
-import org.example.oopdefaultkgb.EntityDTO.Mail;
-import org.example.oopdefaultkgb.EntityDTO.User;
+import org.example.oopdefaultkgb.EntityDTO.*;
 import org.example.oopdefaultkgb.Interface.Repository.IAchievementRepository;
 import org.example.oopdefaultkgb.Interface.Repository.IFriendRepository;
-import org.example.oopdefaultkgb.Interface.Service.IFriendService;
-import org.example.oopdefaultkgb.Interface.Service.IMailService;
-import org.example.oopdefaultkgb.Interface.Service.IUserService;
+import org.example.oopdefaultkgb.Interface.Service.*;
 import org.example.oopdefaultkgb.Repository.AchievementRepository;
-import org.example.oopdefaultkgb.Service.FriendService;
-import org.example.oopdefaultkgb.Service.MailService;
-import org.example.oopdefaultkgb.Service.UserService;
+import org.example.oopdefaultkgb.Service.*;
 
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -82,8 +76,17 @@ public class LoginServlet extends HttpServlet {
                 for(Mail mail: mails){
                     otherUsers.add(userService1.getProfileById(mail.getSenderUserId()));
                 }
-                List<Achievement> achievements = new ArrayList<>();
+                List<Achievement> achievements;
                 achievements = userService1.getAchievements(curUser1.id);
+                IQuizService quizService = new QuizService();
+                IHistoryService historyService = new HistoryService();
+                Map<HistoryQuiz, Quiz> historyQuiz = historyService.getRecentQuizList(curUser1.id);
+                request.setAttribute("historyQuiz", historyQuiz);
+                List<Quiz> popularQuiz;
+                popularQuiz = quizService.getPopularQuizList();
+                List<Quiz> recentlyCreated = quizService.getActiveQuizs();
+                request.setAttribute("recentlyCreated", recentlyCreated);;
+                request.setAttribute("quizList", popularQuiz);
                 request.setAttribute("achievements", achievements);
                 request.setAttribute("senderUsers", otherUsers);
                 request.setAttribute("mails", mails);

@@ -21,5 +21,7 @@ public interface IQuizService  {
 
     List<Quiz> getPopularQuizList() throws SQLException;
 
-    int getActiveQuizs() throws SQLException;
+    List<Quiz> getActiveQuizs() throws SQLException;
+
+    boolean updateQuizCounter(int quizId) throws SQLException;
 }
