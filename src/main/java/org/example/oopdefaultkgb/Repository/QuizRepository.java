@@ -87,5 +87,4 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
         return null;
     }
 
-
 }

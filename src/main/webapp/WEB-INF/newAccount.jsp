@@ -64,15 +64,19 @@
             background-color: #45a049;
         }
 
-        .form-container a {
-            font-size: 1em;
-            color: #0000EE;
-            text-decoration: none;
+        .form-container button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
             margin-top: 10px;
         }
 
-        .form-container a:hover {
-            text-decoration: underline;
+        .form-container button:hover {
+            background-color: #1c86ee;
         }
 
         .red-text {
@@ -93,20 +97,18 @@
 <body>
 <h1>Welcome to Quiz</h1>
 <div class="form-container">
-    <div class="form-container">
-        <form action="CreationServlet" method="post">
-
-            <label for="fullname">Full Name:</label>
-            <input id="fullname" type="text" name="fullName" required/><br>
-            <label for="User">Username:</label>
-            <input id="User" type="text" name="name" required/><br>
-            <label for="passWord">Password:</label>
-            <input id="passWord" type="password" name="pass" required/><br>
-            <input type="submit" value="Create Account">
-        </form>
-        <a href="forward?path=LogIn">Log In</a><br>
-
-    </div>
+    <form action="CreationServlet" method="post">
+        <label for="fullname">Full Name:</label>
+        <input id="fullname" type="text" name="fullName" required/><br>
+        <label for="User">Username:</label>
+        <input id="User" type="text" name="name" required/><br>
+        <label for="passWord">Password:</label>
+        <input id="passWord" type="password" name="pass" required/><br>
+        <input type="submit" value="Create Account">
+    </form>
+    <form action="forward?path=LogIn" method="get">
+        <button type="submit">Login</button>
+    </form>
 </div>
 </body>
 </html>

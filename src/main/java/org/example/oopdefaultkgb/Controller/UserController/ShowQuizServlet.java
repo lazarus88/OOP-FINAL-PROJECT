@@ -30,8 +30,24 @@ import java.util.List;
 @WebServlet(name = "ShowQuizServlet", value = "/ShowQuizServlet")
 public class ShowQuizServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        IQuizService quizService = null;
+        try {
+            quizService = new QuizService();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
+        List<Quiz> quizzes = null;
+        try {
+            quizzes = quizService.getPopularQuizList();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        request.setAttribute("quizzes", quizzes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/ShowQuizzes.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -70,4 +86,3 @@ public class ShowQuizServlet extends HttpServlet {
 
     }
 }
-

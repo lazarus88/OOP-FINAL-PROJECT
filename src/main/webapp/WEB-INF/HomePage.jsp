@@ -86,7 +86,19 @@
         </form>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
+    < <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <form id="mailForm" action="Mail.jsp" method="GET" style="display: inline;">
+        <button class="nav-link btn btn-link" type="submit">Inbox</button>
+      </form>
+    </li>
+      <li class="nav-item">
+        <form id="showQuizzesForm" action="ShowQuizServlet" method="GET" target="_blank" style="display: inline;">
+          <input type="hidden" name="userId" value="<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId") %>">
+          <input type="hidden" name="quizId" value="<%= request.getAttribute("quizId") != null ? (int) request.getAttribute("quizId") : request.getParameter("quizId") %>">
+          <button class="nav-link btn btn-link" type="submit">Quizzes</button>
+        </form>
+      </li>
       <li class="nav-item">
         <form id="profileForm" action="user-profile-servlet" method="POST" style="display: inline;">
           <input type="hidden" name="userId" value="<%= request.getAttribute("userId") != null ? (int) request.getAttribute("userId") : request.getParameter("userId") %>">
