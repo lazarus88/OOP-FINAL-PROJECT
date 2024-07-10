@@ -25,4 +25,9 @@ public class AnswerService  implements IAnswerService {
     public boolean addAnswer(int questionId, String answer, boolean isCorrect) throws SQLException {
         return answerRepository.addAnswer(questionId,answer,isCorrect);
     }
+
+    @Override
+    public Answer getCorrectAnswer(int questionId) throws SQLException {
+        return answerRepository.getCorrectAnswer(questionId);
+    }
 }

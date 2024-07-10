@@ -61,6 +61,11 @@ public class LoginServlet extends HttpServlet {
         {
             try {
                 User curUser1 = sercive.getProfile(usr);
+                if(curUser1.Role.equals("ADMIN")) {
+                    request.setAttribute("currentAdminUser", curUser1);
+                    request.getRequestDispatcher("WEB-INF/AdminUserProfile.jsp").forward(request,response);
+                    return;
+                }
                 mails = mailService.getMails(curUser1.id, -1);
                 IUserService userService1 = new UserService();
                 List<User> otherUsers = new ArrayList<>();

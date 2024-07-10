@@ -15,4 +15,5 @@ public interface IAnswerRepository {
 
 
     boolean addAnswer(int questionId, String answer, boolean isCorrect) throws SQLException;
+    Answer getCorrectAnswer(int questionId) throws SQLException;
 }
