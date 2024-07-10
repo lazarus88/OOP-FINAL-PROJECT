@@ -45,5 +45,10 @@ public class QuizService implements IQuizService {
         return quizRepository.getPopularQuizList();
     }
 
+    @Override
+    public int getActiveQuizs() throws SQLException {
+        return quizRepository.getAllActiveQuizs().size();
+    }
+
 
 }

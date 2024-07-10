@@ -5,6 +5,7 @@ import org.example.oopdefaultkgb.EntityDTO.Quiz;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 public interface IQuizRepository {
 
@@ -19,4 +20,6 @@ public interface IQuizRepository {
     List<Quiz> getPopularQuizList() throws SQLException;
 
     Quiz getQuizById(int quizId) throws SQLException;
+
+    List<Quiz> getAllActiveQuizs() throws SQLException;
 }

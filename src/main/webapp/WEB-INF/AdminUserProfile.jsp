@@ -74,11 +74,55 @@
         .mb-4 {
             margin-bottom: 1.5rem !important;
         }
+        .search-bar-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .search-bar {
+            width: 48%;
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .logout-button {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+        }
+        .logout-button:hover {
+            color: #ff4d4d;
+        }
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form id="logoutForm" action="logout" method="POST" style="display: inline;">
+                    <button class="logout-button" type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container mt-5">
     <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <div class="card mb-4">
+        <div class="card-header">Site Statistics</div>
+        <div class="card-body">
+            <p>Number of Users: <span id="numberOfUsers">...</span></p>
+            <p>Number of Quizzes Taken: <span id="numberOfQuizzesTaken">...</span></p>
+        </div>
+    </div>
 
     <div class="card mb-4">
         <div class="card-header">Create Announcement</div>
@@ -94,42 +138,62 @@
         </div>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-header">Remove User Accounts</div>
-        <div class="card-body">
-            <form action="AdminActionServlet" method="post">
-                <input type="hidden" name="action" value="removeUser">
+    <div class="search-bar-container mb-4">
+        <div class="search-bar card">
+            <div class="card-header">Promote User</div>
+            <div class="card-body">
+                <%
+                    String errorMessage = (String) request.getAttribute("errorMessage");
+                    if (errorMessage != null) {
+                %>
+                <div class="error-message"><%= errorMessage %></div>
+                <%
+                    }
+                %>
+                <form action="AdminActionServlet" method="post">
+                    <input type="hidden" name="action" value="promoteUser">
+                    <div class="form-group">
+                        <label for="promoteUsername">Username:</label>
+                        <input type="text" class="form-control" id="promoteUsername" name="username">
+                    </div>
+                    <button type="submit" class="btn btn-success">Promote User</button>
+                </form>
+            </div>
+        </div>
 
-                <button type="submit" class="btn btn-danger mt-3">Remove Selected Users</button>
-            </form>
+        <div class="search-bar card">
+            <div class="card-header">Remove User</div>
+            <div class="card-body">
+                <%
+                    if (errorMessage != null) {
+                %>
+                <div class="error-message"><%= errorMessage %></div>
+                <%
+                    }
+                %>
+                <form action="AdminActionServlet" method="post">
+                    <input type="hidden" name="action" value="removeUser">
+                    <div class="form-group">
+                        <label for="removeUsername">Username:</label>
+                        <input type="text" class="form-control" id="removeUsername" name="username">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Remove User</button>
+                </form>
+            </div>
         </div>
     </div>
+
     <div class="card mb-4">
         <div class="card-header">Remove Quizzes</div>
         <div class="card-body">
             <form action="AdminActionServlet" method="post">
                 <input type="hidden" name="action" value="removeQuiz">
-
-                <button type="submit" class="btn btn-danger mt-3">Remove Selected Quizzes</button>
+                <div class="form-group">
+                    <label for="removeQuizId">Quiz ID:</label>
+                    <input type="text" class="form-control" id="removeQuizId" name="quizId">
+                </div>
+                <button type="submit" class="btn btn-danger">Remove Quiz</button>
             </form>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-header">Promote User Accounts</div>
-        <div class="card-body">
-            <form action="AdminActionServlet" method="post">
-                <input type="hidden" name="action" value="promoteUser">
-                <button type="submit" class="btn btn-success mt-3">Promote Selected Users to Admin</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-header">Site Statistics</div>
-        <div class="card-body">
-            <p>Number of Users:</p>
-            <p>Number of Quizzes Taken: </p>
         </div>
     </div>
 </div>

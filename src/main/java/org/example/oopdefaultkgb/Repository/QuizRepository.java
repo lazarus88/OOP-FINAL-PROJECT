@@ -60,6 +60,28 @@ public  class QuizRepository extends  BaseRepository implements IQuizRepository 
         }
         return null;
     }
+
+    @Override
+    public List<Quiz> getAllActiveQuizs() throws SQLException {
+        Statement statement = ConnectionString.createStatement();
+        String query = String.format("SELECT * from Quiz  WHERE Status = 'ACTIVE'");
+        ResultSet result = statement.executeQuery(query);
+        List<Quiz> quizList = new ArrayList<>();
+        while (result.next()) {
+            quizList.add(new Quiz(result.getInt(1),
+                    result.getString(2),
+                    result.getInt(3),
+                    result.getBoolean(4),
+                    result.getBoolean(5),
+                    result.getBoolean(6),
+                    result.getBoolean(7),
+                    result.getInt(8),
+                    result.getString(9),
+                    result.getInt(10) ));
+        }
+        return quizList;
+    }
+
     @Override
     public boolean deleteQuiz(int quizId) throws SQLException{
         Statement statement = ConnectionString.createStatement();

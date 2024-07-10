@@ -7,6 +7,7 @@ import org.example.oopdefaultkgb.EntityDTO.User;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService {
     User getProfileById(int userId) throws SQLException;
@@ -23,4 +24,10 @@ public interface IUserService {
     boolean addUser(User user) throws SQLException;
 
     boolean addUser(String userName, String hashPassword,String fullName ,String role) throws SQLException;
+
+    boolean PromoteUser(int userId) throws SQLException;
+
+    boolean DeleteUser(int userId) throws SQLException;
+
+    int getActiveUsers() throws SQLException;
 }

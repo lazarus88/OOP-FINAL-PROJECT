@@ -69,4 +69,18 @@ public class UserService implements IUserService {
     public boolean addUser(String userName, String hashPassword,String fullname ,String role) throws SQLException {
         return userRepository.addUser(userName, hashPassword, fullname,role);
     }
+
+    @Override
+    public boolean PromoteUser(int userId) throws SQLException {
+        return userRepository.promoteUser(userId);
+    }
+    @Override
+    public boolean DeleteUser(int userId) throws SQLException {
+        return userRepository.updateStatus(userId, "DELETED");
+    }
+
+    @Override
+    public int getActiveUsers() throws SQLException {
+        return userRepository.getAllActiveUser().size();
+    }
 }
