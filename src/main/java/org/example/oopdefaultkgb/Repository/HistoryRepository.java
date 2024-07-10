@@ -18,7 +18,7 @@ public class HistoryRepository  extends  BaseRepository implements IHistoryRepos
     public List<HistoryQuiz> getRecentQuizList(int userId) throws SQLException {
         List<HistoryQuiz> historyQuizList = new ArrayList<>();
         Statement statement =ConnectionString.createStatement();
-        String query = String.format("SELECT * FROM QuizHistory WHERE UserId =%d ORDER BY TookAt DESC)", userId);
+        String query = String.format("SELECT * FROM UserQuizHistory WHERE UserId =%d ORDER BY TookAt DESC", userId);
         ResultSet res = statement.executeQuery(query);
         while(res.next())
             historyQuizList.add(new HistoryQuiz(

@@ -29,6 +29,10 @@ import java.util.Map;
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
+    }
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             IUserService userService = new UserService();
@@ -45,12 +49,13 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("senderUsers", otherUsers);
             request.setAttribute("senderUsers", otherUsers);
             List<Achievement> achievements = userService.getAchievements(userId);
+            request.setAttribute("achievements", achievements);
             List<Quiz> popularQuiz = quizService.getPopularQuizList();
             Map<HistoryQuiz, Quiz> recentQuiz = historyService.getRecentQuizList(userId);
             request.setAttribute("mails", mails);
             request.setAttribute("userId",user.id);
             request.setAttribute("currentUser", user);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/CreateMultipleChoiceQuestion.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/HomePage.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
