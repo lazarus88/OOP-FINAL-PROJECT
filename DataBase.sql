@@ -79,23 +79,23 @@ CREATE TABLE `Answer` (`Id` bigInt NOT NULL AUTO_INCREMENT,
 );
 
 
-INSERT INTO User (FullName,UserName, HashPassword)
-VALUES ('Nata Tatikishvili', 'Tatika', 'luboiRagaca');
+INSERT INTO User (FullName,UserName, HashPassword,Role)
+VALUES ('Nata Tatikishvili', 'Tatika', 'luboiRagaca','noob');
 
-INSERT INTO User (FullName,UserName, HashPassword)
-VALUES ('lazo pachuliani', 'lestanberi', 'luboiRagaca2');
+INSERT INTO User (FullName,UserName, HashPassword,Role)
+VALUES ('lazo pachuliani', 'lestanberi', 'luboiRagaca2','noob');
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (1, 2,'2024-07-07' , 'friends');
 
-INSERT INTO User (FullName,UserName, HashPassword)
-VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3');
+INSERT INTO User (FullName,UserName, HashPassword,Role)
+VALUES ('kote qerdiyoshvili', 'kostia', 'luboiRagaca3','noob');
 
 INSERT INTO Friend (SenderUserId, ReceiverUserId, InvitedAt, Status)
 VALUES (3, 1,'2024-01-01' , 'no longer friends');
 
-INSERT INTO User (FullName,UserName, HashPassword)
-VALUES ('test', '11', '11');
+INSERT INTO User (FullName,UserName, HashPassword,Role)
+VALUES ('test', '11', '11','noob');
 use kgb;
 
 INSERT INTO User (FullName,UserName, HashPassword, Role)
